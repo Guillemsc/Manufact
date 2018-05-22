@@ -19,7 +19,8 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
         if (Instance != null && go != null)
         {
-            DontDestroyOnLoad(go);
+            if(!Application.isEditor)
+                DontDestroyOnLoad(go);
         }
     }
 

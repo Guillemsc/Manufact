@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class AppManager : Singleton<AppManager> 
 {
+    [Header("Build")]
     [SerializeField] private bool is_release = false;
 
     [SerializeField] private string version = "0.1";
 
+    [Header("Framerate")]
     [SerializeField] private bool vsync = true;
 
     [SerializeField] private int max_fps = 60;
