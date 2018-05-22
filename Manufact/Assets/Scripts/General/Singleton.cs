@@ -7,7 +7,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     protected void InitInstance(T _instance, GameObject go = null)
     {
-        Instance = _instance;
+        instance = _instance;
 
         object[] objects = FindObjectsOfType(typeof(T));
 
@@ -17,12 +17,29 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                 " - there should never be more than 1 singleton: " + typeof(T).ToString());
         }
 
-        if (Instance != null && go != null)
+        if (instance != null && go != null)
         {
-            if(!Application.isEditor)
+            if (!Application.isEditor)
                 DontDestroyOnLoad(go);
         }
     }
 
-    public static T Instance;
+    public static T Instance
+    {
+        get
+        {
+            if (instance != null)
+            {
+                return instance;
+            }
+            else
+            {
+                Debug.LogError("[Singleton] Instance is not set, create it using 'InitInstance'");
+                return null;
+            }
+
+        }
+    }
+
+    public static T instance;
 }
