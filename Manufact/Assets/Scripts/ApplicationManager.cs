@@ -8,20 +8,37 @@ public class ApplicationManager : Singleton<ApplicationManager>
 
     [SerializeField] private string version = "0.1";
 
+    [SerializeField] private bool vsync = true;
+
+    [SerializeField] private int max_fps = 60;
+
     private int frames_in_last_update = 0;
     private int frames_in_current_update = 0;
-    private float curr_frame_time = 0.0f;
+    Timer fps_timer = new Timer();
 
     private void Awake()
     {
         InitInstance(this, gameObject);
     }
 
+    private void Start()
+    {
+        fps_timer.Start();
+
+        SetVSync(vsync);
+        SetMaxFPS(max_fps);
+    }
+
+    private void Update()
+    {
+        UpdateFPS();
+    }
+
     public bool GetIsRelease()
     {
         return is_release;
     }
-    
+
     public string GetVersion()
     {
         return version;
@@ -32,21 +49,41 @@ public class ApplicationManager : Singleton<ApplicationManager>
         return frames_in_last_update;
     }
 
-    private void Update()
+    public void SetVSync(bool set)
     {
-        UpdateFPS();
+        vsync = set;
+        QualitySettings.vSyncCount = (set == true ? 1 : 0);
+    }
+
+    public bool GetVSync()
+    {
+        return QualitySettings.vSyncCount == 1;
+    }
+
+    public void SetMaxFPS(int set)
+    {
+        if (max_fps > 0)
+        {
+            max_fps = set;
+            Application.targetFrameRate = set;
+        }
+    }
+
+    public int GetMaxFPS()
+    {
+        return Application.targetFrameRate;
     }
 
     private void UpdateFPS()
     {
-        curr_frame_time += Time.deltaTime;
         ++frames_in_current_update;
 
-        if (curr_frame_time > 1)
+        if (fps_timer.ReadFixedTime() > 1)
         {
             frames_in_last_update = frames_in_current_update;
-            curr_frame_time = 0;
             frames_in_current_update = 0;
+
+            fps_timer.Start();
         }
     }
 }
