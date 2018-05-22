@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Xml;
+using System.IO;
 
 public class LocManager : Singleton<LocManager>
 {
+    [SerializeField] private string localization_file_name;
+
     public enum Language
     {
         EN,
@@ -11,70 +15,108 @@ public class LocManager : Singleton<LocManager>
         CAT,
     }
 
-    public enum LanguagePart
-    {
-        MAIN_MENU,
-        GAME_MENU,
-        MAIN_GAME,
-    }
+    private IDictionary<string, string> _content = new Dictionary<string, string>();
 
-    public class LanguageData
-    {
-        LanguageData(Language lan)
-        {
-            language = lan;
-        }
+    private Language language = Language.EN;
 
-        private Language language;
+    private List<LocText> texts = new List<LocText>();
 
-        private IDictionary<LanguagePart, LanguagePartData> content = new Dictionary<LanguagePart, LanguagePartData>();
-    }
-
-    public class LanguagePartData
-    {
-        LanguagePartData(Language lan, LanguagePart p)
-        {
-            language = lan;
-            part = p;
-        }
-
-        private LanguagePart GetPart()
-        {
-            return part;
-        }
-
-        string GetContent(string key)
-        {
-            string ret = string.Empty;
-
-            content.TryGetValue(key, out ret);
-
-            if (string.IsNullOrEmpty(ret))
-                ret = key + "[" + language.ToString() + "]" + "[" + part.ToString() + "]" + " No Text defined";
-            
-            return ret; 
-        }
-
-        private LanguagePart part;
-        private Language language;
-
-        private IDictionary<string, string> content = new Dictionary<string, string>();
-    }
-
-    private Language curr_language = Language.EN;
-
-    private void Awake()
+    public void Awake()
     {
         InitInstance(this, gameObject);
+
+        SetLanguage(Language.CAT);
     }
 
-    private void Start()
+    public void SetLanguage(Language _language)
     {
+        language = _language;
 
+        LoadData(_language);
+
+        for (int i = 0; i < texts.Count; ++i)
+        {
+            texts[i].SetText();
+        }
     }
 
-    private void Update()
+    public Language GetLanguage()
     {
+        return language;
+    }
 
+    public string GetText(string key)
+    {
+        string ret = string.Empty;
+
+        _content.TryGetValue(key, out ret);
+
+        if (string.IsNullOrEmpty(ret))
+            ret = key + "[" + language.ToString() + "]" + " No Text defined";
+
+        return ret;
+    }
+
+    public void AddUIText(LocText text)
+    {
+        texts.Add(text);
+    }
+
+    public void RemoveUIText(LocText text)
+    {
+        texts.Remove(text);
+    }
+
+    private void LoadData(Language language)
+    {
+        _content.Clear();
+
+        XmlDocument xml_document = new XmlDocument();
+
+        TextAsset text_asset = (TextAsset)Resources.Load(localization_file_name);
+
+        if(text_asset == null)
+        {
+            Debug.LogError("[XML] Couldnt Load Xml");
+            return;
+        }
+
+        string path = text_asset.text;
+        xml_document.LoadXml(path);
+
+        if (xml_document == null)
+        {
+            Debug.LogError("[XML] Couldnt Load Xml: " + xml_document.Name);
+            return;
+        }
+
+        XmlNode xNode = xml_document.ChildNodes.Item(1).ChildNodes.Item(0);
+
+        foreach (XmlNode node in xNode.ChildNodes)
+        {
+            if (node.LocalName == "TextKey")
+            {
+                string value = node.Attributes.GetNamedItem("name").Value;
+                string text = string.Empty;
+                foreach (XmlNode langNode in node)
+                {
+                    if (langNode.LocalName == language.ToString())
+                    {
+                        text = langNode.InnerText;
+
+                        if (_content.ContainsKey(value))
+                        {
+                            _content.Remove(value);
+                            _content.Add(value, value + " has been found multiple times in the XML allowed only once!");
+                        }
+                        else
+                        {
+                            _content.Add(value, (!string.IsNullOrEmpty(text)) ? text : ("No Text for " + value + " found"));
+                        }
+                        break;
+                    }
+                }
+            }
+        }
     }
 }

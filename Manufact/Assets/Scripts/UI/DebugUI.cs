@@ -12,15 +12,15 @@ public class DebugUI : MonoBehaviour
     private void Start()
     {
         if (debug_ui_go != null)
-            debug_ui_go.SetActive(!ApplicationManager.Instance.GetIsRelease());
+            debug_ui_go.SetActive(!AppManager.Instance.GetIsRelease());
 
         if (version_text != null)
-            version_text.text = "V." + ApplicationManager.Instance.GetVersion().ToString();
+            version_text.text = "V." + AppManager.Instance.GetVersion().ToString();
     }
 
     private void Update()
     {
         if (fps_text != null)
-            fps_text.text = "FPS: " + ApplicationManager.Instance.GetFPS().ToString();
+            fps_text.text = "FPS: " + AppManager.Instance.GetFPS().ToString();
     }
 }

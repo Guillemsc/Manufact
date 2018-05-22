@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-16"?>
+<Localization>
+  <Section>
+    <TextKey name="Test">
+      <EN>That is a test using barra eneNow we jumpWe jump again</EN>
+      <SPA>Esto es un test</SPA>
+      <CAT>Això es un test</CAT>
+    </TextKey>
+    <TextKey name="Test2">
+      <EN>This is a test2</EN>
+      <SPA>Esto es un test2</SPA>
+      <CAT>Això es un test2</CAT>
+    </TextKey>
+	  <TextKey name="L2-Intro">
+      <EN>This is a test2</EN>
+      <SPA>Esto es un test2</SPA>
+      <CAT>Per fi he arribat al riu Mbia.\nEls natius de la zona m'han dit que per aquí habita un tipus de granota que fa cinc vegades la mida d'una granota normal. Hauria de seguir el riu i intentar trobar-ne un exemplar.</CAT>
+    </TextKey>
+	  <TextKey name="L2-Insectes">
+      <EN>This is a test2</EN>
+      <SPA>Esto es un test2</SPA>
+      <CAT>Per la riba del riu hauria de trobar insectes que em serveixin per atreure les granotes.</CAT>
+    </TextKey>
+	  <TextKey name="L2-Cascada">
+      <EN>This is a test2</EN>
+      <SPA>Esto es un test2</SPA>
+      <CAT>Escolto el so d'un salt d'aigua. Podria ser que trobés alguna cosa interessant a prop de la cascada.</CAT>
+      </TextKey>
+	  <TextKey name="L2-Granota">
+      <EN>This is a test2</EN>
+      <SPA>Esto es un test2</SPA>
+      <CAT>Aquella granota és molt més gran que les que he vist fins ara. Podria ser la que estic buscant. Hauria d'atreure-la amb insectes fins al jeep per poder examinar-la amb deteniment.</CAT>
+      </TextKey>
+	  <TextKey name="L2-GranotaSalt">
+       <EN>This is a test2</EN>
+       <SPA>Esto es un test2</SPA>
+       <CAT>NO! Ha saltat a l'altre costat de riu!\nHauré de trobar un camí que em porti a prop d'ella.</CAT>
+      </TextKey>
+	  <TextKey name="L2-GranotaSalt">
+       <EN>This is a test2</EN>
+       <SPA>Esto es un test2</SPA>
+       <CAT>NO! Ha saltat a l'altre costat de riu!\nHauré de trobar un camí que em porti a prop d'ella.</CAT>
+      </TextKey>
+	  <TextKey name="L2-GranotaJeep">
+      <EN>This is a test2</EN>
+      <SPA>Esto es un test2</SPA>
+      <CAT>Aquí no podrà marxar.\nÉs moment d'estudiar-la a fons.</CAT>
+    </TextKey>
+    <TextKey name="Libelula-Nom">
+      <EN>This is a test2</EN>
+      <SPA>Esto es un test2</SPA>
+      <CAT>Libèl·lula</CAT>
+    </TextKey>
+    <TextKey name="Libelula-Descripcio">
+      <EN>This is a test2</EN>
+      <SPA>Esto es un test2</SPA>
+      <CAT>Descripció d'una libèl·lula</CAT>
+    </TextKey>
+    <TextKey name="UI-AgafaObjecte">
+      <EN>This is a test2</EN>
+      <SPA>Esto es un test2</SPA>
+      <CAT>Has agafat un objecte: </CAT>
+    </TextKey>
+  </Section>
+</Localization>
