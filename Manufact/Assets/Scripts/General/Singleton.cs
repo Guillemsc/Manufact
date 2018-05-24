@@ -37,7 +37,6 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                 Debug.LogError("[Singleton] Instance is not set, create it using 'InitInstance'");
                 return null;
             }
-
         }
     }
 
