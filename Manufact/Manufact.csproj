@@ -246,7 +246,6 @@
     <Compile Include="Assets\Scripts\General\Timer.cs" />
     <Compile Include="Assets\Scripts\Grid\GridManager.cs" />
     <Compile Include="Assets\Scripts\Grid\GridManagerEditor.cs" />
-    <Compile Include="Assets\Scripts\Grid\TileMapInstance.cs" />
     <Compile Include="Assets\Scripts\Localization\LocManager.cs" />
     <Compile Include="Assets\Scripts\Localization\LocText.cs" />
     <Compile Include="Assets\Scripts\UI\DebugUI.cs" />
