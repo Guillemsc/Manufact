@@ -244,6 +244,9 @@
     <Compile Include="Assets\Scripts\AppManager.cs" />
     <Compile Include="Assets\Scripts\General\Singleton.cs" />
     <Compile Include="Assets\Scripts\General\Timer.cs" />
+    <Compile Include="Assets\Scripts\Grid\GridCreatorGrid.cs" />
+    <Compile Include="Assets\Scripts\Grid\GridCreatorManager.cs" />
+    <Compile Include="Assets\Scripts\Grid\GridCreatorManagerEditor.cs" />
     <Compile Include="Assets\Scripts\Grid\GridManager.cs" />
     <Compile Include="Assets\Scripts\Localization\LocManager.cs" />
     <Compile Include="Assets\Scripts\Localization\LocText.cs" />
