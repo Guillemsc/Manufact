@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 [ExecuteInEditMode]
 public class GridManager : Singleton<GridManager>
@@ -24,6 +25,24 @@ public class GridManager : Singleton<GridManager>
         return grid;
     }
 
+    public void CreateTileMap()
+    {
+        if(grid != null)
+        {
+            GameObject tile_map_go = new GameObject();
+            tile_map_go.name = "TileMap";
+
+            TileMapInstance instance = tile_map_go.AddComponent<TileMapInstance>();
+
+            Tilemap tile_map = tile_map_go.AddComponent<Tilemap>();
+
+            TilemapRenderer renderer = tile_map_go.AddComponent<TilemapRenderer>();
+            renderer.sortOrder = TilemapRenderer.SortOrder.BottomRight;
+
+            tile_map_go.transform.parent = grid.transform;
+        }
+    }
+
     private void CheckGridInstance()
     {
         Grid[] grids = FindObjectsOfType<Grid>();
@@ -36,7 +55,7 @@ public class GridManager : Singleton<GridManager>
             GameObject go = new GameObject();
             go.name = "GRID";
             grid = go.AddComponent<Grid>();
-            go.transform.parent = transform;
+            go.transform.parent = null;
         }
         else if(grids_list.Count == 1)
         {
