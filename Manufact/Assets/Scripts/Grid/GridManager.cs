@@ -32,6 +32,8 @@ public class GridManager : Singleton<GridManager>
             GameObject tile_map_go = new GameObject();
             tile_map_go.name = "TileMap";
 
+            TileMapInstance instance = tile_map_go.AddComponent<TileMapInstance>();
+
             Tilemap tile_map = tile_map_go.AddComponent<Tilemap>();
 
             TilemapRenderer renderer = tile_map_go.AddComponent<TilemapRenderer>();
@@ -61,9 +63,6 @@ public class GridManager : Singleton<GridManager>
             {
                 grid.transform.parent = null;
                 grid.gameObject.name = "GRID";
-                grid.transform.position = new Vector3(0, 0, 0);
-                grid.transform.rotation = Quaternion.identity;
-                grid.transform.localScale = new Vector3(1, 1, 1);
             }
         }
         else if(grids_list.Count > 1)
