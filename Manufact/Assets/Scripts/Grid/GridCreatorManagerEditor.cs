@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEditor;
 
 [CustomEditor(typeof(GridCreatorManager))]
+[InitializeOnLoad]
 public class GridCreatorManagerEditor : Editor
 {
     public override void OnInspectorGUI()
@@ -14,6 +15,11 @@ public class GridCreatorManagerEditor : Editor
         GridCreatorManager grid_creator = (GridCreatorManager)target;
 
         DrawDefaultInspector();
+
+        if (GUILayout.Button("Create Grid Instance"))
+        {
+            grid_creator.CreateGridInstance();
+        }
     }
 }
 
