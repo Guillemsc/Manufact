@@ -238,6 +238,18 @@
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/ProgramData/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
     </Reference>
+    <Reference Include="DOTween43">
+      <HintPath>Assets/ThirdParties/Demigiant/DOTween/DOTween43.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween46">
+      <HintPath>Assets/ThirdParties/Demigiant/DOTween/DOTween46.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween">
+      <HintPath>Assets/ThirdParties/Demigiant/DOTween/DOTween.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween50">
+      <HintPath>Assets/ThirdParties/Demigiant/DOTween/DOTween50.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Events\EventManager.cs" />
@@ -252,6 +264,8 @@
     <Compile Include="Assets\Scripts\Localization\LocManager.cs" />
     <Compile Include="Assets\Scripts\Localization\LocText.cs" />
     <Compile Include="Assets\Scripts\UI\DebugUI.cs" />
+    <Compile Include="Assets\ThirdParties\Demigiant\DOTween\Examples\Basics.cs" />
+    <Compile Include="Assets\ThirdParties\Demigiant\DOTween\Examples\Sequences.cs" />
     <Compile Include="Assets\ThirdParties\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\ThirdParties\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\ThirdParties\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
@@ -288,6 +302,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\LocalizationFile.xml" />
+    <None Include="Assets\ThirdParties\Demigiant\DOTween\DOTween.XML" />
+    <None Include="Assets\ThirdParties\Demigiant\DOTween\DOTween43.xml" />
+    <None Include="Assets\ThirdParties\Demigiant\DOTween\DOTween46.xml" />
+    <None Include="Assets\ThirdParties\Demigiant\DOTween\DOTween50.xml" />
+    <None Include="Assets\ThirdParties\Demigiant\DOTween\Editor\DOTweenEditor.XML" />
+    <None Include="Assets\ThirdParties\Demigiant\DOTween\readme.txt" />
     <None Include="Assets\ThirdParties\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
     <None Include="Assets\ThirdParties\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
     <None Include="Assets\ThirdParties\TextMesh Pro\Examples &amp; Extras\Fonts\LiberationSans - OFL.txt" />
