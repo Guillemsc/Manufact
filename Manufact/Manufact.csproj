@@ -220,6 +220,18 @@
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
+    <Reference Include="DOTween">
+      <HintPath>Assets/ThirdParties/Demigiant/DOTween/DOTween.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween43">
+      <HintPath>Assets/ThirdParties/Demigiant/DOTween/DOTween43.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween46">
+      <HintPath>Assets/ThirdParties/Demigiant/DOTween/DOTween46.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween50">
+      <HintPath>Assets/ThirdParties/Demigiant/DOTween/DOTween50.dll</HintPath>
+    </Reference>
     <Reference Include="TextMeshPro-2017.3-Editor">
       <HintPath>Assets/ThirdParties/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.3-Editor.dll</HintPath>
     </Reference>
@@ -238,31 +250,21 @@
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/ProgramData/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
     </Reference>
-    <Reference Include="DOTween43">
-      <HintPath>Assets/ThirdParties/Demigiant/DOTween/DOTween43.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween46">
-      <HintPath>Assets/ThirdParties/Demigiant/DOTween/DOTween46.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween">
-      <HintPath>Assets/ThirdParties/Demigiant/DOTween/DOTween.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween50">
-      <HintPath>Assets/ThirdParties/Demigiant/DOTween/DOTween50.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Events\EventManager.cs" />
     <Compile Include="Assets\Scripts\AppManager.cs" />
+    <Compile Include="Assets\Scripts\Events\EventManager.cs" />
     <Compile Include="Assets\Scripts\General\Singleton.cs" />
     <Compile Include="Assets\Scripts\General\Timer.cs" />
     <Compile Include="Assets\Scripts\Grid\GridCreatorManager.cs" />
     <Compile Include="Assets\Scripts\Grid\GridCreatorManagerEditor.cs" />
+    <Compile Include="Assets\Scripts\Grid\GridEntity.cs" />
     <Compile Include="Assets\Scripts\Grid\GridInstance.cs" />
     <Compile Include="Assets\Scripts\Grid\GridInstanceEditor.cs" />
     <Compile Include="Assets\Scripts\Grid\GridSlotInstance.cs" />
     <Compile Include="Assets\Scripts\Localization\LocManager.cs" />
     <Compile Include="Assets\Scripts\Localization\LocText.cs" />
+    <Compile Include="Assets\Scripts\Map\MapManager.cs" />
     <Compile Include="Assets\Scripts\UI\DebugUI.cs" />
     <Compile Include="Assets\ThirdParties\Demigiant\DOTween\Examples\Basics.cs" />
     <Compile Include="Assets\ThirdParties\Demigiant\DOTween\Examples\Sequences.cs" />

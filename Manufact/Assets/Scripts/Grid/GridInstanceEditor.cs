@@ -53,7 +53,7 @@ public class GridInstanceEditor : MonoBehaviour
 
         if(gi != null)
         {
-            gi.SetGridInfo(grid_gos, slot_size);
+            gi.SetGridInfo(grid_gos, curr_grid_size, slot_size);
         }
     }
 
