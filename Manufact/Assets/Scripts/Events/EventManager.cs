@@ -7,6 +7,9 @@ public class EventManager : Singleton<EventManager>
     public enum EventType
     {
         EVENT_NULL,
+
+        MAP_ENTITY_SPAWN,
+        MAP_ENTITY_DELETE,
     }
 
     public class Event
@@ -16,12 +19,33 @@ public class EventManager : Singleton<EventManager>
             event_type = e_type;
         }
 
+        public class MapEntitySpawn
+        {
+            public MapEntity entity = null;
+        } public MapEntitySpawn map_entity_spawn = new MapEntitySpawn();
+
+
+        public class MapEntityDelete
+        {
+            public MapEntity entity = null;
+        }
+        public MapEntityDelete map_entity_delete = new MapEntityDelete();
+
         private EventManager.EventType event_type = EventManager.EventType.EVENT_NULL;
     }
 
     private void Awake()
     {
         InitInstance(this, gameObject);
+    }
+
+    public void SendEvent(Event ev)
+    {
+        if (ev != null)
+        {
+            if (OnEvent != null)
+                OnEvent(ev);
+        }
     }
 
     public void Suscribe(OnEventDel del)
@@ -35,5 +59,5 @@ public class EventManager : Singleton<EventManager>
     }
 
     public delegate void OnEventDel(EventManager.Event ev);
-    private event OnEventDel OnEvent;
+    private event OnEventDel OnEvent = null;
 }

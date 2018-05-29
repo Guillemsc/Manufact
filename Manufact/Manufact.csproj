@@ -264,6 +264,8 @@
     <Compile Include="Assets\Scripts\Grid\GridSlotInstance.cs" />
     <Compile Include="Assets\Scripts\Localization\LocManager.cs" />
     <Compile Include="Assets\Scripts\Localization\LocText.cs" />
+    <Compile Include="Assets\Scripts\Map\Entities\MapEntityBelt.cs" />
+    <Compile Include="Assets\Scripts\Map\MapEntity.cs" />
     <Compile Include="Assets\Scripts\Map\MapManager.cs" />
     <Compile Include="Assets\Scripts\UI\DebugUI.cs" />
     <Compile Include="Assets\ThirdParties\Demigiant\DOTween\Examples\Basics.cs" />

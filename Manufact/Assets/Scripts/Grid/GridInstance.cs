@@ -65,9 +65,9 @@ public class GridInstance : MonoBehaviour
             return ret;
         }
 
-        public GameObject InstantiateGridEntity(Vector2Int pos, GameObject go_prefab, SlotUsedBehaviour behaviour = SlotUsedBehaviour.DONT_SPAWN)
+        public GridEntity InstantiateGridEntity(Vector2Int pos, GameObject go_prefab, SlotUsedBehaviour behaviour = SlotUsedBehaviour.DONT_SPAWN)
         {
-            GameObject ret = null;
+            GridEntity ret = null;
 
             GridSlot slot = GetGridSlot(pos);
 
@@ -110,11 +110,9 @@ public class GridInstance : MonoBehaviour
 
                 if(ins != null)
                 {
-                    GridEntity g_ent = ins.AddComponent<GridEntity>();
+                    ret = ins.AddComponent<GridEntity>();
 
-                    g_ent.SetInfo(this, slot);
-
-                    return ret = ins;
+                    ret.SetInfo(this, slot);
                 }
             }
 
@@ -150,6 +148,20 @@ public class GridInstance : MonoBehaviour
         public void RemoveGridEntity(GridEntity entity)
         {
             grid_entities.Remove(entity);
+        }
+
+        public void RemoveGridEntity(GameObject entity)
+        {
+            for(int i = 0; i < grid_entities.Count; ++i)
+            {
+                GridEntity curr_entity = grid_entities[i];
+
+                if(curr_entity.gameObject == entity)
+                {
+                    grid_entities.Remove(curr_entity);
+                    break;
+                }
+            }
         }
 
         public Vector2Int GetGridSize()
