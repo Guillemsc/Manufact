@@ -113,6 +113,8 @@ public class GridInstance : MonoBehaviour
                     ret = ins.AddComponent<GridEntity>();
 
                     ret.SetInfo(this, slot);
+
+                    AddGridEntity(ret);
                 }
             }
 

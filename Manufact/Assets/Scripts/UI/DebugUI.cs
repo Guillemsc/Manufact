@@ -8,6 +8,7 @@ public class DebugUI : MonoBehaviour
     [SerializeField] private GameObject debug_ui_go = null;
     [SerializeField] private TMPro.TextMeshProUGUI fps_text = null;
     [SerializeField] private TMPro.TextMeshProUGUI version_text = null;
+    [SerializeField] private TMPro.TextMeshProUGUI curr_level_text = null;
 
     private void Start()
     {
@@ -22,5 +23,18 @@ public class DebugUI : MonoBehaviour
     {
         if (fps_text != null)
             fps_text.text = "FPS: " + AppManager.Instance.GetFPS().ToString();
+
+        Level lev = LevelsManager.Instance.GetCurrentLevel();
+        if (lev != null)
+        {
+            if(curr_level_text != null)
+            {
+                curr_level_text.text = "Level: " + lev.GetLevelNumber();
+            }
+            else
+            {
+                curr_level_text.text = "Level: null";
+            }
+        }
     }
 }

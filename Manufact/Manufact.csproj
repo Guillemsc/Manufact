@@ -262,6 +262,8 @@
     <Compile Include="Assets\Scripts\Grid\GridInstance.cs" />
     <Compile Include="Assets\Scripts\Grid\GridInstanceEditor.cs" />
     <Compile Include="Assets\Scripts\Grid\GridSlotInstance.cs" />
+    <Compile Include="Assets\Scripts\Levels\Level.cs" />
+    <Compile Include="Assets\Scripts\Levels\LevelsManager.cs" />
     <Compile Include="Assets\Scripts\Localization\LocManager.cs" />
     <Compile Include="Assets\Scripts\Localization\LocText.cs" />
     <Compile Include="Assets\Scripts\Map\Entities\MapEntityBelt.cs" />

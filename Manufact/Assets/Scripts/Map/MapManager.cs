@@ -8,14 +8,11 @@ public class MapManager : Singleton<MapManager>
 
     private GridInstance.Grid curr_grid = null;
 
+    List<MapEntity> map_entities = new List<MapEntity>();
+
     private void Awake()
     {
         InitInstance(this);
-    }
-
-    private void Start()
-    {
-
     }
 
     public void SetCurrGrid(GridInstance grid_inst)
@@ -31,9 +28,11 @@ public class MapManager : Singleton<MapManager>
         }
     }
 
-    private MapEntity SpawnEntity(Vector2Int grid_pos, MapEntity.MapEntityType type)
+    public MapEntity SpawnEntity(Vector2Int grid_pos, MapEntity.MapEntityType type)
     {
         MapEntity ret = null;
+        GridEntity grid_ent = null;
+        GameObject to_spawn = null;
 
         if (curr_grid != null)
         {
@@ -43,34 +42,39 @@ public class MapManager : Singleton<MapManager>
                     {
                         if (belt != null)
                         {
-                            GridEntity ins = curr_grid.InstantiateGridEntity(grid_pos, belt);
-
-                            if (ins != null)
-                            {
-                                ret = ins.GetComponent<MapEntity>();
-
-                                if (ret == null)
-                                {
-                                    curr_grid.RemoveGridEntity(ins);
-                                }
-                            }
+                            to_spawn = belt;
                         }
                         break;
                     }
             }
-        }
 
-        if(ret != null)
-        {
-            EventManager.Event ev = new EventManager.Event(EventManager.EventType.MAP_ENTITY_SPAWN);
-            ev.map_entity_spawn.entity = ret;
-            EventManager.Instance.SendEvent(ev);
+            if (to_spawn != null)
+            {
+                grid_ent = curr_grid.InstantiateGridEntity(grid_pos, to_spawn);
+
+                ret = grid_ent.GetComponent<MapEntity>();
+
+                if (ret != null)
+                {
+                    ret.OnSpawn();
+
+                    EventManager.Event ev = new EventManager.Event(EventManager.EventType.MAP_ENTITY_SPAWN);
+                    ev.map_entity_spawn.entity = ret;
+                    EventManager.Instance.SendEvent(ev);
+
+                    map_entities.Add(ret);
+                }
+                else
+                {
+                    curr_grid.RemoveGridEntity(grid_ent);
+                }
+            }
         }
 
         return ret;
     }
 
-    private void DeleteEntity(MapEntity entity)
+    public void DeleteEntity(MapEntity entity)
     {
         if (entity != null)
         {
@@ -80,10 +84,21 @@ public class MapManager : Singleton<MapManager>
                 ev.map_entity_delete.entity = entity;
                 EventManager.Instance.SendEvent(ev);
 
+                entity.OnDelete();
+
                 curr_grid.RemoveGridEntity(entity.gameObject);
+                map_entities.Remove(entity);
 
                 Destroy(entity.gameObject);
             }
+        }
+    }
+
+    public void ClearMapEntities()
+    {
+        while(map_entities.Count > 0)
+        {
+            DeleteEntity(map_entities[0]);
         }
     }
 
