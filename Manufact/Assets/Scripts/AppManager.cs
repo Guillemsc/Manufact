@@ -18,6 +18,9 @@ public class AppManager : Singleton<AppManager>
     private int frames_in_current_update = 0;
     Timer fps_timer = new Timer();
 
+    private bool paused = false;
+    private float last_time_scale = 1.0f;
+
     private void Awake()
     {
         InitInstance(this, gameObject);
@@ -87,5 +90,31 @@ public class AppManager : Singleton<AppManager>
 
             fps_timer.Start();
         }
+    }
+
+    public void Pause()
+    {
+        if (!paused)
+        {
+            last_time_scale = Time.timeScale;
+            Time.timeScale = 0.0f;
+
+            paused = true;
+        }
+    }
+
+    public void Resume()
+    {
+        if(paused)
+        {
+            Time.timeScale = last_time_scale;
+
+            paused = false;
+        }
+    }
+
+    public bool GetPaused()
+    {
+        return paused;
     }
 }

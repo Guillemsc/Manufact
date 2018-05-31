@@ -10,6 +10,9 @@ public class EventManager : Singleton<EventManager>
 
         MAP_ENTITY_SPAWN,
         MAP_ENTITY_DELETE,
+
+        LEVEL_STARTED,
+        LEVEL_FINISHED,
     }
 
     public class Event
@@ -19,6 +22,7 @@ public class EventManager : Singleton<EventManager>
             event_type = e_type;
         }
 
+        // Map
         public class MapEntitySpawn
         {
             public MapEntity entity = null;
@@ -30,6 +34,19 @@ public class EventManager : Singleton<EventManager>
             public MapEntity entity = null;
         }
         public MapEntityDelete map_entity_delete = new MapEntityDelete();
+
+        // Levels
+        public class LevelStarted
+        {
+            public int level = 0;
+        }
+        public LevelStarted level_started = new LevelStarted();
+
+        public class LevelFinished
+        {
+            public int level = 0;
+        }
+        public LevelFinished level_finished = new LevelFinished();
 
         private EventManager.EventType event_type = EventManager.EventType.EVENT_NULL;
     }

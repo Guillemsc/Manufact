@@ -22,12 +22,7 @@ public class MapEntityBelt : MapEntity
 
     public override void OnSpawn()
     {
-        GridEntity entity = gameObject.GetComponent<GridEntity>();
 
-        if (entity != null)
-        {
-            SetGridEntity(entity);
-        }
     }
 
     public override void OnDelete()

@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.4.2f2</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -262,8 +264,9 @@
     <Compile Include="Assets\Scripts\Grid\GridInstance.cs" />
     <Compile Include="Assets\Scripts\Grid\GridInstanceEditor.cs" />
     <Compile Include="Assets\Scripts\Grid\GridSlotInstance.cs" />
-    <Compile Include="Assets\Scripts\Levels\Level.cs" />
-    <Compile Include="Assets\Scripts\Levels\LevelsManager.cs" />
+    <Compile Include="Assets\Scripts\Level\Level.cs" />
+    <Compile Include="Assets\Scripts\Level\Levels\LevelTest.cs" />
+    <Compile Include="Assets\Scripts\Level\LevelsManager.cs" />
     <Compile Include="Assets\Scripts\Localization\LocManager.cs" />
     <Compile Include="Assets\Scripts\Localization\LocText.cs" />
     <Compile Include="Assets\Scripts\Map\Entities\MapEntityBelt.cs" />
@@ -307,7 +310,9 @@
     <Compile Include="Assets\ThirdParties\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Resources\LocalizationFile.xml" />
+    <None Include="Assets\Resources\LocalizationFile.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Assets\ThirdParties\Demigiant\DOTween\DOTween.XML" />
     <None Include="Assets\ThirdParties\Demigiant\DOTween\DOTween43.xml" />
     <None Include="Assets\ThirdParties\Demigiant\DOTween\DOTween46.xml" />

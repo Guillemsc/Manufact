@@ -34,6 +34,7 @@ public class MapManager : Singleton<MapManager>
         GridEntity grid_ent = null;
         GameObject to_spawn = null;
 
+        CheckGridNull();
         if (curr_grid != null)
         {
             switch(type)
@@ -56,6 +57,8 @@ public class MapManager : Singleton<MapManager>
 
                 if (ret != null)
                 {
+                    ret.SetGridEntity(grid_ent);
+
                     ret.OnSpawn();
 
                     EventManager.Event ev = new EventManager.Event(EventManager.EventType.MAP_ENTITY_SPAWN);
@@ -78,6 +81,7 @@ public class MapManager : Singleton<MapManager>
     {
         if (entity != null)
         {
+            CheckGridNull();
             if (curr_grid != null)
             {
                 EventManager.Event ev = new EventManager.Event(EventManager.EventType.MAP_ENTITY_DELETE);
@@ -96,7 +100,8 @@ public class MapManager : Singleton<MapManager>
 
     public void ClearMapEntities()
     {
-        while(map_entities.Count > 0)
+        CheckGridNull();
+        while (map_entities.Count > 0)
         {
             DeleteEntity(map_entities[0]);
         }
@@ -108,5 +113,11 @@ public class MapManager : Singleton<MapManager>
         {
             curr_grid.InstantiateGridEntity(slot.GetGridPos(), belt);
         }
+    }
+
+    private void CheckGridNull()
+    {
+        if (curr_grid == null)
+            Debug.LogError("[Grid] The current grid on the MapManager is null, use SetCurrGrid");
     }
 }
