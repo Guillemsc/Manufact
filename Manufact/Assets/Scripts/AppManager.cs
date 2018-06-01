@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class AppManager : Singleton<AppManager> 
 {
@@ -24,6 +25,8 @@ public class AppManager : Singleton<AppManager>
     private void Awake()
     {
         InitInstance(this, gameObject);
+
+        InitLibraries();
     }
 
     private void Start()
@@ -37,6 +40,12 @@ public class AppManager : Singleton<AppManager>
     private void Update()
     {
         UpdateFPS();
+    }
+
+    private void InitLibraries()
+    {
+        // Dotween
+        DOTween.Init(false, true, LogBehaviour.ErrorsOnly);
     }
 
     public bool GetIsRelease()
