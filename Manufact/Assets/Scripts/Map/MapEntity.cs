@@ -42,6 +42,18 @@ public class MapEntity : MonoBehaviour
         return grid_entity;
     }
 
+    public Vector2Int GetMapPos()
+    {
+        Vector2Int ret = Vector2Int.zero;
+
+        if (grid_entity != null)
+        {
+            ret = grid_entity.GetGridPos();
+        }
+
+        return ret;
+    }
+
     public void SetMapEntityDir(MapEntityDir dir)
     {       
         switch (dir)
@@ -63,8 +75,6 @@ public class MapEntity : MonoBehaviour
                 direction = dir;
                 break;
         }
-           
-
     }
 
     public MapEntityDir GetEntityDir()
@@ -80,5 +90,31 @@ public class MapEntity : MonoBehaviour
     {
     }
 
+    public MapEntity GetFrontEntity()
+    {
+        MapEntity ret = null;
+       
+        Vector2Int pos_to_look = GetMapPos();
+
+        switch (direction)
+        {
+            case MapEntityDir.UP:
+                pos_to_look.y += 1;
+                break;
+            case MapEntityDir.DOWN:
+                pos_to_look.y -= 1;
+                break;
+            case MapEntityDir.LEFT:
+                pos_to_look.x -= 1;
+                break;
+            case MapEntityDir.RIGHT:
+                pos_to_look.x += 1;
+                break;
+        }
+
+        ret = MapManager.Instance.GetEntityByMapPos(pos_to_look);
+       
+        return ret;
+    }
     
 }

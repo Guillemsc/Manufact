@@ -25,6 +25,17 @@ public class GridEntity : MonoBehaviour
         return grid_slot;
     }
 
+    public Vector2Int GetGridPos()
+    {
+        Vector2Int ret = Vector2Int.zero;
+
+        if (grid_slot != null)
+            ret = grid_slot.GetGridPos();
+
+        return ret;
+
+    }
+
     public GridInstance.Grid GetGrid()
     {
         return grid;

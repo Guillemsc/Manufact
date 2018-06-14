@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class MapManager : Singleton<MapManager>
 {
+    public enum MapClickBehaviour
+    {
+        ADD,
+        ERASE,
+    }
+
     [SerializeField] private GameObject belt = null;
 
     private GridInstance.Grid curr_grid = null;
+
+    MapClickBehaviour map_click_behaviour = MapClickBehaviour.ADD;
 
     List<MapEntity> map_entities = new List<MapEntity>();
 
@@ -26,6 +34,16 @@ public class MapManager : Singleton<MapManager>
                 curr_grid.OnSlotMouseDown += OnSlotMouseDown;
             }
         }
+    }
+
+    public void SetClickBehaviour(MapClickBehaviour set)
+    {
+        map_click_behaviour = set;
+    }
+
+    public MapClickBehaviour GetClickBehaviour()
+    {
+        return map_click_behaviour;
     }
 
     public MapEntity SpawnEntity(Vector2Int grid_pos, MapEntity.MapEntityType type)
@@ -98,6 +116,27 @@ public class MapManager : Singleton<MapManager>
         }
     }
 
+    public MapEntity GetEntityByMapPos(Vector2Int map_pos)
+    {
+        MapEntity ret = null;
+
+        if (curr_grid != null)
+        {
+            for(int i = 0; i < map_entities.Count; ++i)
+            {
+                MapEntity curr_entity = map_entities[i];
+
+                if(curr_entity.GetGridEntity().GetGridPos() == map_pos)
+                {
+                    ret = curr_entity;
+                    break;
+                }
+            }
+        }
+
+        return ret;
+    }
+
     public void ClearMapEntities()
     {
         CheckGridNull();
@@ -111,7 +150,14 @@ public class MapManager : Singleton<MapManager>
     {
         if(curr_grid != null)
         {
-            curr_grid.InstantiateGridEntity(slot.GetGridPos(), belt);
+            switch(map_click_behaviour)
+            {
+                case MapClickBehaviour.ADD:
+                    SpawnEntity(slot.GetGridPos(), MapEntity.MapEntityType.ENTITY_BELT);
+                    break;
+                case MapClickBehaviour.ERASE:
+                    break;
+            }
         }
     }
 
