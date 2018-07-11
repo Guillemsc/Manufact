@@ -22,19 +22,6 @@ public class EventManager : Singleton<EventManager>
             event_type = e_type;
         }
 
-        // Map
-        public class MapEntitySpawn
-        {
-            public MapEntity entity = null;
-        } public MapEntitySpawn map_entity_spawn = new MapEntitySpawn();
-
-
-        public class MapEntityDelete
-        {
-            public MapEntity entity = null;
-        }
-        public MapEntityDelete map_entity_delete = new MapEntityDelete();
-
         // Levels
         public class LevelStarted
         {
@@ -53,7 +40,7 @@ public class EventManager : Singleton<EventManager>
 
     private void Awake()
     {
-        InitInstance(this, gameObject);
+        //InitInstance(this, gameObject);
     }
 
     public void SendEvent(Event ev)

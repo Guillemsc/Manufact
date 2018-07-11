@@ -254,24 +254,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\AppManager.cs" />
+    <Compile Include="Assets\Scripts\EditorTools\LevelCreatorEditor.cs" />
+    <Compile Include="Assets\Scripts\EditorTools\LevelCreatorEditorExt.cs" />
     <Compile Include="Assets\Scripts\Events\EventManager.cs" />
     <Compile Include="Assets\Scripts\General\Singleton.cs" />
     <Compile Include="Assets\Scripts\General\Timer.cs" />
-    <Compile Include="Assets\Scripts\Grid\GridCreatorManager.cs" />
-    <Compile Include="Assets\Scripts\Grid\GridCreatorManagerEditor.cs" />
-    <Compile Include="Assets\Scripts\Grid\GridEntity.cs" />
     <Compile Include="Assets\Scripts\Grid\GridInstance.cs" />
-    <Compile Include="Assets\Scripts\Grid\GridInstanceEditor.cs" />
-    <Compile Include="Assets\Scripts\Grid\GridSlotInstance.cs" />
+    <Compile Include="Assets\Scripts\Grid\GridInstanceExt.cs" />
     <Compile Include="Assets\Scripts\Level\Level.cs" />
-    <Compile Include="Assets\Scripts\Level\Levels\LevelTest.cs" />
     <Compile Include="Assets\Scripts\Level\LevelsManager.cs" />
     <Compile Include="Assets\Scripts\Localization\LocManager.cs" />
     <Compile Include="Assets\Scripts\Localization\LocText.cs" />
-    <Compile Include="Assets\Scripts\Map\Entities\MapEntityBelt.cs" />
-    <Compile Include="Assets\Scripts\Map\MapEntity.cs" />
-    <Compile Include="Assets\Scripts\Map\MapManager.cs" />
-    <Compile Include="Assets\Scripts\Materials\MaterialEntity.cs" />
     <Compile Include="Assets\Scripts\UI\DebugUI.cs" />
     <Compile Include="Assets\ThirdParties\Demigiant\DOTween\Examples\Basics.cs" />
     <Compile Include="Assets\ThirdParties\Demigiant\DOTween\Examples\Sequences.cs" />

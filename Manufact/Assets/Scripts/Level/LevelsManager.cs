@@ -31,8 +31,7 @@ public class LevelsManager : Singleton<LevelsManager>
 
     private void Start()
     {
-        StartLevel(0);
-
+        //StartLevel(0);
     }
 
     private void Update()
