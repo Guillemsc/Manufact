@@ -259,8 +259,8 @@
     <Compile Include="Assets\Scripts\Events\EventManager.cs" />
     <Compile Include="Assets\Scripts\General\Singleton.cs" />
     <Compile Include="Assets\Scripts\General\Timer.cs" />
-    <Compile Include="Assets\Scripts\Grid\GridInstance.cs" />
-    <Compile Include="Assets\Scripts\Grid\GridInstanceExt.cs" />
+    <Compile Include="Assets\Scripts\Grid\GameGridInstance.cs" />
+    <Compile Include="Assets\Scripts\Grid\GameGridInstanceExt.cs" />
     <Compile Include="Assets\Scripts\Level\Level.cs" />
     <Compile Include="Assets\Scripts\Level\LevelsManager.cs" />
     <Compile Include="Assets\Scripts\Localization\LocManager.cs" />

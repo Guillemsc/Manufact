@@ -9,6 +9,6 @@ public class LevelCreatorEditor : MonoBehaviour
     {
         GameObject go = new GameObject();
         go.name = "GridInstance";
-        go.AddComponent<GridInstance>();
+        go.AddComponent<GameGridInstance>();
     }
 }

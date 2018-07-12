@@ -13,7 +13,7 @@ public class AppManager : Singleton<AppManager>
     [Header("Framerate")]
     [SerializeField] private bool vsync = true;
 
-    [SerializeField] private int max_fps = 60;
+    [SerializeField] private int max_fps = 999;
 
     private int frames_in_last_update = 0;
     private int frames_in_current_update = 0;
