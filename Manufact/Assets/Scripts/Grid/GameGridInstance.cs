@@ -22,6 +22,8 @@ public class GameGridInstance : MonoBehaviour
     [SerializeField] [HideInInspector]
     List<GridTile> tiles = new List<GridTile>();
 
+    private bool automatic_go_grid_snap = true;
+
     [System.Serializable]
     public class GridTile
     {
@@ -100,6 +102,88 @@ public class GameGridInstance : MonoBehaviour
         return tiles;
     }
 
+    public enum GetTileByGridPosState
+    {
+        SUCCES,
+        OUT_OF_BOUNDARIES,
+        NO_TIILE_FOUND,
+    }
+
+    public GridTile GetTileByGridPos(Vector2Int grid_pos)
+    {
+        GetTileByGridPosState state;
+        return GetTileByGridPos(grid_pos, out state);
+    }
+
+    public GridTile GetTileByGridPos(Vector2Int grid_pos, out GetTileByGridPosState state)
+    {
+        GridTile ret = null;
+
+        state = GetTileByGridPosState.NO_TIILE_FOUND;
+
+        if (grid_pos.x < grid_size.x && grid_pos.y < grid_size.y && grid_pos.x >= 0 && grid_pos.y >= 0)
+        {
+            for (int i = 0; i < tiles.Count; ++i)
+            {
+                GridTile curr_tile = tiles[i];
+
+                if (curr_tile.grid_pos == grid_pos)
+                {
+                    state = GetTileByGridPosState.SUCCES;
+                    ret = curr_tile;
+                    break;
+                }
+            }
+
+            if (ret == null)
+                state = GetTileByGridPosState.NO_TIILE_FOUND;
+        }
+        else
+            state = GetTileByGridPosState.OUT_OF_BOUNDARIES;
+
+        return ret;
+    }
+
+    public Vector3 GetWorldPosByTilePos(Vector2Int grid_pos)
+    {
+        Vector3 ret = Vector3.zero;
+
+        for (int i = 0; i < tiles.Count; ++i)
+        {
+            GridTile curr_tile = tiles[i];
+
+            if (curr_tile.grid_pos == grid_pos)
+            {
+                ret = curr_tile.pos;
+                break;
+            }
+        }
+
+        return ret;
+    }
+
+    public void SwapGridInfo(GridTile tile, Vector2Int new_grid_pos)
+    {
+        if(tile != null)
+        {
+            GridTile to_swap = GetTileByGridPos(new_grid_pos);
+
+            if(to_swap != null)
+            {
+                if(tile != to_swap)
+                {
+                    to_swap.go = tile.go;
+                    tile.go = null;
+                }
+            }
+        }
+    }
+
+    public void SetAutomaticGridSnap(bool set)
+    {
+        automatic_go_grid_snap = set;
+    }
+
     public Vector2 GetGridCenter()
     {
         return center_pos;
@@ -137,8 +221,12 @@ public class GameGridInstance : MonoBehaviour
 
                 if (curr_tile.go != null)
                 {
-                    curr_tile.go.transform.position = curr_tile.pos;
-                    curr_tile.go.transform.localScale = new Vector3(tiles_size, tiles_size, tiles_size);
+                    if (automatic_go_grid_snap)
+                    {
+                        curr_tile.go.transform.position = new Vector3(curr_tile.pos.x, curr_tile.pos.y, transform.position.z);
+                        curr_tile.go.transform.localScale = new Vector3(tiles_size, tiles_size, tiles_size);
+                    }
+
                     curr_tile.go.transform.parent = this.gameObject.transform;
                 }
             }
@@ -183,10 +271,10 @@ public class GameGridInstance : MonoBehaviour
         {
             GridTile curr_tile = tiles[i];
 
-            Vector3 p1 = new Vector3(curr_tile.pos.x - (tiles_size * 0.5f), curr_tile.pos.y + (tiles_size * 0.5f), 0);
-            Vector3 p2 = new Vector3(curr_tile.pos.x - (tiles_size * 0.5f), curr_tile.pos.y - (tiles_size * 0.5f), 0);
-            Vector3 p3 = new Vector3(curr_tile.pos.x + (tiles_size * 0.5f), curr_tile.pos.y - (tiles_size * 0.5f), 0);
-            Vector3 p4 = new Vector3(curr_tile.pos.x + (tiles_size * 0.5f), curr_tile.pos.y + (tiles_size * 0.5f), 0);
+            Vector3 p1 = new Vector3(curr_tile.pos.x - (tiles_size * 0.5f), curr_tile.pos.y + (tiles_size * 0.5f), transform.position.z);
+            Vector3 p2 = new Vector3(curr_tile.pos.x - (tiles_size * 0.5f), curr_tile.pos.y - (tiles_size * 0.5f), transform.position.z);
+            Vector3 p3 = new Vector3(curr_tile.pos.x + (tiles_size * 0.5f), curr_tile.pos.y - (tiles_size * 0.5f), transform.position.z);
+            Vector3 p4 = new Vector3(curr_tile.pos.x + (tiles_size * 0.5f), curr_tile.pos.y + (tiles_size * 0.5f), transform.position.z);
 
             Debug.DrawLine(p1, p2);
             Debug.DrawLine(p2, p3);

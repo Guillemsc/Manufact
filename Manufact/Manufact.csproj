@@ -261,6 +261,7 @@
     <Compile Include="Assets\Scripts\General\Timer.cs" />
     <Compile Include="Assets\Scripts\Grid\GameGridInstance.cs" />
     <Compile Include="Assets\Scripts\Grid\GameGridInstanceExt.cs" />
+    <Compile Include="Assets\Scripts\Grid\GameGridMovement.cs" />
     <Compile Include="Assets\Scripts\Level\Level.cs" />
     <Compile Include="Assets\Scripts\Level\LevelsManager.cs" />
     <Compile Include="Assets\Scripts\Localization\LocManager.cs" />
