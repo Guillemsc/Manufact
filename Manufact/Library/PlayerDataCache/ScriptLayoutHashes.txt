@@ -1,6 +1,6 @@
 WindowsStandalone
 PlayerPath?
-C:/Users/Guillem/Desktop/TestBuilds/test.exe
+C:/Users/Guillem/Desktop/Manufact/Builds/tst.exe
 SceneListBegin?
 Assets/Scenes/MainScene.unity
 SceneListEnd?
@@ -18,6 +18,7 @@ ff05dcdf90651c3d98a9cad3df5e471e UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 92d7a83ea3c7404e484f3b2eed421855 UnityEngine.Timeline.dll:UnityEngine.Timeline.GroupTrack
 92d7a83ea3c7404e484f3b2eed421855 UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 df374c01140c2d578bf70cbd60073d1d UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UIControl
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 49cd62a578efc0a599b810a2b66cd49c UnityEngine.UI.dll:UnityEngine.UI.Button
@@ -52,6 +53,7 @@ f61c0793411f10cf5fbfa1473fef5ef2 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 1b8c02d0aa82fbf036a2b9b2d713eec3 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.Editor.Placeholder
+70cef324b6b20c3b766a696ebff444fa Assembly-CSharp.dll:.IntroLogoUI
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 49cd62a578efc0a599b810a2b66cd49c UnityEngine.UI.dll:UnityEngine.UI.Button
@@ -217,6 +219,7 @@ e0f7ffd5d5c2abe4b2e16569a21163da UnityEngine.GoogleAudioSpatializer.dll:UnityEng
 67a5f2c97205d2e41a8ed7c7ce898f6e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSoundfieldExtension
 67a5f2c97205d2e41a8ed7c7ce898f6e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
 aa9d1bd0cc771545f2ae1f63a6d0ed6a Assembly-CSharp.dll:TMPro.Examples.TMP_TextEventCheck
+b0a52a01741efb87b0085d9c8cc3c351 Assembly-CSharp.dll:.GameGridMovement
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.LevelCreatorEditor
 9e0ef5bf862444b5dc48b5a99554ce7c UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioListenerExtension
 e0f7ffd5d5c2abe4b2e16569a21163da UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
@@ -240,9 +243,10 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 752ea815860a151aee955bcc6c8b2dbf Assembly-CSharp.dll:.GameGridInstanceExt
 6826e26f7cc718f870001971f13e79c7 Assembly-CSharp.dll:TMPro.TMP_TextEventHandler
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TMPro.Examples.VertexColorCycler
+844afb30850faf94643682ab7d0564f6 Assembly-CSharp.dll:.LanguageSelectUI
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.LevelsManager
 020550babdb991365f61c5bffe1f4f52 Assembly-CSharp.dll:TMPro.Examples.TextMeshSpawner
 af7666733efcc974926d7d470e1732a6 Assembly-CSharp.dll:TMPro.Examples.SkewTextExample
 34e025057ef78b1bf238460cdf6583a3 Assembly-CSharp.dll:TMPro.Examples.ObjectSpin
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TMPro.Examples.SimpleScript
-b0a52a01741efb87b0085d9c8cc3c351 Assembly-CSharp.dll:.GameGridMovement
+33110c93cfb7ba971e8a2a9440ee9941 Assembly-CSharp.dll:.LogicManager

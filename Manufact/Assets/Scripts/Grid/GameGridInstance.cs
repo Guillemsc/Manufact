@@ -10,14 +10,11 @@ public class GameGridInstance : MonoBehaviour
 
     private Vector2 center_pos = Vector2.zero;
 
-    [SerializeField]
-    private float tiles_size = 1.0f;
+    [SerializeField] private float tiles_size = 1.0f;
 
-    [SerializeField]
-    private Vector2 tiles_spacing = Vector2.one;
+    [SerializeField] private Vector2 tiles_spacing = Vector2.one;
 
-    [SerializeField]
-    private bool draw_tiles = true;
+    [SerializeField] private bool draw_tiles = true;
 
     [SerializeField] [HideInInspector]
     List<GridTile> tiles = new List<GridTile>();

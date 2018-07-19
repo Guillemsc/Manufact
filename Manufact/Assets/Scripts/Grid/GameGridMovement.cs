@@ -13,8 +13,7 @@ public class GameGridMovement : MonoBehaviour
         RIGHT,
     }
 
-    [SerializeField]
-    private float movement_time = 0.5f;
+    [SerializeField] private float movement_time = 0.5f;
 
     private GameGridInstance grid_inst = null;
 

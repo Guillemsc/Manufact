@@ -266,7 +266,12 @@
     <Compile Include="Assets\Scripts\Level\LevelsManager.cs" />
     <Compile Include="Assets\Scripts\Localization\LocManager.cs" />
     <Compile Include="Assets\Scripts\Localization\LocText.cs" />
+    <Compile Include="Assets\Scripts\LogicManager.cs" />
     <Compile Include="Assets\Scripts\UI\DebugUI.cs" />
+    <Compile Include="Assets\Scripts\UI\IntroLogoUI.cs" />
+    <Compile Include="Assets\Scripts\UI\LanguageSelectUI.cs" />
+    <Compile Include="Assets\Scripts\UI\MainMenuUI.cs" />
+    <Compile Include="Assets\Scripts\UI\UIControl.cs" />
     <Compile Include="Assets\ThirdParties\Demigiant\DOTween\Examples\Basics.cs" />
     <Compile Include="Assets\ThirdParties\Demigiant\DOTween\Examples\Sequences.cs" />
     <Compile Include="Assets\ThirdParties\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
