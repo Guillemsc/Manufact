@@ -14,6 +14,7 @@ public class LogicManager : Singleton<LogicManager>
 
     [SerializeField] private IntroLogoUI intro_logo_ui = null;
     [SerializeField] private LanguageSelectUI select_language_ui = null;
+    [SerializeField] private MainMenuUI main_menu_ui = null;
 
     private void Awake()
     {
@@ -31,11 +32,16 @@ public class LogicManager : Singleton<LogicManager>
             select_language_ui.gameObject.SetActive(false);
             select_language_ui.UISuscribeOnFinish(OnSelectLanguageUIFinished);
         }
+
+        if(main_menu_ui != null)
+        {
+            main_menu_ui.gameObject.SetActive(true);
+        }
     }
 
     private void Start()
     {
-        //StartPhase(LogicPhase.GAME_LOAD_SCREENS);
+        StartPhase(LogicPhase.GAME_LOAD_SCREENS);
     }
 
     public void StartPhase(LogicPhase p)
@@ -66,7 +72,10 @@ public class LogicManager : Singleton<LogicManager>
 
     private void StartGameMenu()
     {
-
+        if (main_menu_ui != null)
+        {
+            main_menu_ui.UIBegin();
+        }
     }
 
     private void OnIntroLogoUIFinished(UIControl c)
@@ -80,6 +89,6 @@ public class LogicManager : Singleton<LogicManager>
 
     private void OnSelectLanguageUIFinished(UIControl c)
     {
-
+        StartPhase(LogicPhase.GAME_MENU);
     }
 }
