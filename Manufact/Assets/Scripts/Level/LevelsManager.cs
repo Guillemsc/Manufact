@@ -117,7 +117,7 @@ public class LevelsManager : Singleton<LevelsManager>
         }
         else
         {
-            Debug.LogError("[Level] Level could be started, number not found: " + level_number);
+            Debug.LogError("[Level] Level could not be started, number not found: " + level_number);
         }
     }
 }

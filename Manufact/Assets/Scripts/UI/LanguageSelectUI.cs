@@ -134,6 +134,10 @@ public class LanguageSelectUI : UIControl
                 }
             case LanguageSelectState.FINISHED:
                {
+                   english_button.gameObject.SetActive(false);
+                   spanish_button.gameObject.SetActive(false);
+                   background_image.gameObject.SetActive(false);
+
                    break;
                }
        }

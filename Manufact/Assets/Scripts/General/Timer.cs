@@ -15,6 +15,13 @@ public class Timer
         start_fixed_time = Time.realtimeSinceStartup;
     }
 
+    public void Reset()
+    {
+        started = false;
+        start_time = 0.0f;
+        start_fixed_time = 0.0f;
+}
+
     public float ReadTime()
     {
         if (started)

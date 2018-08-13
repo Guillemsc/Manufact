@@ -5,10 +5,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class GameGridInstance : MonoBehaviour
 {
-    [SerializeField] [HideInInspector]
-    private Vector2Int grid_size = Vector2Int.zero;
-
-    private Vector2 center_pos = Vector2.zero;
+    [SerializeField] [HideInInspector] private Vector2Int grid_size = Vector2Int.zero;
 
     [SerializeField] private float tiles_size = 1.0f;
 
@@ -16,10 +13,18 @@ public class GameGridInstance : MonoBehaviour
 
     [SerializeField] private bool draw_tiles = true;
 
-    [SerializeField] [HideInInspector]
-    List<GridTile> tiles = new List<GridTile>();
+    [SerializeField] [HideInInspector] List<GridTile> tiles = new List<GridTile>();
+
+    private Vector2 center_pos = Vector2.zero;
 
     private bool automatic_go_grid_snap = true;
+
+    public enum GridTileType
+    {
+        GRID_TILE_TYPE_EMPTY,
+        GRID_TILE_TYPE_MOVE,
+        GRID_TIILE_TYPE_STATIC,
+    }
 
     [System.Serializable]
     public class GridTile
@@ -27,6 +32,15 @@ public class GameGridInstance : MonoBehaviour
         public Vector2 pos = Vector2.zero;
         public Vector2Int grid_pos = Vector2Int.zero;
         public GameObject go = null;
+        public GridTileType type = GridTileType.GRID_TILE_TYPE_EMPTY;
+    }
+
+    private void Start()
+    {
+        if(Application.isPlaying)
+        {
+            InitGrid();
+        }
     }
 
     private void Update()
@@ -59,22 +73,64 @@ public class GameGridInstance : MonoBehaviour
         tiles_size = size;
     }
 
-    public void AddGameObject(Vector2 tile_pos, GameObject go)
+    public void InitGrid()
     {
-        if (go != null)
+        for (int i = 0; i < tiles.Count; ++i)
         {
-            for (int i = 0; i < tiles.Count; ++i)
-            {
-                GridTile curr_tile = tiles[i];
+            GridTile curr_tile = tiles[i];
 
-                if (curr_tile.grid_pos == tile_pos)
-                {
-                    curr_tile.go = go;
-                    curr_tile.go.transform.position = curr_tile.pos;
-                    break;
-                }
+            GameObject inst = InstantiateTileGoFromTileType(curr_tile.type);
+
+            if (inst != null)
+            {
+                curr_tile.go = inst;
+                curr_tile.go.transform.position = curr_tile.pos;
             }
         }
+    }
+    
+    GameObject InstantiateTileGoFromTileType(GridTileType type)
+    {
+        GameObject ret = null;
+
+        GameObject prefab = null;
+
+        switch(type)
+        {
+            case GridTileType.GRID_TIILE_TYPE_STATIC:
+                prefab = LevelCreatorEditor.instance.GetStaticTilePrefab();
+                break;
+            case GridTileType.GRID_TILE_TYPE_MOVE:
+                prefab = LevelCreatorEditor.instance.GetBaseMoveTilePrefab();
+                break;
+        }
+
+        if(prefab != null)
+        {
+            ret = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+        }
+
+        return ret;
+    }
+
+    Color TileDebugColorFromTileType(GridTileType type)
+    {
+        Color ret = new Color();
+
+        switch (type)
+        {
+            case GridTileType.GRID_TILE_TYPE_EMPTY:
+                ret = new Color(0, 0, 0, 0);
+                break;
+            case GridTileType.GRID_TIILE_TYPE_STATIC:
+                ret = LevelCreatorEditor.instance.GetStaticTileDebugColor();
+                break;
+            case GridTileType.GRID_TILE_TYPE_MOVE:
+                ret = LevelCreatorEditor.instance.GetBaseMoveTileDebugColor();
+                break;
+        }
+
+        return ret;
     }
 
     public void RemoveGameObject(GameObject go)
@@ -273,10 +329,25 @@ public class GameGridInstance : MonoBehaviour
             Vector3 p3 = new Vector3(curr_tile.pos.x + (tiles_size * 0.5f), curr_tile.pos.y - (tiles_size * 0.5f), transform.position.z);
             Vector3 p4 = new Vector3(curr_tile.pos.x + (tiles_size * 0.5f), curr_tile.pos.y + (tiles_size * 0.5f), transform.position.z);
 
+            Vector3 p1_tile = new Vector3(curr_tile.pos.x - (tiles_size * 0.25f), curr_tile.pos.y + (tiles_size * 0.25f), transform.position.z);
+            Vector3 p2_tile = new Vector3(curr_tile.pos.x - (tiles_size * 0.25f), curr_tile.pos.y - (tiles_size * 0.25f), transform.position.z);
+            Vector3 p3_tile = new Vector3(curr_tile.pos.x + (tiles_size * 0.25f), curr_tile.pos.y - (tiles_size * 0.25f), transform.position.z);
+            Vector3 p4_tile = new Vector3(curr_tile.pos.x + (tiles_size * 0.25f), curr_tile.pos.y + (tiles_size * 0.25f), transform.position.z);
+  
             Debug.DrawLine(p1, p2);
             Debug.DrawLine(p2, p3);
             Debug.DrawLine(p3, p4);
             Debug.DrawLine(p4, p1);
+
+            if (!Application.isPlaying)
+            {
+                Color color_type = TileDebugColorFromTileType(curr_tile.type);
+
+                Debug.DrawLine(p1_tile, p2_tile, color_type);
+                Debug.DrawLine(p2_tile, p3_tile, color_type);
+                Debug.DrawLine(p3_tile, p4_tile, color_type);
+                Debug.DrawLine(p4_tile, p1_tile, color_type);
+            }
         }
     }
 }

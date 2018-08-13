@@ -34,7 +34,6 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             }
             else
             {
-                Debug.LogError("[Singleton] Instance is not set or used before creation, create it using 'InitInstance'");
                 return null;
             }
         }

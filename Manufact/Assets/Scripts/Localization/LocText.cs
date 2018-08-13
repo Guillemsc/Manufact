@@ -32,6 +32,7 @@ public class LocText : MonoBehaviour
 
     private void OnDestroy()
     {
-        LocManager.Instance.RemoveUIText(this);
+        if(LocManager.Instance != null)
+            LocManager.Instance.RemoveUIText(this);
     }
 }

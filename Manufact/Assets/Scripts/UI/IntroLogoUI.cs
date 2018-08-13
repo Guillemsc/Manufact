@@ -135,6 +135,8 @@ public class IntroLogoUI : UIControl
                 {
                     if (timer_background_fade_out.ReadTime() > time_background_fade_out)
                     {
+                        logo_image.gameObject.SetActive(false);
+                        background_image.gameObject.SetActive(false);
                         state = IntroLogoState.FINISHED;
                         UIOnFinish();
                     }

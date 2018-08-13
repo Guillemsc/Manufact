@@ -12,7 +12,6 @@ public class LocManager : Singleton<LocManager>
     {
         EN,
         SPA,
-        CAT,
     }
 
     private IDictionary<string, string> _content = new Dictionary<string, string>();
@@ -25,7 +24,7 @@ public class LocManager : Singleton<LocManager>
     {
         InitInstance(this, gameObject);
 
-        SetLanguage(Language.CAT);
+        SetLanguage(Language.EN);
     }
 
     public void SetLanguage(Language _language)

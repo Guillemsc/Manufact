@@ -53,19 +53,14 @@ public class GameGridInstanceExt :Editor
 
                 string name = "[" + curr_tile.grid_pos.x + "] [" + curr_tile.grid_pos.y + "]";
 
-                GameObject obj = (GameObject)EditorGUILayout.ObjectField(name, curr_tile.go, typeof(GameObject), false);
+                GameGridInstance.GridTileType obj = (GameGridInstance.GridTileType)EditorGUILayout.EnumPopup(name, curr_tile.type);
 
-                if (obj != null && !obj.scene.IsValid())
+                if (obj != curr_tile.type)
                 {
-                    obj = Instantiate(obj, new Vector3(0, 0, 0), Quaternion.identity);
-                }
+                    curr_tile.type = obj;
 
-                if (obj == null && curr_tile.go != null || obj != curr_tile.go)
-                {
-                    DestroyImmediate(curr_tile.go);
+                    EditorUtility.SetDirty(target);
                 }
-
-                curr_tile.go = obj;
             }
         }
     }
