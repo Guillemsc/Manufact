@@ -33,6 +33,9 @@ public class GameGridInstance : MonoBehaviour
         public Vector2Int grid_pos = Vector2Int.zero;
         public GameObject go = null;
         public GridTileType type = GridTileType.GRID_TILE_TYPE_EMPTY;
+
+        public Vector2 initial_pos = Vector2.zero;
+        public Vector2Int initial_grid_pos = Vector2Int.zero;
     }
 
     private void Start()
