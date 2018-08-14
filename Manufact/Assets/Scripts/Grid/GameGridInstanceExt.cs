@@ -47,6 +47,16 @@ public class GameGridInstanceExt :Editor
 
             List<GameGridInstance.GridTile> tiles = myScript.GetTiles();
 
+            if (GUILayout.Button("Reset"))
+            {
+                for (int i = 0; i < tiles.Count; ++i)
+                {
+                    tiles[i].type = GameGridInstance.GridTileType.GRID_TILE_TYPE_EMPTY;
+                }
+
+                EditorUtility.SetDirty(target);
+            }
+
             for (int i = 0; i < tiles.Count; ++i)
             {
                 GameGridInstance.GridTile curr_tile = tiles[i];

@@ -105,28 +105,31 @@ public class GameGridMovement : MonoBehaviour
 
         if (tile != null)
         {
-            Vector2Int grid_pos_to_offset = GetOffsetByDirection(dir);
-
-            Vector2Int grid_pos_to_check = tile.grid_pos + grid_pos_to_offset;
-
-            GameGridInstance.GetTileByGridPosState state;
-            GameGridInstance.GridTile tile_check = grid_inst.GetTileByGridPos(grid_pos_to_check, out state);
-
-            switch(state)
+            if (tile.type != GameGridInstance.GridTileType.GRID_TIILE_TYPE_STATIC)
             {
-                case GameGridInstance.GetTileByGridPosState.SUCCES:
-                    {
-                        if (tile_check.go != null)
-                            ret = CheckMovementTile(tile_check, dir);
-                        else
+                Vector2Int grid_pos_to_offset = GetOffsetByDirection(dir);
+
+                Vector2Int grid_pos_to_check = tile.grid_pos + grid_pos_to_offset;
+
+                GameGridInstance.GetTileByGridPosState state;
+                GameGridInstance.GridTile tile_check = grid_inst.GetTileByGridPos(grid_pos_to_check, out state);
+
+                switch (state)
+                {
+                    case GameGridInstance.GetTileByGridPosState.SUCCES:
+                        {
+                            if (tile_check.go != null)
+                                ret = CheckMovementTile(tile_check, dir);
+                            else
+                                ret = true;
+                        }
+                        break;
+                    case GameGridInstance.GetTileByGridPosState.NO_TIILE_FOUND:
+                        {
                             ret = true;
-                    }
-                    break;
-                case GameGridInstance.GetTileByGridPosState.NO_TIILE_FOUND:
-                    {
-                        ret = true;
-                    }
-                    break;
+                        }
+                        break;
+                }
             }
         }
 
