@@ -3985,12 +3985,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dd1142774d4ed244ab3792871746932, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points_size: 1
+  points_size: 0.59
   draw_path: 1
   path_points:
-  - pos: {x: 0, y: 0}
-    go: {fileID: 0}
-    connexions: []
+  - pos: {x: 4.29, y: 1.38}
+    world_pos: {x: 0, y: 0}
+    connexions:
+    - pos: {x: 0.8, y: 1.36}
+      world_pos: {x: 0, y: 0}
+      connexions:
+      - pos: {x: 4.29, y: 1.38}
+        world_pos: {x: 0, y: 0}
+        connexions:
+        - pos: {x: 0.8, y: 1.36}
+          world_pos: {x: 0, y: 0}
+          connexions:
+          - pos: {x: 4.29, y: 1.38}
+            world_pos: {x: 0, y: 0}
+            connexions:
+            - pos: {x: 0.8, y: 1.36}
+              world_pos: {x: 0, y: 0}
+              connexions:
+              - pos: {x: 4.29, y: 1.38}
+                world_pos: {x: 0, y: 0}
+                connexions:
+                - pos: {x: 0.8, y: 1.36}
+                  world_pos: {x: 0, y: 0}
+  - pos: {x: 0.8, y: 1.36}
+    world_pos: {x: 0, y: 0}
+    connexions:
+    - pos: {x: 4.29, y: 1.38}
+      world_pos: {x: 0, y: 0}
+      connexions:
+      - pos: {x: 0.8, y: 1.36}
+        world_pos: {x: 0, y: 0}
+        connexions:
+        - pos: {x: 4.29, y: 1.38}
+          world_pos: {x: 0, y: 0}
+          connexions:
+          - pos: {x: 0.8, y: 1.36}
+            world_pos: {x: 0, y: 0}
+            connexions:
+            - pos: {x: 4.29, y: 1.38}
+              world_pos: {x: 0, y: 0}
+              connexions:
+              - pos: {x: 0.8, y: 1.36}
+                world_pos: {x: 0, y: 0}
+                connexions:
+                - pos: {x: 4.29, y: 1.38}
+                  world_pos: {x: 0, y: 0}
 --- !u!1 &2050364074
 GameObject:
   m_ObjectHideFlags: 0

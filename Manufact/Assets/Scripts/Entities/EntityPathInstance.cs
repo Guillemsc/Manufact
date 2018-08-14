@@ -15,9 +15,9 @@ public class EntityPathInstance : MonoBehaviour
     public class PathPoint
     {
         public Vector2    pos = Vector2.zero;
+        public Vector2    world_pos = Vector2.zero;
         public PathEntity entity = null;
-        public GameObject go = null;
-       
+
         public List<PathPoint> connexions = new List<PathPoint>();
 
         public bool HasConnexion(PathPoint pp)
@@ -30,7 +30,7 @@ public class EntityPathInstance : MonoBehaviour
                 {
                     PathPoint curr_point = connexions[i];
 
-                    if(curr_point == pp || (curr_point.go == pp.go && curr_point.go != null))
+                    if(curr_point == pp)
                     {
                         ret = true;
                         break;
@@ -39,6 +39,11 @@ public class EntityPathInstance : MonoBehaviour
             }
 
             return ret;
+        }
+
+        public Vector2 RealPos()
+        {
+            return world_pos + pos;
         }
     }
 
@@ -61,18 +66,37 @@ public class EntityPathInstance : MonoBehaviour
             DebugDrawPath();
 	}
 
+    public List<PathPoint> GetPathPoints()
+    {
+        return path_points;
+    }
+
     public PathPoint AddPathPoint(Vector2 pos)
     {
         PathPoint ret = new PathPoint();
 
         ret.pos = pos;
-        ret.go = new GameObject();
-
-        ret.go.transform.parent = transform;
 
         path_points.Add(ret);
 
         return ret;
+    }
+
+    public void RemovePathPoint(PathPoint pp)
+    {
+        if (pp != null)
+        {
+            for (int i = 0; i < path_points.Count; ++i)
+            {
+                PathPoint curr_point = path_points[i];
+
+                if (curr_point == pp)
+                {
+                    path_points.RemoveAt(i);
+                    break;
+                }
+            }
+        }
     }
 
     public void AddPathPointConexion(PathPoint p1, PathPoint p2)
@@ -87,30 +111,14 @@ public class EntityPathInstance : MonoBehaviour
         }
     }
 
-    public PathPoint GetPathPointFromGo(GameObject go)
-    {
-        PathPoint ret = null;
-
-        if (go != null)
-        {
-            for(int i = 0; i < path_points.Count; ++i)
-            {
-                PathPoint curr_point = path_points[i];
-
-                if(curr_point.go == go)
-                {
-                    ret = curr_point;
-                    break;
-                }
-            }
-        }
-
-        return ret;
-    }
-
     private void UpdatePath()
     {
+        for (int i = 0; i < path_points.Count; ++i)
+        {
+            PathPoint curr_point = path_points[i];
 
+            curr_point.world_pos = transform.position;
+        }
     }
 
     private void DebugDrawPath()
@@ -119,10 +127,10 @@ public class EntityPathInstance : MonoBehaviour
         {
             PathPoint curr_point = path_points[i];
 
-            Vector3 p1 = new Vector3(curr_point.pos.x - (points_size * 0.5f), curr_point.pos.y + (points_size * 0.5f), transform.position.z);
-            Vector3 p2 = new Vector3(curr_point.pos.x - (points_size * 0.5f), curr_point.pos.y - (points_size * 0.5f), transform.position.z);
-            Vector3 p3 = new Vector3(curr_point.pos.x + (points_size * 0.5f), curr_point.pos.y - (points_size * 0.5f), transform.position.z);
-            Vector3 p4 = new Vector3(curr_point.pos.x + (points_size * 0.5f), curr_point.pos.y + (points_size * 0.5f), transform.position.z);
+            Vector3 p1 = new Vector3(curr_point.RealPos().x - (points_size * 0.5f), curr_point.RealPos().y + (points_size * 0.5f), transform.position.z);
+            Vector3 p2 = new Vector3(curr_point.RealPos().x - (points_size * 0.5f), curr_point.RealPos().y - (points_size * 0.5f), transform.position.z);
+            Vector3 p3 = new Vector3(curr_point.RealPos().x + (points_size * 0.5f), curr_point.RealPos().y - (points_size * 0.5f), transform.position.z);
+            Vector3 p4 = new Vector3(curr_point.RealPos().x + (points_size * 0.5f), curr_point.RealPos().y + (points_size * 0.5f), transform.position.z);
 
             Debug.DrawLine(p1, p2);
             Debug.DrawLine(p2, p3);
@@ -131,10 +139,12 @@ public class EntityPathInstance : MonoBehaviour
 
             for(int y = 0; y < curr_point.connexions.Count; ++y)
             {
-                PathPoint curr_con = curr_point.connexions[i];
+                PathPoint curr_con = curr_point.connexions[y];
 
                 Vector3 c1 = new Vector3(curr_point.pos.x, curr_point.pos.y, transform.position.z);
                 Vector3 c2 = new Vector3(curr_con.pos.x, curr_con.pos.y, transform.position.z);
+
+                Debug.DrawLine(c1, c2);
             }
         }
     }
