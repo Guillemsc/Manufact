@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEditor;
 
 [CustomEditor(typeof(GameGridInstance))]
-public class GameGridInstanceExt :Editor
+public class GameGridInstanceExt : Editor
 {
     [SerializeField] [HideInInspector]
     private Vector2Int new_grid_size = new Vector2Int(-1, -1);
