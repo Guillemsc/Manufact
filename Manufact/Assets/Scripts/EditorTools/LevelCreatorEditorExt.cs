@@ -11,14 +11,19 @@ public class LevelCreatorEditorExt : Editor
 {
     public override void OnInspectorGUI()
     {
-        DrawDefaultInspector();
-
         LevelCreatorEditor myScript = (LevelCreatorEditor)target;
 
         if (GUILayout.Button("New grid instance"))
         {
             myScript.NewGridInstance();
         }
+
+        if (GUILayout.Button("New path instance"))
+        {
+            myScript.NewPathInstance();
+        }
+
+        DrawDefaultInspector();
     }
 }
 

@@ -969,154 +969,154 @@ MonoBehaviour:
   tiles_spacing: {x: 1.23, y: 1.08}
   draw_tiles: 1
   tiles:
-  - pos: {x: 1.8200002, y: 2.76}
+  - pos: {x: -2.37, y: -2.1000001}
     grid_pos: {x: 0, y: 0}
     go: {fileID: 0}
     type: 0
     initial_pos: {x: 0, y: 0}
     initial_grid_pos: {x: 0, y: 0}
-  - pos: {x: 3.0500002, y: 2.76}
+  - pos: {x: -1.1399999, y: -2.1000001}
     grid_pos: {x: 1, y: 0}
     go: {fileID: 0}
     type: 0
     initial_pos: {x: 0, y: 0}
     initial_grid_pos: {x: 0, y: 0}
-  - pos: {x: 4.28, y: 2.76}
+  - pos: {x: 0.09000015, y: -2.1000001}
     grid_pos: {x: 2, y: 0}
     go: {fileID: 0}
     type: 0
     initial_pos: {x: 0, y: 0}
     initial_grid_pos: {x: 0, y: 0}
-  - pos: {x: 5.51, y: 2.76}
+  - pos: {x: 1.3200002, y: -2.1000001}
     grid_pos: {x: 3, y: 0}
     go: {fileID: 0}
     type: 0
     initial_pos: {x: 0, y: 0}
     initial_grid_pos: {x: 0, y: 0}
-  - pos: {x: 6.7400002, y: 2.76}
+  - pos: {x: 2.5500002, y: -2.1000001}
     grid_pos: {x: 4, y: 0}
     go: {fileID: 0}
     type: 0
     initial_pos: {x: 0, y: 0}
     initial_grid_pos: {x: 0, y: 0}
-  - pos: {x: 1.8200002, y: 3.8400002}
+  - pos: {x: -2.37, y: -1.0200001}
     grid_pos: {x: 0, y: 1}
     go: {fileID: 0}
     type: 0
     initial_pos: {x: 0, y: 0}
     initial_grid_pos: {x: 0, y: 0}
-  - pos: {x: 3.0500002, y: 3.8400002}
+  - pos: {x: -1.1399999, y: -1.0200001}
     grid_pos: {x: 1, y: 1}
     go: {fileID: 0}
     type: 0
     initial_pos: {x: 0, y: 0}
     initial_grid_pos: {x: 0, y: 0}
-  - pos: {x: 4.28, y: 3.8400002}
+  - pos: {x: 0.09000015, y: -1.0200001}
     grid_pos: {x: 2, y: 1}
     go: {fileID: 0}
     type: 0
     initial_pos: {x: 0, y: 0}
     initial_grid_pos: {x: 0, y: 0}
-  - pos: {x: 5.51, y: 3.8400002}
+  - pos: {x: 1.3200002, y: -1.0200001}
     grid_pos: {x: 3, y: 1}
     go: {fileID: 0}
-    type: 0
+    type: 1
     initial_pos: {x: 0, y: 0}
     initial_grid_pos: {x: 0, y: 0}
-  - pos: {x: 6.7400002, y: 3.8400002}
+  - pos: {x: 2.5500002, y: -1.0200001}
     grid_pos: {x: 4, y: 1}
     go: {fileID: 0}
     type: 0
     initial_pos: {x: 0, y: 0}
     initial_grid_pos: {x: 0, y: 0}
-  - pos: {x: 1.8200002, y: 4.92}
+  - pos: {x: -2.37, y: 0.059999943}
     grid_pos: {x: 0, y: 2}
     go: {fileID: 0}
     type: 0
     initial_pos: {x: 0, y: 0}
     initial_grid_pos: {x: 0, y: 0}
-  - pos: {x: 3.0500002, y: 4.92}
+  - pos: {x: -1.1399999, y: 0.059999943}
     grid_pos: {x: 1, y: 2}
     go: {fileID: 0}
-    type: 1
+    type: 0
     initial_pos: {x: 0, y: 0}
     initial_grid_pos: {x: 0, y: 0}
-  - pos: {x: 4.28, y: 4.92}
+  - pos: {x: 0.09000015, y: 0.059999943}
     grid_pos: {x: 2, y: 2}
     go: {fileID: 0}
-    type: 1
+    type: 0
     initial_pos: {x: 0, y: 0}
     initial_grid_pos: {x: 0, y: 0}
-  - pos: {x: 5.51, y: 4.92}
+  - pos: {x: 1.3200002, y: 0.059999943}
     grid_pos: {x: 3, y: 2}
     go: {fileID: 0}
-    type: 1
+    type: 0
     initial_pos: {x: 0, y: 0}
     initial_grid_pos: {x: 0, y: 0}
-  - pos: {x: 6.7400002, y: 4.92}
+  - pos: {x: 2.5500002, y: 0.059999943}
     grid_pos: {x: 4, y: 2}
     go: {fileID: 0}
-    type: 1
+    type: 0
     initial_pos: {x: 0, y: 0}
     initial_grid_pos: {x: 0, y: 0}
-  - pos: {x: 1.8200002, y: 6}
+  - pos: {x: -2.37, y: 1.14}
     grid_pos: {x: 0, y: 3}
     go: {fileID: 0}
-    type: 1
+    type: 0
     initial_pos: {x: 0, y: 0}
     initial_grid_pos: {x: 0, y: 0}
-  - pos: {x: 3.0500002, y: 6}
+  - pos: {x: -1.1399999, y: 1.14}
     grid_pos: {x: 1, y: 3}
     go: {fileID: 0}
-    type: 1
+    type: 0
     initial_pos: {x: 0, y: 0}
     initial_grid_pos: {x: 0, y: 0}
-  - pos: {x: 4.28, y: 6}
+  - pos: {x: 0.09000015, y: 1.14}
     grid_pos: {x: 2, y: 3}
     go: {fileID: 0}
-    type: 1
+    type: 0
     initial_pos: {x: 0, y: 0}
     initial_grid_pos: {x: 0, y: 0}
-  - pos: {x: 5.51, y: 6}
+  - pos: {x: 1.3200002, y: 1.14}
     grid_pos: {x: 3, y: 3}
     go: {fileID: 0}
-    type: 1
+    type: 0
     initial_pos: {x: 0, y: 0}
     initial_grid_pos: {x: 0, y: 0}
-  - pos: {x: 6.7400002, y: 6}
+  - pos: {x: 2.5500002, y: 1.14}
     grid_pos: {x: 4, y: 3}
     go: {fileID: 0}
-    type: 1
+    type: 0
     initial_pos: {x: 0, y: 0}
     initial_grid_pos: {x: 0, y: 0}
-  - pos: {x: 1.8200002, y: 7.08}
+  - pos: {x: -2.37, y: 2.22}
     grid_pos: {x: 0, y: 4}
     go: {fileID: 0}
-    type: 1
+    type: 0
     initial_pos: {x: 0, y: 0}
     initial_grid_pos: {x: 0, y: 0}
-  - pos: {x: 3.0500002, y: 7.08}
+  - pos: {x: -1.1399999, y: 2.22}
     grid_pos: {x: 1, y: 4}
     go: {fileID: 0}
-    type: 1
+    type: 0
     initial_pos: {x: 0, y: 0}
     initial_grid_pos: {x: 0, y: 0}
-  - pos: {x: 4.28, y: 7.08}
+  - pos: {x: 0.09000015, y: 2.22}
     grid_pos: {x: 2, y: 4}
     go: {fileID: 0}
-    type: 1
+    type: 0
     initial_pos: {x: 0, y: 0}
     initial_grid_pos: {x: 0, y: 0}
-  - pos: {x: 5.51, y: 7.08}
+  - pos: {x: 1.3200002, y: 2.22}
     grid_pos: {x: 3, y: 4}
     go: {fileID: 0}
-    type: 1
+    type: 0
     initial_pos: {x: 0, y: 0}
     initial_grid_pos: {x: 0, y: 0}
-  - pos: {x: 6.7400002, y: 7.08}
+  - pos: {x: 2.5500002, y: 2.22}
     grid_pos: {x: 4, y: 4}
     go: {fileID: 0}
-    type: 1
+    type: 0
     initial_pos: {x: 0, y: 0}
     initial_grid_pos: {x: 0, y: 0}
 --- !u!4 &633226457
@@ -1126,7 +1126,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 633226455}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.28, y: 4.92, z: -4.82}
+  m_LocalPosition: {x: 4.28, y: 4.92, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1370437195}
@@ -2266,7 +2266,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1370437194}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -4.19, y: -4.86, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 633226457}
@@ -2288,6 +2288,8 @@ MonoBehaviour:
   level_name: no_name_key
   level_description: no_description_key
   level_number: 0
+  player_bullets: 0
+  enemy_lifes: 0
 --- !u!1 &1377825157
 GameObject:
   m_ObjectHideFlags: 0
@@ -2840,6 +2842,13 @@ MonoBehaviour:
     type: 2}
   base_move_tile_debug: {r: 0.227451, g: 0.5921569, b: 0.8352942, a: 1}
   base_static_tile_debug: {r: 0.882353, g: 0.3019608, b: 0.25882354, a: 1}
+  player: {fileID: 1328425099591492, guid: 0564f5e07a753ab44a88f1da32a9594d, type: 2}
+  base_enemy: {fileID: 1795868063248026, guid: a1db908a6268d444a978176d8855e06c, type: 2}
+  player_debug: {r: 0.227451, g: 0.5921569, b: 0.8352942, a: 1}
+  base_enemy_debug: {r: 0.882353, g: 0.3019608, b: 0.25882354, a: 1}
+  base_bullet: {fileID: 1454640611530602, guid: eb7122b9f60b59d4c86e60a1a6b24558,
+    type: 2}
+  bullets_speed: 10
 --- !u!1 &1495516781
 GameObject:
   m_ObjectHideFlags: 0
@@ -3988,13 +3997,21 @@ MonoBehaviour:
   points_size: 0.59
   draw_path: 1
   path_points:
-  - pos: {x: 0.01, y: 0}
-    world_pos: {x: -2.16, y: 0}
-  - pos: {x: 2.63, y: -3.56}
-    world_pos: {x: -2.16, y: 0}
-  path_point_conexions:
-  - p1: 1
-    p2: 0
+  - pos: {x: 6.41, y: 8.26}
+    world_pos: {x: -6.3500004, y: -4.86}
+    direction: 0
+    entity:
+      type: 2
+      go: {fileID: 0}
+    uid: e8629e92-abab-4a63-a785-23c62cbdfbd9
+  - pos: {x: 6.41, y: 1.43}
+    world_pos: {x: -6.3500004, y: -4.86}
+    direction: 0
+    entity:
+      type: 1
+      go: {fileID: 0}
+    uid: 885e89f6-15fa-4dc3-98d9-7fb939a1d663
+  path_point_conexions: []
 --- !u!1 &2050364074
 GameObject:
   m_ObjectHideFlags: 0

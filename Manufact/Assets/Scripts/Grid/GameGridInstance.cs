@@ -101,10 +101,10 @@ public class GameGridInstance : MonoBehaviour
         switch(type)
         {
             case GridTileType.GRID_TIILE_TYPE_STATIC:
-                prefab = LevelCreatorEditor.instance.GetStaticTilePrefab();
+                prefab = LevelCreatorEditor.Instance.GetStaticTilePrefab();
                 break;
             case GridTileType.GRID_TILE_TYPE_MOVE:
-                prefab = LevelCreatorEditor.instance.GetBaseMoveTilePrefab();
+                prefab = LevelCreatorEditor.Instance.GetBaseMoveTilePrefab();
                 break;
         }
 
@@ -126,10 +126,12 @@ public class GameGridInstance : MonoBehaviour
                 ret = new Color(0, 0, 0, 0);
                 break;
             case GridTileType.GRID_TIILE_TYPE_STATIC:
-                ret = LevelCreatorEditor.instance.GetStaticTileDebugColor();
+                if(LevelCreatorEditor.Instance != null)
+                    ret = LevelCreatorEditor.Instance.GetStaticTileDebugColor();
                 break;
             case GridTileType.GRID_TILE_TYPE_MOVE:
-                ret = LevelCreatorEditor.instance.GetBaseMoveTileDebugColor();
+                if(LevelCreatorEditor.Instance != null)
+                    ret = LevelCreatorEditor.Instance.GetBaseMoveTileDebugColor();
                 break;
         }
 

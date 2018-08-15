@@ -13,6 +13,10 @@ public class EventManager : Singleton<EventManager>
 
         LEVEL_STARTED,
         LEVEL_FINISHED,
+
+        ENTITY_SHOOTS,
+        ENTITY_HIT,
+        ENTITY_DIES,
     }
 
     public class Event
@@ -35,12 +39,32 @@ public class EventManager : Singleton<EventManager>
         }
         public LevelFinished level_finished = new LevelFinished();
 
+        // Entities
+        public class EntityShoots
+        {
+            public GameEntity entity = null;
+        }
+        public EntityShoots entity_shoots = new EntityShoots();
+
+        public class EntityHit
+        {
+            public GameEntity hit = null;
+            public GameEntity sender = null;
+        }
+        public EntityHit entity_hit = new EntityHit();
+
+        public class EntityDies
+        {
+            public GameEntity entity = null;
+        }
+        public EntityDies entity_dies = new EntityDies();
+
         private EventManager.EventType event_type = EventManager.EventType.EVENT_NULL;
     }
 
     private void Awake()
     {
-        //InitInstance(this, gameObject);
+        InitInstance(this, gameObject);
     }
 
     public void SendEvent(Event ev)
