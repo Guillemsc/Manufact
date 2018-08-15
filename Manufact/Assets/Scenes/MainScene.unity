@@ -3968,7 +3968,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1960053273}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.16, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1370437195}
@@ -3988,52 +3988,13 @@ MonoBehaviour:
   points_size: 0.59
   draw_path: 1
   path_points:
-  - pos: {x: 4.29, y: 1.38}
-    world_pos: {x: 0, y: 0}
-    connexions:
-    - pos: {x: 0.8, y: 1.36}
-      world_pos: {x: 0, y: 0}
-      connexions:
-      - pos: {x: 4.29, y: 1.38}
-        world_pos: {x: 0, y: 0}
-        connexions:
-        - pos: {x: 0.8, y: 1.36}
-          world_pos: {x: 0, y: 0}
-          connexions:
-          - pos: {x: 4.29, y: 1.38}
-            world_pos: {x: 0, y: 0}
-            connexions:
-            - pos: {x: 0.8, y: 1.36}
-              world_pos: {x: 0, y: 0}
-              connexions:
-              - pos: {x: 4.29, y: 1.38}
-                world_pos: {x: 0, y: 0}
-                connexions:
-                - pos: {x: 0.8, y: 1.36}
-                  world_pos: {x: 0, y: 0}
-  - pos: {x: 0.8, y: 1.36}
-    world_pos: {x: 0, y: 0}
-    connexions:
-    - pos: {x: 4.29, y: 1.38}
-      world_pos: {x: 0, y: 0}
-      connexions:
-      - pos: {x: 0.8, y: 1.36}
-        world_pos: {x: 0, y: 0}
-        connexions:
-        - pos: {x: 4.29, y: 1.38}
-          world_pos: {x: 0, y: 0}
-          connexions:
-          - pos: {x: 0.8, y: 1.36}
-            world_pos: {x: 0, y: 0}
-            connexions:
-            - pos: {x: 4.29, y: 1.38}
-              world_pos: {x: 0, y: 0}
-              connexions:
-              - pos: {x: 0.8, y: 1.36}
-                world_pos: {x: 0, y: 0}
-                connexions:
-                - pos: {x: 4.29, y: 1.38}
-                  world_pos: {x: 0, y: 0}
+  - pos: {x: 0.01, y: 0}
+    world_pos: {x: -2.16, y: 0}
+  - pos: {x: 2.63, y: -3.56}
+    world_pos: {x: -2.16, y: 0}
+  path_point_conexions:
+  - p1: 1
+    p2: 0
 --- !u!1 &2050364074
 GameObject:
   m_ObjectHideFlags: 0

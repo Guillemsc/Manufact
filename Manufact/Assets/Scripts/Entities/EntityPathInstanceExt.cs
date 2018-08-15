@@ -45,6 +45,7 @@ public class EntityPathInstanceExt : Editor
         GUILayout.Space(20);
 
         List<EntityPathInstance.PathPoint> points = myScript.GetPathPoints();
+        List<EntityPathInstance.PathPointConexions> pointConexions = myScript.GetPathPointsConections();
 
         for(int i = 0; i < points.Count; ++i)
         {
@@ -62,6 +63,16 @@ public class EntityPathInstanceExt : Editor
             if (GUILayout.Button(text))
             {
                 ToggleSelection(curr_point);
+            }
+
+            List<int> conexions = myScript.GetPathPointConexions(curr_point);
+
+            for (int y = 0; y < conexions.Count; ++y)
+            {
+                string c_text = "     - ";
+                c_text += conexions[y];
+
+                GUILayout.Label(c_text);
             }
 
             Vector2 last_point_pos = curr_point.pos;
