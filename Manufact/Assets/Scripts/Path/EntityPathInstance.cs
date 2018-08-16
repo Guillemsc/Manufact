@@ -76,6 +76,52 @@ public class EntityPathInstance : MonoBehaviour
             DebugDrawPath();
     }
 
+    public List<GameEntity> GetGameEntitiesByEntityType(PathEntityType type)
+    {
+        List<GameEntity> ret = new List<GameEntity>();
+
+        for(int i = 0; i < path_points.Count; ++i)
+        {
+            PathPoint curr_tile = path_points[i];
+
+            if (curr_tile.entity.type == type)
+            {
+                if(curr_tile.entity.go != null)
+                {
+                    GameEntity ge = curr_tile.entity.go.GetComponent<GameEntity>();
+
+                    if(ge != null)
+                        ret.Add(ge);
+                }
+            }
+        }
+
+        return ret;
+    }
+
+    public GameEntity GetGameEntityByEntityType(PathEntityType type)
+    {
+        GameEntity ret = null;
+
+        for (int i = 0; i < path_points.Count; ++i)
+        {
+            PathPoint curr_tile = path_points[i];
+
+            if (curr_tile.entity.type == type)
+            {
+                if (curr_tile.entity.go != null)
+                {
+                    GameEntity ge = curr_tile.entity.go.GetComponent<GameEntity>();
+
+                    if (ge != null)
+                        ret = ge;
+                }
+            }
+        }
+
+        return ret;
+    }
+
     public List<PathPoint> GetPathPoints()
     {
         return path_points;

@@ -9,6 +9,10 @@ public class Level : MonoBehaviour
     [SerializeField] private string level_description = "no_description_key";
     [SerializeField] private int level_number = 0;
 
+    [Header("Build info")]
+    [SerializeField] protected GameGridInstance grid = null;
+    [SerializeField] protected EntityPathInstance path = null;
+
     public string GetLevelName()
     {
         return LocManager.Instance.GetText(level_name);

@@ -9,7 +9,7 @@ public class GameEntity : MonoBehaviour
     protected EntityPathInstance.PathEntityType type;
 
     protected int life_points = 0;
-    protected int bullets_count = 3;
+    protected int bullets_count = 0;
 
     protected bool dead = false;
 

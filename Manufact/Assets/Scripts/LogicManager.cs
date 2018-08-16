@@ -35,13 +35,13 @@ public class LogicManager : Singleton<LogicManager>
 
         if(main_menu_ui != null)
         {
-            main_menu_ui.gameObject.SetActive(true);
+            main_menu_ui.gameObject.SetActive(false);
         }
     }
 
     private void Start()
     {
-        StartPhase(LogicPhase.GAME_LOAD_SCREENS);
+        //StartPhase(LogicPhase.GAME_LOAD_SCREENS);
     }
 
     public void StartPhase(LogicPhase p)

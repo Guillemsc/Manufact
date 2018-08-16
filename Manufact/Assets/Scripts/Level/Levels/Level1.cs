@@ -8,6 +8,11 @@ public class Level1 : Level
     [SerializeField] private int player_bullets;
     [SerializeField] private int enemy_lifes;
 
+    private EntityPlayer player = null;
+    private EntityBaseEnemy enemy = null;
+
+    private bool enemy_dead = false;
+
     public override void OnAwake()
     {
         EventManager.Instance.Suscribe(OnEvent);
@@ -15,7 +20,13 @@ public class Level1 : Level
 
     public override void OnStart()
     {
+        player = (EntityPlayer)path.GetGameEntityByEntityType(EntityPathInstance.PathEntityType.PATH_ENTITY_TYPE_PLAYER);
+        enemy = (EntityBaseEnemy)path.GetGameEntityByEntityType(EntityPathInstance.PathEntityType.PATH_ENTITY_TYPE_BASE_ENEMY);
 
+        if(player != null)
+        {
+            player.SetBullets(1);
+        }
     }
 
     public override void OnEnd()
@@ -30,7 +41,7 @@ public class Level1 : Level
 
     public override bool OnCheckWin()
     {
-        return false;
+        return enemy_dead;
     }
 
     public override bool OnCheckLose()

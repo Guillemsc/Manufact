@@ -8,6 +8,9 @@ public class LevelsManager : Singleton<LevelsManager>
 
     private Level current_level = null;
 
+    int  level_to_start = 0;
+    bool to_start_level = false;
+
     private void Awake()
     {
         InitInstance(this, gameObject);
@@ -31,11 +34,17 @@ public class LevelsManager : Singleton<LevelsManager>
 
     private void Start()
     {
-        //StartLevel(0);
+        StartLevel(0);
     }
 
     private void Update()
     {
+        if(to_start_level)
+        {
+            ActuallyStartLevel();
+            to_start_level = false;
+        }
+
         CheckCurrentLevelStates();
     }
 
@@ -93,13 +102,19 @@ public class LevelsManager : Singleton<LevelsManager>
 
     public void StartLevel(int level_number)
     {
+        level_to_start = level_number;
+        to_start_level = true;
+    }
+
+    public void ActuallyStartLevel()
+    {
         current_level = null;
 
         for (int i = 0; i < levels.Count; ++i)
         {
             Level level = levels[i];
 
-            if (level.GetLevelNumber() == level_number)
+            if (level.GetLevelNumber() == level_to_start)
             {
                 current_level = level;
                 break;
@@ -117,7 +132,7 @@ public class LevelsManager : Singleton<LevelsManager>
         }
         else
         {
-            Debug.LogError("[Level] Level could not be started, number not found: " + level_number);
+            Debug.LogError("[Level] Level could not be started, number not found: " + level_to_start);
         }
     }
 }
