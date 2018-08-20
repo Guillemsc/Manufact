@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,11 +13,14 @@ public class EventManager : Singleton<EventManager>
         MAP_ENTITY_DELETE,
 
         LEVEL_STARTED,
+        LEVEL_LOAD,
         LEVEL_FINISHED,
 
         ENTITY_SHOOTS,
         ENTITY_HIT,
         ENTITY_DIES,
+
+        TILE_HIT,
     }
 
     public class Event
@@ -32,6 +36,12 @@ public class EventManager : Singleton<EventManager>
             public int level = 0;
         }
         public LevelStarted level_started = new LevelStarted();
+
+        public class LevelLoad
+        {
+            public int level = 0;
+        }
+        public LevelLoad level_load = new LevelLoad();
 
         public class LevelFinished
         {
@@ -59,6 +69,19 @@ public class EventManager : Singleton<EventManager>
         }
         public EntityDies entity_dies = new EntityDies();
 
+        // Tiles
+        public class TileHit
+        {
+            public GridTileInstance tile = null;
+            public GameEntity sender = null;
+        }
+        public TileHit tile_hit = new TileHit();
+
+        public EventManager.EventType Type()
+        {
+            return event_type;
+        }
+
         private EventManager.EventType event_type = EventManager.EventType.EVENT_NULL;
     }
 
@@ -78,7 +101,22 @@ public class EventManager : Singleton<EventManager>
 
     public void Suscribe(OnEventDel del)
     {
-        OnEvent += del;
+        bool found = false;
+
+        if (OnEvent != null)
+        {
+            foreach (Delegate d in OnEvent.GetInvocationList())
+            {
+                if ((OnEventDel)d == del)
+                {
+                    found = true;
+                    break;
+                }
+            }
+        }
+    
+        if(!found)
+            OnEvent += del;
     }
 
     public void UnSuscribe(OnEventDel del)

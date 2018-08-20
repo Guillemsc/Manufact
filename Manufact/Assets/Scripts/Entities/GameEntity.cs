@@ -8,7 +8,7 @@ public class GameEntity : MonoBehaviour
 
     protected EntityPathInstance.PathEntityType type;
 
-    protected int life_points = 0;
+    protected int life_points = 1;
     protected int bullets_count = 0;
 
     protected bool dead = false;
@@ -23,11 +23,14 @@ public class GameEntity : MonoBehaviour
         collider = gameObject.GetComponent<BoxCollider2D>();
 
         timer_before_new_shoot.Start();
+
+        EventManager.Instance.Suscribe(OnEvent);
     }
 
     public void OnDestroy()
     {
-      
+        if(EventManager.Valid())
+            EventManager.Instance.UnSuscribe(OnEvent);
     }
 
     public void Init(EntityPathInstance ins)
@@ -62,6 +65,9 @@ public class GameEntity : MonoBehaviour
             EventManager.Event ev = new EventManager.Event(EventManager.EventType.ENTITY_DIES);
             ev.entity_dies.entity = this;
             EventManager.Instance.SendEvent(ev);
+
+            path.RemoveGameObject(gameObject);
+            gameObject.SetActive(false);
         }
     }
 
@@ -123,5 +129,18 @@ public class GameEntity : MonoBehaviour
         }
 
         return ret;
+    }
+
+    private void OnEvent(EventManager.Event ev)
+    {
+        switch(ev.Type())
+        {
+            case EventManager.EventType.ENTITY_HIT:
+                if(ev.entity_hit.hit == this)
+                {
+                    SetLifeHit(1);
+                }
+                break;
+        }
     }
 }

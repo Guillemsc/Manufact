@@ -13,6 +13,8 @@ public class EntityPathInstance : MonoBehaviour
 
     [SerializeField] [HideInInspector] List<PathPointConexions> path_point_conexions = new List<PathPointConexions>();
 
+    private bool inited = false;
+
     public enum PathPointDirection
     {
         PATH_POINT_DIRECTION_UP,
@@ -62,10 +64,7 @@ public class EntityPathInstance : MonoBehaviour
 
 	void Start ()
     {
-        if (Application.isPlaying)
-        {
-            InitPath();
-        }
+
     }
 
 	private void Update ()
@@ -74,6 +73,11 @@ public class EntityPathInstance : MonoBehaviour
 
         if (draw_path)
             DebugDrawPath();
+
+        if (Application.isPlaying)
+        {
+            InitPath();
+        }
     }
 
     public List<GameEntity> GetGameEntitiesByEntityType(PathEntityType type)
@@ -134,43 +138,48 @@ public class EntityPathInstance : MonoBehaviour
 
     public void InitPath()
     {
-        for (int i = 0; i < path_points.Count; ++i)
+        if (!inited)
         {
-            PathPoint curr_tile = path_points[i];
-
-            GameObject inst = InstantiateEntityGoFromPathEntityType(curr_tile.entity.type);
-
-            if (inst != null)
+            for (int i = 0; i < path_points.Count; ++i)
             {
-                inst.name = "Entity: " + i;
-                curr_tile.entity.go = inst;
-                curr_tile.entity.go.transform.position = curr_tile.RealPos();
-                curr_tile.entity.go.transform.parent = this.transform;
+                PathPoint curr_tile = path_points[i];
+
+                GameObject inst = InstantiateEntityGoFromPathEntityType(curr_tile.entity.type);
+
+                if (inst != null)
+                {
+                    inst.name = "Entity: " + i;
+                    curr_tile.entity.go = inst;
+                    curr_tile.entity.go.transform.position = curr_tile.RealPos();
+                    curr_tile.entity.go.transform.parent = this.transform;
+                }
             }
-        }
 
-        for(int i = 0; i < path_point_conexions.Count; ++i)
-        {
-            PathPointConexions curr_con = path_point_conexions[i];
+            for (int i = 0; i < path_point_conexions.Count; ++i)
+            {
+                PathPointConexions curr_con = path_point_conexions[i];
 
-            GameObject go_con = new GameObject();
-            go_con.name = "Connexion: " + i;
-            go_con.transform.parent = this.transform;
-            curr_con.line = go_con.AddComponent<LineRenderer>();
+                GameObject go_con = new GameObject();
+                go_con.name = "Connexion: " + i;
+                go_con.transform.parent = this.transform;
+                curr_con.line = go_con.AddComponent<LineRenderer>();
 
-            PathPoint p1 = GetPathPointFromUid(curr_con.p1);
-            PathPoint p2 = GetPathPointFromUid(curr_con.p2);
+                PathPoint p1 = GetPathPointFromUid(curr_con.p1);
+                PathPoint p2 = GetPathPointFromUid(curr_con.p2);
 
-            Vector3 start_pos = new Vector3(p1.RealPos().x, p1.RealPos().y, 1);
-            Vector3 end_pos = new Vector3(p2.RealPos().x, p2.RealPos().y, 1);
+                Vector3 start_pos = new Vector3(p1.RealPos().x, p1.RealPos().y, 1);
+                Vector3 end_pos = new Vector3(p2.RealPos().x, p2.RealPos().y, 1);
 
-            curr_con.line.SetPosition(0, start_pos);
-            curr_con.line.SetPosition(1, end_pos);
+                curr_con.line.SetPosition(0, start_pos);
+                curr_con.line.SetPosition(1, end_pos);
 
-            curr_con.line.material = LevelCreatorEditor.Instance.GetLineMaterial();
-            curr_con.line.numCapVertices = 60;
-            curr_con.line.startWidth = 0.1f;
-            curr_con.line.endWidth = 0.1f;
+                curr_con.line.material = LevelCreatorEditor.Instance.GetLineMaterial();
+                curr_con.line.numCapVertices = 60;
+                curr_con.line.startWidth = 0.1f;
+                curr_con.line.endWidth = 0.1f;
+            }
+
+            inited = true;
         }
     }
 
@@ -247,6 +256,24 @@ public class EntityPathInstance : MonoBehaviour
             }
         }
     }
+
+    public void RemoveGameObject(GameObject go)
+    {
+        if(go != null)
+        {
+            for (int i = 0; i < path_points.Count; ++i)
+            {
+                PathPoint curr_point = path_points[i];
+
+                if(curr_point.entity.go == go)
+                {
+                    curr_point.entity.go = null;
+                    curr_point.entity.type = PathEntityType.PATH_ENTITY_TYPE_EMPTY;
+                }
+            }
+        }
+    }
+
 
     public int GetPathPointIndex(PathPoint pp)
     {

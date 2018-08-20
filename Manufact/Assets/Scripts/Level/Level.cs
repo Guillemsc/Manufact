@@ -28,6 +28,11 @@ public class Level : MonoBehaviour
         return level_number;
     }
 
+    public void Awake()
+    {
+        gameObject.SetActive(false);
+    }
+
     public virtual void OnAwake()
     {
 

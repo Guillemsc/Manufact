@@ -18,20 +18,28 @@ public class Level1 : Level
         EventManager.Instance.Suscribe(OnEvent);
     }
 
+    public override void OnEnd()
+    {
+        EventManager.Instance.UnSuscribe(OnEvent);
+    }
+
     public override void OnStart()
     {
+        path.InitPath();
+        grid.InitGrid();
+
         player = (EntityPlayer)path.GetGameEntityByEntityType(EntityPathInstance.PathEntityType.PATH_ENTITY_TYPE_PLAYER);
         enemy = (EntityBaseEnemy)path.GetGameEntityByEntityType(EntityPathInstance.PathEntityType.PATH_ENTITY_TYPE_BASE_ENEMY);
 
         if(player != null)
         {
-            player.SetBullets(1);
+            player.SetBullets(player_bullets);
         }
-    }
 
-    public override void OnEnd()
-    {
-        EventManager.Instance.UnSuscribe(OnEvent);
+        if(enemy != null)
+        {
+            enemy.SetLifePoints(enemy_lifes);
+        }
     }
 
     public override void OnUpdate()
@@ -51,6 +59,14 @@ public class Level1 : Level
 
     private void OnEvent(EventManager.Event ev)
     {
-
+        switch(ev.Type())
+        {
+            case EventManager.EventType.ENTITY_DIES:
+                if(ev.entity_dies.entity == enemy)
+                {
+                    enemy_dead = true;
+                }
+                break;
+        }
     }
 }

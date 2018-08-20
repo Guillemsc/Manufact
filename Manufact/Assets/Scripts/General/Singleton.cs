@@ -39,5 +39,10 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 
+    public static bool Valid()
+    {
+        return instance != null;
+    }
+
     private static T instance;
 }

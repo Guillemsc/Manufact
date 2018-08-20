@@ -19,6 +19,8 @@ public class GameGridInstance : MonoBehaviour
 
     private bool automatic_go_grid_snap = true;
 
+    private bool inited = false;
+
     public enum GridTileType
     {
         GRID_TILE_TYPE_EMPTY,
@@ -40,10 +42,6 @@ public class GameGridInstance : MonoBehaviour
 
     private void Start()
     {
-        if(Application.isPlaying)
-        {
-            InitGrid();
-        }
     }
 
     private void Update()
@@ -54,6 +52,11 @@ public class GameGridInstance : MonoBehaviour
 
         if(draw_tiles)
             DebugDrawGrid();
+
+        if (Application.isPlaying)
+        {
+            InitGrid();
+        }
     }
 
     public void CreateGrid(Vector2Int size)
@@ -78,17 +81,22 @@ public class GameGridInstance : MonoBehaviour
 
     public void InitGrid()
     {
-        for (int i = 0; i < tiles.Count; ++i)
+        if (!inited)
         {
-            GridTile curr_tile = tiles[i];
-
-            GameObject inst = InstantiateTileGoFromTileType(curr_tile.type);
-
-            if (inst != null)
+            for (int i = 0; i < tiles.Count; ++i)
             {
-                curr_tile.go = inst;
-                curr_tile.go.transform.position = curr_tile.pos;
+                GridTile curr_tile = tiles[i];
+
+                GameObject inst = InstantiateTileGoFromTileType(curr_tile.type);
+
+                if (inst != null)
+                {
+                    curr_tile.go = inst;
+                    curr_tile.go.transform.position = curr_tile.pos;
+                }
             }
+
+            inited = true;
         }
     }
     
@@ -111,6 +119,8 @@ public class GameGridInstance : MonoBehaviour
         if(prefab != null)
         {
             ret = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+            GridTileInstance tile_script = ret.AddComponent<GridTileInstance>();
+            tile_script.Init(this);
         }
 
         return ret;

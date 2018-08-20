@@ -34,6 +34,8 @@ public class LevelsManager : Singleton<LevelsManager>
 
     private void Start()
     {
+        EventManager.Instance.Suscribe(OnEvent);
+
         StartLevel(0);
     }
 
@@ -74,6 +76,7 @@ public class LevelsManager : Singleton<LevelsManager>
                 EventManager.Instance.SendEvent(ev);
 
                 current_level.OnEnd();
+                current_level.gameObject.SetActive(false);
                 current_level = null;
             }
         }
@@ -123,16 +126,33 @@ public class LevelsManager : Singleton<LevelsManager>
 
         if (current_level != null)
         {
-            current_level.OnAwake();
-            current_level.OnStart();
+            LevelStartUI.Instance.StartLevel(current_level.GetLevelNumber(), current_level.GetLevelDescription());
 
-            EventManager.Event ev = new EventManager.Event(EventManager.EventType.LEVEL_STARTED);
-            ev.level_started.level = current_level.GetLevelNumber();
-            EventManager.Instance.SendEvent(ev);
+            current_level.OnAwake();
         }
         else
         {
             Debug.LogError("[Level] Level could not be started, number not found: " + level_to_start);
+        }
+    }
+
+    private void OnEvent(EventManager.Event ev)
+    {
+        switch(ev.Type())
+        {
+            case EventManager.EventType.LEVEL_LOAD:
+
+                if (current_level != null)
+                {
+                    current_level.gameObject.SetActive(true);
+
+                    current_level.OnStart();
+
+                    EventManager.Event new_ev = new EventManager.Event(EventManager.EventType.LEVEL_STARTED);
+                    new_ev.level_started.level = current_level.GetLevelNumber();
+                    EventManager.Instance.SendEvent(new_ev);
+                }
+                break;
         }
     }
 }

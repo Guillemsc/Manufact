@@ -266,6 +266,7 @@
     <Compile Include="Assets\Scripts\Grid\GameGridInstance.cs" />
     <Compile Include="Assets\Scripts\Grid\GameGridInstanceExt.cs" />
     <Compile Include="Assets\Scripts\Grid\GameGridMovement.cs" />
+    <Compile Include="Assets\Scripts\Grid\GridTileInstance.cs" />
     <Compile Include="Assets\Scripts\Level\Level.cs" />
     <Compile Include="Assets\Scripts\Level\Levels\Level1.cs" />
     <Compile Include="Assets\Scripts\Level\LevelsManager.cs" />
@@ -277,6 +278,7 @@
     <Compile Include="Assets\Scripts\UI\DebugUI.cs" />
     <Compile Include="Assets\Scripts\UI\IntroLogoUI.cs" />
     <Compile Include="Assets\Scripts\UI\LanguageSelectUI.cs" />
+    <Compile Include="Assets\Scripts\UI\LevelStartUI.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenuUI.cs" />
     <Compile Include="Assets\Scripts\UI\UIControl.cs" />
     <Compile Include="Assets\ThirdParties\Demigiant\DOTween\Examples\Basics.cs" />

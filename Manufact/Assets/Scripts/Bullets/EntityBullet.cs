@@ -78,7 +78,21 @@ public class EntityBullet : MonoBehaviour
                 EventManager.Instance.SendEvent(ev);
 
                 Destroy(gameObject);
+                return;
             }
+        }
+
+        GridTileInstance tile_hit = collision.gameObject.GetComponent<GridTileInstance>();
+
+        if(tile_hit != null)
+        {
+            EventManager.Event ev = new EventManager.Event(EventManager.EventType.TILE_HIT);
+            ev.tile_hit.tile = tile_hit;
+            ev.tile_hit.sender = sender;
+            EventManager.Instance.SendEvent(ev);
+
+            Destroy(gameObject);
+            return;
         }
     }
 }
