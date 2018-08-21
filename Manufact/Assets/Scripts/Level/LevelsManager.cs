@@ -11,6 +11,8 @@ public class LevelsManager : Singleton<LevelsManager>
     int  level_to_start = 0;
     bool to_start_level = false;
 
+    [SerializeField] LevelStartUI level_start_ui = null;
+
     private void Awake()
     {
         InitInstance(this, gameObject);
@@ -30,13 +32,13 @@ public class LevelsManager : Singleton<LevelsManager>
                 Debug.LogError("[Levels] There are two levels with the same number: " + curr_level.GetLevelNumber());
             }
         }
+
+        level_start_ui.gameObject.SetActive(false);
     }
 
     private void Start()
     {
         EventManager.Instance.Suscribe(OnEvent);
-
-        StartLevel(0);
     }
 
     private void Update()
@@ -126,7 +128,7 @@ public class LevelsManager : Singleton<LevelsManager>
 
         if (current_level != null)
         {
-            LevelStartUI.Instance.StartLevel(current_level.GetLevelNumber(), current_level.GetLevelDescription());
+            level_start_ui.StartLevel(current_level.GetLevelNumber(), current_level.GetLevelName(), current_level.GetLevelDescription());
 
             current_level.OnAwake();
         }

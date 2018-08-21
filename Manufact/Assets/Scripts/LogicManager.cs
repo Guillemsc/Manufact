@@ -41,7 +41,9 @@ public class LogicManager : Singleton<LogicManager>
 
     private void Start()
     {
-        //StartPhase(LogicPhase.GAME_LOAD_SCREENS);
+        EventManager.Instance.Suscribe(OnEvent);
+
+        LevelsManager.Instance.StartLevel(0);
     }
 
     public void StartPhase(LogicPhase p)
@@ -60,6 +62,11 @@ public class LogicManager : Singleton<LogicManager>
                     break;
                 }
         }
+    }
+
+    public void MainMenuButtonClick()
+    {
+        LevelsManager.Instance.StartLevel(0);
     }
 
     private void StartGameLoadScreens()
@@ -91,4 +98,15 @@ public class LogicManager : Singleton<LogicManager>
     {
         StartPhase(LogicPhase.GAME_MENU);
     }
+
+    private void OnEvent(EventManager.Event ev)
+    {
+        switch(ev.Type())
+        {
+            case EventManager.EventType.LEVEL_LOAD:
+                main_menu_ui.gameObject.SetActive(false);
+                break;
+        }
+    }
+
 }

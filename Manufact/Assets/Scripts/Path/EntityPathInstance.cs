@@ -74,7 +74,7 @@ public class EntityPathInstance : MonoBehaviour
         if (draw_path)
             DebugDrawPath();
 
-        if (Application.isPlaying)
+        if (Application.isPlaying && !AppManager.Instance.GetIsRelease())
         {
             InitPath();
         }

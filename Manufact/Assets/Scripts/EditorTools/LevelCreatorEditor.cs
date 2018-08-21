@@ -6,6 +6,7 @@ using UnityEngine;
 public class LevelCreatorEditor : Singleton<LevelCreatorEditor>
 {
     [Header("Tiles")]
+    [SerializeField] private GameObject empty_tile = null;
     [SerializeField] private GameObject base_move_tile = null;
     [SerializeField] private GameObject base_static_tile = null;
 
@@ -51,6 +52,11 @@ public class LevelCreatorEditor : Singleton<LevelCreatorEditor>
         GameObject go = new GameObject();
         go.name = "PathInstance";
         go.AddComponent<EntityPathInstance>();
+    }
+
+    public GameObject GetEmptyTilePrefab()
+    {
+        return empty_tile;
     }
 
     public GameObject GetBaseMoveTilePrefab()

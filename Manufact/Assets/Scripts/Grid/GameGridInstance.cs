@@ -34,6 +34,7 @@ public class GameGridInstance : MonoBehaviour
         public Vector2      pos = Vector2.zero;
         public Vector2Int   grid_pos = Vector2Int.zero;
         public GameObject   go = null;
+        public GameObject   empty_tile_go = null;
         public GridTileType type = GridTileType.GRID_TILE_TYPE_EMPTY;
 
         public Vector2      initial_pos = Vector2.zero;
@@ -53,7 +54,7 @@ public class GameGridInstance : MonoBehaviour
         if(draw_tiles)
             DebugDrawGrid();
 
-        if (Application.isPlaying)
+        if (Application.isPlaying && !AppManager.Instance.GetIsRelease())
         {
             InitGrid();
         }
@@ -87,7 +88,14 @@ public class GameGridInstance : MonoBehaviour
             {
                 GridTile curr_tile = tiles[i];
 
+                GameObject empty_tile = Instantiate(LevelCreatorEditor.Instance.GetEmptyTilePrefab(), new Vector3(0, 0, 0), Quaternion.identity);
+
                 GameObject inst = InstantiateTileGoFromTileType(curr_tile.type);
+
+                if(empty_tile != null)
+                {
+                    curr_tile.empty_tile_go = empty_tile;
+                }
 
                 if (inst != null)
                 {
@@ -230,23 +238,6 @@ public class GameGridInstance : MonoBehaviour
         return ret;
     }
 
-    public void SwapGridInfo(GridTile tile, Vector2Int new_grid_pos)
-    {
-        if(tile != null)
-        {
-            GridTile to_swap = GetTileByGridPos(new_grid_pos);
-
-            if(to_swap != null)
-            {
-                if(tile != to_swap)
-                {
-                    to_swap.go = tile.go;
-                    tile.go = null;
-                }
-            }
-        }
-    }
-
     public void SetAutomaticGridSnap(bool set)
     {
         automatic_go_grid_snap = set;
@@ -287,15 +278,23 @@ public class GameGridInstance : MonoBehaviour
                 curr_tile.pos.x = (curr_tile.grid_pos.x * tiles_size * tiles_spacing.x) + starting_pos.x;
                 curr_tile.pos.y = (curr_tile.grid_pos.y * tiles_size * tiles_spacing.y) + starting_pos.y;
 
+                if (curr_tile.empty_tile_go != null)
+                {
+                    curr_tile.empty_tile_go.transform.parent = this.gameObject.transform;
+
+                    curr_tile.empty_tile_go.transform.position = new Vector3(curr_tile.pos.x, curr_tile.pos.y, transform.position.z);
+                    curr_tile.empty_tile_go.transform.localScale = new Vector3(tiles_size, tiles_size, tiles_size);
+                }
+
                 if (curr_tile.go != null)
                 {
+                    curr_tile.go.transform.parent = this.gameObject.transform;
+
                     if (automatic_go_grid_snap)
                     {
                         curr_tile.go.transform.position = new Vector3(curr_tile.pos.x, curr_tile.pos.y, transform.position.z);
                         curr_tile.go.transform.localScale = new Vector3(tiles_size, tiles_size, tiles_size);
                     }
-
-                    curr_tile.go.transform.parent = this.gameObject.transform;
                 }
             }
         }

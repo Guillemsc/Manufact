@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
 
-public class LevelStartUI : Singleton<LevelStartUI>
+public class LevelStartUI : MonoBehaviour
 {
     enum LevelStartState
     {
@@ -21,7 +21,9 @@ public class LevelStartUI : Singleton<LevelStartUI>
     private LevelStartState state = LevelStartState.FADING_IN;
 
     [SerializeField] private CanvasGroup canvas_group = null;
+    [SerializeField] private Canvas canvas = null;
     [SerializeField] private TMPro.TextMeshProUGUI number_text = null;
+    [SerializeField] private TMPro.TextMeshProUGUI title_text = null;
     [SerializeField] private TMPro.TextMeshProUGUI description_text = null;
     [SerializeField] private Image background_image = null;
     [SerializeField] private Image all_back_image = null;
@@ -39,18 +41,6 @@ public class LevelStartUI : Singleton<LevelStartUI>
 
     [SerializeField] private float fade_out_time = 1.0f;
     private Timer fade_out_timer = new Timer();
-
-    private void Awake()
-    {
-        InitInstance(this, gameObject);
-
-        gameObject.SetActive(false);
-    }
-
-    void Start ()
-    {
-		
-	}
 	
 	void Update ()
     {
@@ -87,7 +77,12 @@ public class LevelStartUI : Singleton<LevelStartUI>
                 {
                     if (wait_timer.ReadTime() > wait_time)
                     {
-                        canvas_group.DOFade(0, fade_out_time);
+                        Vector3 finish_pos = new Vector3(canvas_group.gameObject.transform.position.x - background_image.rectTransform.rect.size.x * 2,
+                        canvas_group.gameObject.gameObject.transform.position.y, canvas_group.gameObject.transform.position.z);
+
+                        background_image.transform.DOMoveX(finish_pos.x, fade_out_time);
+                        all_back_image.transform.DOMoveX(finish_pos.x, fade_out_time);
+
                         fade_out_timer.Start();
 
                         state = LevelStartState.FADING_OUT;
@@ -112,19 +107,22 @@ public class LevelStartUI : Singleton<LevelStartUI>
         }
 	}
 
-    public void StartLevel(int level_number, string level_text)
+    public void StartLevel(int level_number, string level_title, string level_text)
     {
+        gameObject.SetActive(true);
+
         level_to_load = level_number;
 
         number_text.text = level_number.ToString();
+        title_text.text = level_title;
         description_text.text = level_text;
+
+        Canvas.ForceUpdateCanvases();
 
         Vector3 starting_pos = new Vector3(canvas_group.gameObject.transform.position.x + background_image.rectTransform.rect.size.x * 2,
             canvas_group.gameObject.gameObject.transform.position.y, canvas_group.gameObject.transform.position.z);
 
         background_image.gameObject.transform.position = starting_pos;
-
-        gameObject.SetActive(true);
 
         canvas_group.alpha = starting_alpha_val;
 
