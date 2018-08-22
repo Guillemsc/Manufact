@@ -69,6 +69,21 @@ public class LogicManager : Singleton<LogicManager>
         LevelsManager.Instance.StartLevel(0);
     }
 
+    public void NextLevelButtonClick()
+    {
+        if(!LevelsManager.Instance.StartNextLevel())
+        {
+            StartGameMenu();
+            LevelsManager.Instance.GetLevelEndUI().FadeOut();
+        }
+    }
+
+    public void ReturnMainMenu()
+    {
+        LevelsManager.Instance.GetLevelEndUI().FadeOut();
+        StartGameMenu();
+    }
+
     private void StartGameLoadScreens()
     {
         if (intro_logo_ui != null)

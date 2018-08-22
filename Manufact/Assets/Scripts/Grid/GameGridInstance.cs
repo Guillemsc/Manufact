@@ -51,10 +51,18 @@ public class GameGridInstance : MonoBehaviour
 
         UpdateGrid();
 
-        if(draw_tiles)
+        bool debug_draw = draw_tiles;
+
+        if (Application.isPlaying)
+        {
+            if (AppManager.Instance.GetIsRelease())
+                debug_draw = true;
+        }
+
+        if(debug_draw)
             DebugDrawGrid();
 
-        if (Application.isPlaying && !AppManager.Instance.GetIsRelease())
+        if (Application.isPlaying)
         {
             InitGrid();
         }
@@ -80,7 +88,7 @@ public class GameGridInstance : MonoBehaviour
         tiles_size = size;
     }
 
-    public void InitGrid()
+    private void InitGrid()
     {
         if (!inited)
         {
@@ -95,16 +103,49 @@ public class GameGridInstance : MonoBehaviour
                 if(empty_tile != null)
                 {
                     curr_tile.empty_tile_go = empty_tile;
+                    curr_tile.empty_tile_go.transform.parent = this.transform;
                 }
 
                 if (inst != null)
                 {
                     curr_tile.go = inst;
+                    curr_tile.go.transform.parent = this.transform;
                     curr_tile.go.transform.position = curr_tile.pos;
                 }
             }
 
+            UpdateGrid();
+
             inited = true;
+        }
+    }
+
+    public void ReloadGrid()
+    {
+        if(inited)
+        {
+            inited = false;
+
+            for (int i = 0; i < tiles.Count; ++i)
+            {
+                GridTile curr_tile = tiles[i];
+
+                if (curr_tile.go != null)
+                {
+                    Destroy(curr_tile.go);
+                }
+
+                if(curr_tile.empty_tile_go != null)
+                {
+                    Destroy(curr_tile.empty_tile_go);
+                }
+            }
+
+            InitGrid();
+        }
+        else
+        {
+            InitGrid();
         }
     }
     
@@ -282,7 +323,7 @@ public class GameGridInstance : MonoBehaviour
                 {
                     curr_tile.empty_tile_go.transform.parent = this.gameObject.transform;
 
-                    curr_tile.empty_tile_go.transform.position = new Vector3(curr_tile.pos.x, curr_tile.pos.y, transform.position.z);
+                    curr_tile.empty_tile_go.transform.position = new Vector3(curr_tile.pos.x, curr_tile.pos.y, transform.position.z + 1);
                     curr_tile.empty_tile_go.transform.localScale = new Vector3(tiles_size, tiles_size, tiles_size);
                 }
 

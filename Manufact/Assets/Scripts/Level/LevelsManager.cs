@@ -8,16 +8,17 @@ public class LevelsManager : Singleton<LevelsManager>
 
     private Level current_level = null;
 
-    int  level_to_start = 0;
-    bool to_start_level = false;
+    private int  level_to_start = 0;
+    private bool to_start_level = false;
 
-    [SerializeField] LevelStartUI level_start_ui = null;
+    [SerializeField] private LevelStartUI level_start_ui = null;
+    [SerializeField] private LevelEndUI level_end_ui = null;
 
     private void Awake()
     {
         InitInstance(this, gameObject);
 
-        Level[] levels_arr = FindObjectsOfType<Level>();
+        Level[] levels_arr = (Level[])Resources.FindObjectsOfTypeAll(typeof(Level));
 
         for (int i = 0; i < levels_arr.Length; ++i)
         {
@@ -34,10 +35,16 @@ public class LevelsManager : Singleton<LevelsManager>
         }
 
         level_start_ui.gameObject.SetActive(false);
+        level_end_ui.gameObject.SetActive(false);
     }
 
     private void Start()
     {
+        for (int i = 0; i < levels.Count; ++i)
+        {
+            levels[i].gameObject.SetActive(false);
+        }
+
         EventManager.Instance.Suscribe(OnEvent);
     }
 
@@ -52,6 +59,11 @@ public class LevelsManager : Singleton<LevelsManager>
         CheckCurrentLevelStates();
     }
 
+    public LevelEndUI GetLevelEndUI()
+    {
+        return level_end_ui;
+    }
+
     private void CheckCurrentLevelStates()
     {
         if (current_level != null)
@@ -59,11 +71,13 @@ public class LevelsManager : Singleton<LevelsManager>
             current_level.OnUpdate();
 
             bool finished = false;
+            bool win = false;
 
             if (current_level.OnCheckWin())
             {
                 // Win
                 finished = true;
+                win = true;
             }
             else if (current_level.OnCheckLose())
             {
@@ -78,7 +92,10 @@ public class LevelsManager : Singleton<LevelsManager>
                 EventManager.Instance.SendEvent(ev);
 
                 current_level.OnEnd();
-                current_level.gameObject.SetActive(false);
+
+                level_end_ui.EndLevel(win, current_level.GetLevelNumber());
+
+                //current_level.gameObject.SetActive(false);
                 current_level = null;
             }
         }
@@ -105,15 +122,37 @@ public class LevelsManager : Singleton<LevelsManager>
         return current_level;
     }
 
-    public void StartLevel(int level_number)
+    public bool StartLevel(int level_number)
     {
-        level_to_start = level_number;
-        to_start_level = true;
+        bool ret = false;
+
+        Level level = GetLevel(level_to_start);
+
+        if (level != null)
+        {
+            level.gameObject.SetActive(false);
+            level_to_start = level_number;
+            to_start_level = true;
+        }
+
+        return ret;
     }
 
-    public void ActuallyStartLevel()
+    public bool StartNextLevel()
     {
-        current_level = null;
+        bool ret = false;
+
+        if (current_level != null)
+        {
+            ret = StartLevel(current_level.GetLevelNumber());
+        }
+
+        return ret;
+    }
+
+    public Level GetLevel(int level_num)
+    {
+        Level ret = null;
 
         for (int i = 0; i < levels.Count; ++i)
         {
@@ -121,16 +160,27 @@ public class LevelsManager : Singleton<LevelsManager>
 
             if (level.GetLevelNumber() == level_to_start)
             {
-                current_level = level;
+                ret = level;
                 break;
             }
         }
 
+        return ret;
+    }
+
+    private void ActuallyStartLevel()
+    {
+        current_level = null;
+
+        current_level = GetLevel(level_to_start);
+
         if (current_level != null)
         {
-            level_start_ui.StartLevel(current_level.GetLevelNumber(), current_level.GetLevelName(), current_level.GetLevelDescription());
+            level_start_ui.UIBegin(current_level.GetLevelNumber(), current_level.GetLevelName(), current_level.GetLevelDescription());
 
             current_level.OnAwake();
+
+            current_level.OnStart();
         }
         else
         {
@@ -148,11 +198,16 @@ public class LevelsManager : Singleton<LevelsManager>
                 {
                     current_level.gameObject.SetActive(true);
 
-                    current_level.OnStart();
-
                     EventManager.Event new_ev = new EventManager.Event(EventManager.EventType.LEVEL_STARTED);
                     new_ev.level_started.level = current_level.GetLevelNumber();
                     EventManager.Instance.SendEvent(new_ev);
+                }
+                break;
+            case EventManager.EventType.LEVEL_UNLOAD:
+
+                if (current_level != null)
+                {
+                    current_level.gameObject.SetActive(false);
                 }
                 break;
         }

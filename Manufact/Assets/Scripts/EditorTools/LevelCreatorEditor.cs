@@ -21,7 +21,8 @@ public class LevelCreatorEditor : Singleton<LevelCreatorEditor>
     [SerializeField] private Color base_enemy_debug;
 
     [Header("Bullets")]
-    [SerializeField] private GameObject base_bullet = null; 
+    [SerializeField] private GameObject base_bullet = null;
+    [SerializeField] private GameObject base_bullet_ammo = null;
     [SerializeField] private float bullets_speed = 0.0f;
 
     private void Awake()
@@ -107,6 +108,11 @@ public class LevelCreatorEditor : Singleton<LevelCreatorEditor>
     public GameObject GetBaseBullet()
     {
         return base_bullet;
+    }
+
+    public GameObject GetBaseBulletAmmo()
+    {
+        return base_bullet_ammo;
     }
 
     public float GetBulletsSpeed()

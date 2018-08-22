@@ -45,8 +45,29 @@ public class MainMenuUI : UIControl
     [SerializeField] CanvasGroup play_button_group = null;
     [SerializeField] Button play_button = null;
 
-    private void Awake()
+    public override void UIBegin()
     {
+        UIRestart();
+
+        base.UIBegin();
+
+        if (logo_image != null)
+        {
+            Canvas.ForceUpdateCanvases();
+
+            logo_image.gameObject.SetActive(true);
+
+            logo_image.transform.DOMove(new Vector3(logo_move_in_pos.transform.position.x,
+                                                               logo_move_in_pos.transform.position.y,                                              transform.position.z), logo_move_in_time);
+            orange_time_offset_move_in_timer.Start();
+            blue_time_offset_in_timer.Start();
+        }
+    }
+
+    public override void UIRestart()
+    {
+        state = MainMenuSelectState.FADING_IN;
+
         if (logo_image != null && logo_starting_pos != null)
         {
             logo_image.transform.position = new Vector3(logo_starting_pos.transform.position.x,
@@ -55,7 +76,7 @@ public class MainMenuUI : UIControl
             logo_image.gameObject.SetActive(false);
         }
 
-        if(orange_triangle != null && blue_triangle != null)
+        if (orange_triangle != null && blue_triangle != null)
         {
             blue_triangle.transform.position = new Vector3(logo_image.transform.position.x,
                                                  blue_triangle.transform.position.y,
@@ -72,22 +93,6 @@ public class MainMenuUI : UIControl
 
         if (play_button != null)
             play_button.gameObject.SetActive(false);
-    }
-
-    public override void UIBegin()
-    {
-        base.UIBegin();
-
-        if (logo_image != null)
-        {
-            logo_image.gameObject.SetActive(true);
-
-            Tweener t = logo_image.transform.DOMove(new Vector3(logo_move_in_pos.transform.position.x,
-                                                               logo_move_in_pos.transform.position.y, 
-                                                               transform.position.z), logo_move_in_time);
-            orange_time_offset_move_in_timer.Start();
-            blue_time_offset_in_timer.Start();
-        }
     }
 
     void Start ()

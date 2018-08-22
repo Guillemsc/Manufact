@@ -71,10 +71,18 @@ public class EntityPathInstance : MonoBehaviour
     {
         UpdatePath();
 
-        if (draw_path)
+        bool debug_draw = draw_path;
+
+        if (Application.isPlaying)
+        {
+            if (AppManager.Instance.GetIsRelease())
+                debug_draw = true;
+        }
+
+        if (debug_draw)
             DebugDrawPath();
 
-        if (Application.isPlaying && !AppManager.Instance.GetIsRelease())
+        if (Application.isPlaying)
         {
             InitPath();
         }
@@ -136,7 +144,7 @@ public class EntityPathInstance : MonoBehaviour
         return path_point_conexions;
     }
 
-    public void InitPath()
+    private void InitPath()
     {
         if (!inited)
         {
@@ -179,7 +187,43 @@ public class EntityPathInstance : MonoBehaviour
                 curr_con.line.endWidth = 0.1f;
             }
 
+            UpdatePath();
+
             inited = true;
+        }
+    }
+
+    public void ReloadPath()
+    {
+        if (inited)
+        {
+            inited = false;
+
+            for (int i = 0; i < path_points.Count; ++i)
+            {
+                PathPoint curr_tile = path_points[i];
+                
+                if(curr_tile.entity.go != null)
+                {
+                    Destroy(curr_tile.entity.go);
+                }                
+            }
+
+            for (int i = 0; i < path_point_conexions.Count; ++i)
+            {
+                PathPointConexions curr_con = path_point_conexions[i];
+
+                if(curr_con.line != null)
+                {
+                    Destroy(curr_con.line.gameObject);
+                }
+            }
+
+            InitPath();
+        }
+        else
+        {
+            InitPath();
         }
     }
 
@@ -268,7 +312,6 @@ public class EntityPathInstance : MonoBehaviour
                 if(curr_point.entity.go == go)
                 {
                     curr_point.entity.go = null;
-                    curr_point.entity.type = PathEntityType.PATH_ENTITY_TYPE_EMPTY;
                 }
             }
         }
@@ -531,6 +574,11 @@ public class EntityPathInstance : MonoBehaviour
             PathPoint curr_point = path_points[i];
 
             curr_point.world_pos = transform.position;
+
+            if(curr_point.entity.go != null)
+            {
+                curr_point.entity.go.transform.localScale = new Vector3(points_size, points_size, 1);
+            }
         }
 
         for (int i = 0; i < path_point_conexions.Count; ++i)

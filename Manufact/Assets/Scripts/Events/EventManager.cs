@@ -14,11 +14,13 @@ public class EventManager : Singleton<EventManager>
 
         LEVEL_STARTED,
         LEVEL_LOAD,
+        LEVEL_UNLOAD,
         LEVEL_FINISHED,
 
         ENTITY_SHOOTS,
         ENTITY_HIT,
         ENTITY_DIES,
+        ENTITY_BULLETS_CHANGE,
 
         TILE_HIT,
     }
@@ -49,6 +51,12 @@ public class EventManager : Singleton<EventManager>
         }
         public LevelFinished level_finished = new LevelFinished();
 
+        public class LevelUnload
+        {
+            public int level = 0;
+        }
+        public LevelUnload level_unload = new LevelUnload();
+
         // Entities
         public class EntityShoots
         {
@@ -68,6 +76,14 @@ public class EventManager : Singleton<EventManager>
             public GameEntity entity = null;
         }
         public EntityDies entity_dies = new EntityDies();
+
+        public class EntityBulletsChange
+        {
+            public GameEntity entity = null;
+            public int bullets_now = 0;
+            public int bullets_before = 0;
+        }
+        public EntityBulletsChange entity_bullets_change = new EntityBulletsChange();
 
         // Tiles
         public class TileHit

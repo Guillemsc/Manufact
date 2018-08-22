@@ -8,6 +8,9 @@ public class Level1 : Level
     [SerializeField] private int player_bullets;
     [SerializeField] private int enemy_lifes;
 
+    private int curr_player_bullets = 0;
+    private int curr_enemy_lifes = 0;
+
     private EntityPlayer player = null;
     private EntityBaseEnemy enemy = null;
 
@@ -25,8 +28,12 @@ public class Level1 : Level
 
     public override void OnStart()
     {
-        path.InitPath();
-        grid.InitGrid();
+        curr_player_bullets = player_bullets;
+        curr_enemy_lifes = enemy_lifes;
+        enemy_dead = false;
+
+        path.ReloadPath();
+        grid.ReloadGrid();
 
         player = (EntityPlayer)path.GetGameEntityByEntityType(EntityPathInstance.PathEntityType.PATH_ENTITY_TYPE_PLAYER);
         enemy = (EntityBaseEnemy)path.GetGameEntityByEntityType(EntityPathInstance.PathEntityType.PATH_ENTITY_TYPE_BASE_ENEMY);

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
 
-public class LevelStartUI : MonoBehaviour
+public class LevelStartUI : UIControl
 {
     enum LevelStartState
     {
@@ -107,9 +107,12 @@ public class LevelStartUI : MonoBehaviour
         }
 	}
 
-    public void StartLevel(int level_number, string level_title, string level_text)
+    public void UIBegin(int level_number, string level_title, string level_text)
     {
+        base.UIBegin();
+
         gameObject.SetActive(true);
+        all_back_image.gameObject.SetActive(true);
 
         level_to_load = level_number;
 
@@ -122,6 +125,7 @@ public class LevelStartUI : MonoBehaviour
         Vector3 starting_pos = new Vector3(canvas_group.gameObject.transform.position.x + background_image.rectTransform.rect.size.x * 2,
             canvas_group.gameObject.gameObject.transform.position.y, canvas_group.gameObject.transform.position.z);
 
+        all_back_image.transform.position = canvas_group.gameObject.transform.position;
         background_image.gameObject.transform.position = starting_pos;
 
         canvas_group.alpha = starting_alpha_val;

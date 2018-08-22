@@ -13,4 +13,9 @@ public class EntityBaseEnemy : GameEntity
 	void Update () {
 		
 	}
+
+    protected override void OnEventCall(EventManager.Event ev)
+    {
+
+    }
 }

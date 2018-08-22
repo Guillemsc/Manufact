@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameEntity : MonoBehaviour
+public abstract class GameEntity : MonoBehaviour
 {
     protected EntityPathInstance path = null;
 
@@ -16,12 +16,8 @@ public class GameEntity : MonoBehaviour
     private Timer timer_before_new_shoot = new Timer();
     private float time_before_new_shoot = 1.0f;
 
-    BoxCollider2D collider = null;
-
     public void Awake()
     {
-        collider = gameObject.GetComponent<BoxCollider2D>();
-
         timer_before_new_shoot.Start();
 
         EventManager.Instance.Suscribe(OnEvent);
@@ -40,7 +36,19 @@ public class GameEntity : MonoBehaviour
 
     public void SetBullets(int set)
     {
-        bullets_count = set;
+        if (set < 0)
+            set = 0;
+
+        if (bullets_count != set)
+        {
+            EventManager.Event ev = new EventManager.Event(EventManager.EventType.ENTITY_BULLETS_CHANGE);
+            ev.entity_bullets_change.entity = this;
+            ev.entity_bullets_change.bullets_before = bullets_count;
+            ev.entity_bullets_change.bullets_now = set;
+            EventManager.Instance.SendEvent(ev);
+
+            bullets_count = set;
+        }
 
         if (bullets_count < 0)
             bullets_count = 0;
@@ -113,6 +121,7 @@ public class GameEntity : MonoBehaviour
 
 
                 GameObject bullet = Instantiate(LevelCreatorEditor.Instance.GetBaseBullet(), transform.position, Quaternion.identity);
+                bullet.transform.parent = gameObject.transform;
                 EntityBullet bullet_script = bullet.AddComponent<EntityBullet>();
                 bullet_script.Init(this, LevelCreatorEditor.Instance.GetBulletsSpeed(), point.direction);
 
@@ -133,7 +142,9 @@ public class GameEntity : MonoBehaviour
 
     private void OnEvent(EventManager.Event ev)
     {
-        switch(ev.Type())
+        OnEventCall(ev);
+
+        switch (ev.Type())
         {
             case EventManager.EventType.ENTITY_HIT:
                 if(ev.entity_hit.hit == this)
@@ -143,4 +154,6 @@ public class GameEntity : MonoBehaviour
                 break;
         }
     }
+
+    protected abstract void OnEventCall(EventManager.Event ev);
 }
