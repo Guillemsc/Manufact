@@ -124,17 +124,16 @@ public class LevelEndUI : MonoBehaviour
 
     public void FadeOut()
     {
-        if(state == LevelEndState.WAITING_TO_FADE_OUT)
-        {
-            Vector3 finish_pos = new Vector3(canvas_group.gameObject.transform.position.x - background_image.rectTransform.rect.size.x * 2,
-            canvas_group.gameObject.gameObject.transform.position.y, canvas_group.gameObject.transform.position.z);
+        gameObject.SetActive(true);
 
-            background_image.transform.DOMoveX(finish_pos.x, fade_out_time);
-            all_back_image.transform.DOMoveX(finish_pos.x, fade_out_time);
+        Vector3 finish_pos = new Vector3(canvas_group.gameObject.transform.position.x - background_image.rectTransform.rect.size.x * 2,
+        canvas_group.gameObject.gameObject.transform.position.y, canvas_group.gameObject.transform.position.z);
 
-            fade_out_timer.Start();
+        background_image.transform.DOMoveX(finish_pos.x, fade_out_time);
+        all_back_image.transform.DOMoveX(finish_pos.x, fade_out_time);
 
-            state = LevelEndState.FADING_OUT;
-        }
+        fade_out_timer.Start();
+
+        state = LevelEndState.FADING_OUT;
     }
 }

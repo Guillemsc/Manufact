@@ -44,19 +44,24 @@ public class EntityPlayer : GameEntity
             {
                 GameObject new_bull = Instantiate(LevelCreatorEditor.Instance.GetBaseBulletAmmo(), new Vector3(0, 0, 0), Quaternion.identity);
 
-                float start_pos = 0.46f;
+                float start_pos = 0.86f;
 
                 float to_add = 0.15f;
 
                 if (i == 0)
-                    to_add = 0.16f;
+                    to_add = 0.46f;
 
                 new_bull.transform.parent = this.transform;
                 new_bull.transform.localPosition = new Vector3((start_pos + (i * to_add)),
-                    -0.07f, 0);
+                    -0.67f, 0);
 
                 visual_bullets.Add(new_bull);
             }
         }
+    }
+
+    void OnMouseDown()
+    {
+        Shoot();
     }
 }

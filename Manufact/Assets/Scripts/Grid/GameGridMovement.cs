@@ -37,7 +37,7 @@ public class GameGridMovement : MonoBehaviour
 
     private void Start()
     {
- 
+        EventManager.Instance.Suscribe(OnEvent);
     }
 
     void Update ()
@@ -223,6 +223,25 @@ public class GameGridMovement : MonoBehaviour
             {
                 curr.tile.go = null;
             }
+        }
+    }
+
+    private void OnEvent(EventManager.Event ev)
+    {
+        switch(ev.Type())
+        {
+            case EventManager.EventType.CONTROLS_SWIPE_DOWN:
+                Move(MoveDirection.DOWN);
+                break;
+            case EventManager.EventType.CONTROLS_SWIPE_LEFT:
+                Move(MoveDirection.LEFT);
+                break;
+            case EventManager.EventType.CONTROLS_SWIPE_RIGHT:
+                Move(MoveDirection.RIGHT);
+                break;
+            case EventManager.EventType.CONTROLS_SWIPE_UP:
+                Move(MoveDirection.UP);
+                break;
         }
     }
 }

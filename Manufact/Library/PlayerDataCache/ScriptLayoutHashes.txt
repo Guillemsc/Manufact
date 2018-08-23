@@ -1,6 +1,6 @@
-WindowsStandalone
+Android
 PlayerPath?
-C:/Users/Guillem/Desktop/Manufact/Builds/tst.exe
+C:/Users/Guillem/Desktop/Manufact/AndroidBuild/Manufact.apk
 SceneListBegin?
 Assets/Scenes/MainScene.unity
 SceneListEnd?
@@ -142,7 +142,7 @@ e763036081c708b34f78f5a56f72c23d TextMeshPro-2017.3-Runtime.dll:TMPro.TMP_StyleS
 22bb40270d2bfc0d0884e2aefd3d1c60 TextMeshPro-2017.3-Runtime.dll:TMPro.TMP_Text
 322cb40e1e282f28af980cbef7922a90 UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsEventTracker
 dc07d7ad69b399a46e92c483bf1c04ca UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
-657b96d2343a29a1535af77b4716d952 Assembly-CSharp.dll:.Level1
+657b96d2343a29a1535af77b4716d952 Assembly-CSharp.dll:.Level0
 0ea7e3a1b65cd933d7a007e6774c4eaa Assembly-CSharp.dll:.Sequences
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
@@ -251,11 +251,39 @@ b9f1c537a98b40479d1c6a715daff256 Assembly-CSharp.dll:.LevelStartUI
 6826e26f7cc718f870001971f13e79c7 Assembly-CSharp.dll:TMPro.TMP_TextEventHandler
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TMPro.Examples.VertexColorCycler
 f62e81c9c44a76626d343490e1ae2ab4 Assembly-CSharp.dll:.LanguageSelectUI
-3ed4540a702d657372d350568df2898e Assembly-CSharp.dll:.LevelsManager
+0eb8558654df9de0dbc860edfb3eef07 Assembly-CSharp.dll:.LevelsManager
 020550babdb991365f61c5bffe1f4f52 Assembly-CSharp.dll:TMPro.Examples.TextMeshSpawner
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.EntityPathInstanceExt
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.EntityBaseEnemy
 af7666733efcc974926d7d470e1732a6 Assembly-CSharp.dll:TMPro.Examples.SkewTextExample
+88934a7f38b531c493cf8f90f981bc19 Assembly-CSharp.dll:.LevelEndUI
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.EntityBullet
 34e025057ef78b1bf238460cdf6583a3 Assembly-CSharp.dll:TMPro.Examples.ObjectSpin
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TMPro.Examples.SimpleScript
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ControlsManager
+ab47db5301f558dab3066bef48a20335 Assembly-CSharp.dll:Lean.Touch.LeanFingerSet
+493c211ab85ec2db8c090d3ba6c0a013 Assembly-CSharp.dll:Lean.Touch.LeanSelectableGraphicColor
+91b36326f294b619937373da443e69b6 Assembly-CSharp.dll:Lean.Touch.LeanTouch
+b69fb5034809d4cbe977f438123a337f Assembly-CSharp.dll:Lean.Touch.LeanCameraZoom
+9f94f2bd15532b7f4fb26e9ddf013d57 Assembly-CSharp.dll:Lean.Touch.LeanFingerHeld
+c7b4e1cefa38e05c60ad69dee88481d8 Assembly-CSharp.dll:Lean.Touch.LeanSelectableRendererColor
+f39fa2d90cea541e27581f74e8fbbf9a Assembly-CSharp.dll:Lean.Touch.LeanSpawnAt
+e1a312172407d9d9f3690722d2c9ac73 Assembly-CSharp.dll:Lean.Touch.LeanCanvasArrow
+9827e08f2f62db65bd4d593dffd94737 Assembly-CSharp.dll:Lean.Touch.LeanSelect
+da8b1afa3aba9ced70c35c501f25776f Assembly-CSharp.dll:Lean.Touch.LeanTranslate
+548c6364d9081c2ff45481e12d6106e8 Assembly-CSharp.dll:Lean.Touch.LeanRotate
+cc0c6e43dd8c08bbdbe4e43f1c20ddd6 Assembly-CSharp.dll:Lean.Touch.LeanFingerUp
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:Lean.Touch.LeanTouchEvents
+6c15db20cfd69979254593ffa5037d44 Assembly-CSharp.dll:Lean.Touch.LeanDestroy
+8e194e74053b8ffdee68402e7e9dd69f Assembly-CSharp.dll:Lean.Touch.LeanFingerTrail
+7def5fe351fb82fda3891095d17de420 Assembly-CSharp.dll:Lean.Touch.LeanScale
+29df9c04438d15b5b4fdcf4eb9a48823 Assembly-CSharp.dll:Lean.Touch.LeanSelectable
+0e5d517277ec9ce8ca9d50dd679a865c Assembly-CSharp.dll:Lean.Touch.LeanFingerSwipe
+493c211ab85ec2db8c090d3ba6c0a013 Assembly-CSharp.dll:Lean.Touch.LeanSelectableSpriteRendererColor
+b75fdd29c3f372c6b79e9b343a53e3d1 Assembly-CSharp.dll:Lean.Touch.LeanFingerDown
+91f1d5edeb3110867ff723bd53427867 Assembly-CSharp.dll:Lean.Touch.LeanFingerLine
+9b89fc63418e4db2b4c7460eb168b954 Assembly-CSharp.dll:Lean.Touch.LeanOpenUrl
+2f514da27b71d477e62b77ba8324ad55 Assembly-CSharp.dll:Lean.Touch.LeanPlane
+a8df30edef0c9ba664999240dc0b3058 Assembly-CSharp.dll:Lean.Touch.LeanCameraMove
+bda5e49dd3fbc2f3b1799461c832505c Assembly-CSharp.dll:Lean.Touch.LeanPath
+e8e8f0e750145acab4381d7e2fa841be Assembly-CSharp.dll:Lean.Touch.LeanFingerTap

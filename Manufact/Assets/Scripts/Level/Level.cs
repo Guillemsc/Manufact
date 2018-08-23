@@ -30,7 +30,7 @@ public class Level : MonoBehaviour
 
     public void Awake()
     {
-        gameObject.SetActive(false);
+      
     }
 
     public virtual void OnAwake()

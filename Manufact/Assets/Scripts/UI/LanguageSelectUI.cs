@@ -65,9 +65,6 @@ public class LanguageSelectUI : UIControl
 
         if (spanish_button != null)
             spanish_button.onClick.AddListener(OnSpanishPress);
-
-        if(elements_group != null)
-            elements_group.alpha = 0.0f;
     }
 
     // Use this for initialization

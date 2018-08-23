@@ -22,6 +22,11 @@ public class EventManager : Singleton<EventManager>
         ENTITY_DIES,
         ENTITY_BULLETS_CHANGE,
 
+        CONTROLS_SWIPE_UP,
+        CONTROLS_SWIPE_RIGHT,
+        CONTROLS_SWIPE_DOWN,
+        CONTROLS_SWIPE_LEFT,
+
         TILE_HIT,
     }
 
@@ -31,6 +36,27 @@ public class EventManager : Singleton<EventManager>
         {
             event_type = e_type;
         }
+
+        // Controls
+        public class ControlsSwipeUp
+        {      
+        }
+        public ControlsSwipeUp controls_swipe_up = new ControlsSwipeUp();
+
+        public class ControlsSwipeLeft
+        {
+        }
+        public ControlsSwipeLeft controls_swipe_left = new ControlsSwipeLeft();
+
+        public class ControlsSwipeDown
+        {
+        }
+        public ControlsSwipeDown controls_swipe_down = new ControlsSwipeDown();
+
+        public class ControlsSwipeRight
+        {
+        }
+        public ControlsSwipeRight controls_swipe_right = new ControlsSwipeRight();
 
         // Levels
         public class LevelStarted

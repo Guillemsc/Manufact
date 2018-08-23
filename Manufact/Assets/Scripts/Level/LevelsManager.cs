@@ -7,6 +7,7 @@ public class LevelsManager : Singleton<LevelsManager>
     private List<Level> levels = new List<Level>();
 
     private Level current_level = null;
+    private Level last_level = null;
 
     private int  level_to_start = 0;
     private bool to_start_level = false;
@@ -95,7 +96,7 @@ public class LevelsManager : Singleton<LevelsManager>
 
                 level_end_ui.EndLevel(win, current_level.GetLevelNumber());
 
-                //current_level.gameObject.SetActive(false);
+                last_level = current_level;
                 current_level = null;
             }
         }
@@ -133,6 +134,8 @@ public class LevelsManager : Singleton<LevelsManager>
             level.gameObject.SetActive(false);
             level_to_start = level_number;
             to_start_level = true;
+
+            ret = true;
         }
 
         return ret;
@@ -142,9 +145,9 @@ public class LevelsManager : Singleton<LevelsManager>
     {
         bool ret = false;
 
-        if (current_level != null)
+        if (last_level != null)
         {
-            ret = StartLevel(current_level.GetLevelNumber());
+            ret = StartLevel(last_level.GetLevelNumber() + 1);
         }
 
         return ret;

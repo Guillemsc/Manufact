@@ -47,9 +47,11 @@ public class MainMenuUI : UIControl
 
     public override void UIBegin()
     {
-        UIRestart();
+        gameObject.SetActive(true);
 
-        base.UIBegin();
+        Canvas.ForceUpdateCanvases();
+
+        UIRestart();
 
         if (logo_image != null)
         {

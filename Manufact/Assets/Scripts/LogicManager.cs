@@ -43,7 +43,9 @@ public class LogicManager : Singleton<LogicManager>
     {
         EventManager.Instance.Suscribe(OnEvent);
 
-        LevelsManager.Instance.StartLevel(0);
+        //LevelsManager.Instance.StartLevel(1);
+
+        StartPhase(LogicPhase.GAME_LOAD_SCREENS);
     }
 
     public void StartPhase(LogicPhase p)
@@ -74,8 +76,9 @@ public class LogicManager : Singleton<LogicManager>
         if(!LevelsManager.Instance.StartNextLevel())
         {
             StartGameMenu();
-            LevelsManager.Instance.GetLevelEndUI().FadeOut();
         }
+
+        LevelsManager.Instance.GetLevelEndUI().FadeOut();
     }
 
     public void ReturnMainMenu()
