@@ -127,7 +127,7 @@ public class LevelsManager : Singleton<LevelsManager>
     {
         bool ret = false;
 
-        Level level = GetLevel(level_to_start);
+        Level level = GetLevel(level_number);
 
         if (level != null)
         {
@@ -161,7 +161,7 @@ public class LevelsManager : Singleton<LevelsManager>
         {
             Level level = levels[i];
 
-            if (level.GetLevelNumber() == level_to_start)
+            if (level.GetLevelNumber() == level_num)
             {
                 ret = level;
                 break;
@@ -208,9 +208,9 @@ public class LevelsManager : Singleton<LevelsManager>
                 break;
             case EventManager.EventType.LEVEL_UNLOAD:
 
-                if (current_level != null)
+                if (last_level != null)
                 {
-                    current_level.gameObject.SetActive(false);
+                    last_level.gameObject.SetActive(false);
                 }
                 break;
         }
