@@ -15,6 +15,7 @@ public class Level0 : Level
     private EntityBaseEnemy enemy = null;
 
     private bool enemy_dead = false;
+    private bool no_bullets = false;
 
     public override void OnAwake()
     {
@@ -61,7 +62,7 @@ public class Level0 : Level
 
     public override bool OnCheckLose()
     {
-        return false;
+        return no_bullets;
     }
 
     private void OnEvent(EventManager.Event ev)
@@ -72,6 +73,15 @@ public class Level0 : Level
                 if(ev.entity_dies.entity == enemy)
                 {
                     enemy_dead = true;
+                }
+                break;
+            case EventManager.EventType.ENTITY_SHOOT_FINISHED:
+                if(ev.entity_shoot_finished.sender == player)
+                {
+                    if(player.GetBullets() <= 0)
+                    {
+                        no_bullets = true;
+                    }
                 }
                 break;
         }

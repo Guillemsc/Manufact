@@ -18,6 +18,7 @@ public class EventManager : Singleton<EventManager>
         LEVEL_FINISHED,
 
         ENTITY_SHOOTS,
+        ENTITY_SHOOT_FINISHED,
         ENTITY_HIT,
         ENTITY_DIES,
         ENTITY_BULLETS_CHANGE,
@@ -89,6 +90,12 @@ public class EventManager : Singleton<EventManager>
             public GameEntity entity = null;
         }
         public EntityShoots entity_shoots = new EntityShoots();
+
+        public class EntityShootFinished
+        {
+            public GameEntity sender = null;
+        }
+        public EntityShootFinished entity_shoot_finished = new EntityShootFinished();
 
         public class EntityHit
         {

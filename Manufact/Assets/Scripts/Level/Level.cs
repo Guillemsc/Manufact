@@ -13,6 +13,8 @@ public class Level : MonoBehaviour
     [SerializeField] protected GameGridInstance grid = null;
     [SerializeField] protected EntityPathInstance path = null;
 
+    protected bool started = false;
+
     public string GetLevelName()
     {
         return LocManager.Instance.GetText(level_name);
@@ -26,6 +28,16 @@ public class Level : MonoBehaviour
     public int GetLevelNumber()
     {
         return level_number;
+    }
+
+    public void SetStarted(bool set)
+    {
+        started = set;
+    }
+
+    public bool GetStarted()
+    {
+        return started;
     }
 
     public void Awake()

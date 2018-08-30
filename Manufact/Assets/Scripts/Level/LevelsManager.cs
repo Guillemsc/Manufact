@@ -67,7 +67,7 @@ public class LevelsManager : Singleton<LevelsManager>
 
     private void CheckCurrentLevelStates()
     {
-        if (current_level != null)
+        if (current_level != null && current_level.GetStarted())
         {
             current_level.OnUpdate();
 
@@ -95,6 +95,8 @@ public class LevelsManager : Singleton<LevelsManager>
                 current_level.OnEnd();
 
                 level_end_ui.EndLevel(win, current_level.GetLevelNumber());
+
+                current_level.SetStarted(false);
 
                 last_level = current_level;
                 current_level = null;
@@ -184,6 +186,8 @@ public class LevelsManager : Singleton<LevelsManager>
             current_level.OnAwake();
 
             current_level.OnStart();
+
+            current_level.SetStarted(true);
         }
         else
         {

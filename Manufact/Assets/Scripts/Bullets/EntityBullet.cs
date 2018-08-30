@@ -29,7 +29,7 @@ public class EntityBullet : MonoBehaviour
 
     public void Init(GameEntity entity_sender, float speed, EntityPathInstance.PathPointDirection direction)
     {
-        entity_sender = sender;
+        sender = entity_sender;
         movement_speed = speed;
         movement_dir = direction;
     }
@@ -94,5 +94,12 @@ public class EntityBullet : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.Event ev = new EventManager.Event(EventManager.EventType.ENTITY_SHOOT_FINISHED);
+        ev.entity_shoot_finished.sender = sender;
+        EventManager.Instance.SendEvent(ev);
     }
 }
