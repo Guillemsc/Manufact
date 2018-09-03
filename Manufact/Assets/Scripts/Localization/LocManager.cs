@@ -44,14 +44,21 @@ public class LocManager : Singleton<LocManager>
         return language;
     }
 
-    public string GetText(string key)
+    public string GetText(string key, object[] values = null)
     {
         string ret = string.Empty;
 
         _content.TryGetValue(key, out ret);
 
-        if (string.IsNullOrEmpty(ret))
-            ret = key + "[" + language.ToString() + "]" + " No Text defined";
+        if (values != null)
+        {
+            if (string.IsNullOrEmpty(ret))
+                ret = key + "[" + language.ToString() + "]" + " No Text defined";
+            else
+            {
+                ret = SubstituteValues(ret, values);
+            }
+        }
 
         return ret;
     }
@@ -117,5 +124,45 @@ public class LocManager : Singleton<LocManager>
                 }
             }
         }
+    }
+
+    private string SubstituteValues(string text, object[] values)
+    {
+        string ret = "";
+
+        string val_to_check = "%value%";
+        int index_val_to_check = 0;
+
+        int curr_value = 0;
+
+        string to_check = "";
+        
+        for(int i = 0; i < text.Length; ++i)
+        {            
+            if (values.Length > curr_value && text[i] == val_to_check[index_val_to_check])
+            {
+                ++index_val_to_check;
+
+                to_check += text[i];
+
+                if (index_val_to_check >= val_to_check.Length)
+                {
+                    ret += values[curr_value].ToString();
+
+                    to_check = "";
+
+                    ++curr_value;
+                }
+            }
+            else
+            {
+                index_val_to_check = 0;
+
+                ret += to_check + text[i];
+                to_check = "";
+            }
+        }
+
+        return ret;
     }
 }

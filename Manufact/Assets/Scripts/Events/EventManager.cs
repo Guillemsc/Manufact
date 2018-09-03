@@ -14,6 +14,7 @@ public class EventManager : Singleton<EventManager>
 
         LEVEL_STARTED,
         LEVEL_LOAD,
+        LEVEL_BEGIN,
         LEVEL_UNLOAD,
         LEVEL_FINISHED,
 
@@ -72,9 +73,16 @@ public class EventManager : Singleton<EventManager>
         }
         public LevelLoad level_load = new LevelLoad();
 
+        public class LevelBegin
+        {
+            public int level = 0;
+        }
+        public LevelBegin level_begin = new LevelBegin();
+
         public class LevelFinished
         {
             public int level = 0;
+            public bool win = false;
         }
         public LevelFinished level_finished = new LevelFinished();
 

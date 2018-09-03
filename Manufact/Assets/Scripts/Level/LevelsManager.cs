@@ -11,9 +11,11 @@ public class LevelsManager : Singleton<LevelsManager>
 
     private int  level_to_start = 0;
     private bool to_start_level = false;
+    private bool level_to_start_use_intro = false;
 
     [SerializeField] private LevelStartUI level_start_ui = null;
     [SerializeField] private LevelEndUI level_end_ui = null;
+    [SerializeField] private LevelsUI levels_ui = null;
 
     private void Awake()
     {
@@ -37,6 +39,7 @@ public class LevelsManager : Singleton<LevelsManager>
 
         level_start_ui.gameObject.SetActive(false);
         level_end_ui.gameObject.SetActive(false);
+        levels_ui.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -90,16 +93,12 @@ public class LevelsManager : Singleton<LevelsManager>
             {
                 EventManager.Event ev = new EventManager.Event(EventManager.EventType.LEVEL_FINISHED);
                 ev.level_finished.level = current_level.GetLevelNumber();
+                ev.level_finished.win = win;
                 EventManager.Instance.SendEvent(ev);
-
-                current_level.OnEnd();
 
                 level_end_ui.EndLevel(win, current_level.GetLevelNumber());
 
-                current_level.SetStarted(false);
-
-                last_level = current_level;
-                current_level = null;
+                ExitLevel();
             }
         }
     }
@@ -125,7 +124,7 @@ public class LevelsManager : Singleton<LevelsManager>
         return current_level;
     }
 
-    public bool StartLevel(int level_number)
+    public bool StartLevel(int level_number, bool use_intro = true)
     {
         bool ret = false;
 
@@ -136,9 +135,30 @@ public class LevelsManager : Singleton<LevelsManager>
             level.gameObject.SetActive(false);
             level_to_start = level_number;
             to_start_level = true;
+            level_to_start_use_intro = use_intro;
 
             ret = true;
         }
+
+        return ret;
+    }
+
+    public bool ReestartLastLevel()
+    {
+        bool ret = false;
+
+        if (last_level != null)
+            ret = StartLevel(last_level.GetLevelNumber(), false);
+
+        return ret;
+    }
+
+    public bool ReestartCurrentLevel()
+    {
+        bool ret = false;
+
+        if(current_level != null)
+            ret = StartLevel(current_level.GetLevelNumber(), false);
 
         return ret;
     }
@@ -153,6 +173,21 @@ public class LevelsManager : Singleton<LevelsManager>
         }
 
         return ret;
+    }
+
+    public void ExitLevel()
+    {
+        if(current_level != null)
+        {
+            current_level.SetStarted(false);
+            current_level.OnEnd();
+            current_level.gameObject.SetActive(false);
+
+            last_level = current_level;
+            current_level = null;
+
+            levels_ui.FadeOut();
+        }
     }
 
     public Level GetLevel(int level_num)
@@ -181,13 +216,30 @@ public class LevelsManager : Singleton<LevelsManager>
 
         if (current_level != null)
         {
-            level_start_ui.UIBegin(current_level.GetLevelNumber(), current_level.GetLevelName(), current_level.GetLevelDescription());
+            if (level_to_start_use_intro)
+            {
+                level_start_ui.UIBegin(current_level.GetLevelNumber(), current_level.GetLevelName(), current_level.GetLevelDescription());
 
-            current_level.OnAwake();
+                current_level.OnAwake();
 
-            current_level.OnStart();
+                current_level.OnStart();
 
-            current_level.SetStarted(true);
+                current_level.SetStarted(true);
+            }
+            else
+            {
+                current_level.OnAwake();
+
+                current_level.OnStart();
+
+                current_level.SetStarted(true);
+
+                current_level.gameObject.SetActive(true);
+            }
+
+            EventManager.Event new_ev = new EventManager.Event(EventManager.EventType.LEVEL_STARTED);
+            new_ev.level_started.level = current_level.GetLevelNumber();
+            EventManager.Instance.SendEvent(new_ev);
         }
         else
         {
@@ -204,12 +256,16 @@ public class LevelsManager : Singleton<LevelsManager>
                 if (current_level != null)
                 {
                     current_level.gameObject.SetActive(true);
-
-                    EventManager.Event new_ev = new EventManager.Event(EventManager.EventType.LEVEL_STARTED);
-                    new_ev.level_started.level = current_level.GetLevelNumber();
-                    EventManager.Instance.SendEvent(new_ev);
                 }
                 break;
+            case EventManager.EventType.LEVEL_BEGIN:
+
+                if (current_level != null)
+                {
+                    levels_ui.UIBegin();
+                }
+                break;
+
             case EventManager.EventType.LEVEL_UNLOAD:
 
                 if (last_level != null)

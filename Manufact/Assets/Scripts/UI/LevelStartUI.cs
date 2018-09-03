@@ -94,6 +94,10 @@ public class LevelStartUI : UIControl
                 {
                     if (fade_out_timer.ReadTime() > fade_out_time)
                     {
+                        EventManager.Event ev = new EventManager.Event(EventManager.EventType.LEVEL_BEGIN);
+                        ev.level_begin.level = level_to_load;
+                        EventManager.Instance.SendEvent(ev);
+
                         state = LevelStartState.FINISHED;
                     }
                     break;

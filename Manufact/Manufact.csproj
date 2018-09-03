@@ -281,6 +281,7 @@
     <Compile Include="Assets\Scripts\UI\LanguageSelectUI.cs" />
     <Compile Include="Assets\Scripts\UI\LevelEndUI.cs" />
     <Compile Include="Assets\Scripts\UI\LevelStartUI.cs" />
+    <Compile Include="Assets\Scripts\UI\LevelsUI.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenuUI.cs" />
     <Compile Include="Assets\Scripts\UI\UIControl.cs" />
     <Compile Include="Assets\ThirdParties\Demigiant\DOTween\Examples\Basics.cs" />

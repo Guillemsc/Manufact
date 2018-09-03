@@ -26,6 +26,7 @@ public class LevelEndUI : MonoBehaviour
     [SerializeField] private TMPro.TextMeshProUGUI level_status_text = null;
     [SerializeField] private Image background_image = null;
     [SerializeField] private Image all_back_image = null;
+    [SerializeField] private TMPro.TextMeshProUGUI next_level_play_again_text = null;
 
     [SerializeField] private float starting_alpha_val = 0.9f;
 
@@ -37,6 +38,9 @@ public class LevelEndUI : MonoBehaviour
 
     [SerializeField] private float fade_out_time = 1.0f;
     private Timer fade_out_timer = new Timer();
+
+    private bool win = false;
+    private bool level_reestart = false;
 
     void Update()
     {
@@ -76,6 +80,15 @@ public class LevelEndUI : MonoBehaviour
                 {
                     if (fade_out_timer.ReadTime() > fade_out_time)
                     {
+                        if(level_reestart)
+                        {
+                            EventManager.Event ev = new EventManager.Event(EventManager.EventType.LEVEL_BEGIN);
+                            ev.level_begin.level = level_ended;
+                            EventManager.Instance.SendEvent(ev);
+
+                            level_reestart = false;
+                        }
+
                         state = LevelEndState.FINISHED;
                     }
                     break;
@@ -91,6 +104,8 @@ public class LevelEndUI : MonoBehaviour
 
     public void EndLevel(bool finished, int level_to_end)
     {
+        win = finished;
+
         gameObject.SetActive(true);
         all_back_image.gameObject.SetActive(true);
 
@@ -98,11 +113,15 @@ public class LevelEndUI : MonoBehaviour
 
         if(finished)
         {
-            level_status_text.text = LocManager.Instance.GetText("FinishLevelLevelCompleted");
+            object[] val = { level_ended };
+            level_status_text.text = LocManager.Instance.GetText("FinishLevelLevelCompleted", val);
+            next_level_play_again_text.text = LocManager.Instance.GetText("FinishLevelNextLevel");
         }
         else
         {
-            level_status_text.text = LocManager.Instance.GetText("FinishLevelLevelFailed");
+            object[] val = { level_ended };
+            level_status_text.text = LocManager.Instance.GetText("FinishLevelLevelFailed", val);
+            next_level_play_again_text.text = LocManager.Instance.GetText("FinishLevelReestartLevel");
         }
 
         Canvas.ForceUpdateCanvases();
@@ -122,8 +141,10 @@ public class LevelEndUI : MonoBehaviour
         state = LevelEndState.ALL_BACK_FADE_IN;
     }
 
-    public void FadeOut()
+    public void FadeOut(bool _level_reestart)
     {
+        level_reestart = _level_reestart;
+
         gameObject.SetActive(true);
 
         Vector3 finish_pos = new Vector3(canvas_group.gameObject.transform.position.x - background_image.rectTransform.rect.size.x * 2,
@@ -135,5 +156,10 @@ public class LevelEndUI : MonoBehaviour
         fade_out_timer.Start();
 
         state = LevelEndState.FADING_OUT;
+    }
+
+    public void NextLevelReplayButtonDow()
+    {
+        LogicManager.Instance.NextLevelReestart(win);
     }
 }

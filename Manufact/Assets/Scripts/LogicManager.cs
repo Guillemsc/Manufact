@@ -71,20 +71,41 @@ public class LogicManager : Singleton<LogicManager>
         LevelsManager.Instance.StartLevel(0);
     }
 
-    public void NextLevelButtonClick()
+    public void NextLevelReestart(bool win)
     {
-        if(!LevelsManager.Instance.StartNextLevel())
+        bool reestart = false;
+
+        if (win)
         {
-            StartGameMenu();
+            if (!LevelsManager.Instance.StartNextLevel())
+            {
+                StartGameMenu();
+            }
+        }
+        else
+        {
+            if (LevelsManager.Instance.ReestartLastLevel())
+                reestart = true;
         }
 
-        LevelsManager.Instance.GetLevelEndUI().FadeOut();
+        LevelsManager.Instance.GetLevelEndUI().FadeOut(reestart);
+    }
+
+    public void ReturnMainMenuLevelEnd()
+    {
+        LevelsManager.Instance.GetLevelEndUI().FadeOut(false);
+        StartGameMenu();
     }
 
     public void ReturnMainMenu()
     {
-        LevelsManager.Instance.GetLevelEndUI().FadeOut();
         StartGameMenu();
+        LevelsManager.Instance.ExitLevel();
+    }
+
+    public void ReestartLevel()
+    {
+        LevelsManager.Instance.ReestartCurrentLevel();
     }
 
     private void StartGameLoadScreens()

@@ -32,6 +32,7 @@ public class Level0 : Level
         curr_player_bullets = player_bullets;
         curr_enemy_lifes = enemy_lifes;
         enemy_dead = false;
+        no_bullets = false;
 
         path.ReloadPath();
         grid.ReloadGrid();
