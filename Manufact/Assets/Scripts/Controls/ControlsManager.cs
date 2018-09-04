@@ -18,6 +18,15 @@ public class ControlsManager : Singleton<ControlsManager>
     private void Update()
     {
         CheckOnFingerDistance();
+
+        if (Input.GetKeyDown("a"))
+            OnSwipeLeft();
+        if (Input.GetKeyDown("d"))
+            OnSwipeRight();
+        if (Input.GetKeyDown("w"))
+            OnSwipeUp();
+        if (Input.GetKeyDown("s"))
+            OnSwipeDown();
     }
 
     private void OnFingerDown(Lean.Touch.LeanFinger finger)

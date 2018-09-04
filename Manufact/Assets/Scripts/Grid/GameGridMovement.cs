@@ -42,15 +42,6 @@ public class GameGridMovement : MonoBehaviour
 
     void Update ()
     {
-        if(Input.GetKey("a"))
-            Move(MoveDirection.LEFT);
-        if (Input.GetKey("d"))
-            Move(MoveDirection.RIGHT);
-        if (Input.GetKey("w"))
-            Move(MoveDirection.UP);
-        if (Input.GetKey("s"))
-            Move(MoveDirection.DOWN);
-
         UpdateMovingTileGos();
     }
 
