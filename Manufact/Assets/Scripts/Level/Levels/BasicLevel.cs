@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Level0 : Level
+public class BasicLevel : Level
 {
     [Header("Level info")]
     [SerializeField] private int player_bullets;
