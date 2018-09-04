@@ -1458,6 +1458,7 @@ Transform:
   m_Children:
   - {fileID: 1881525925}
   - {fileID: 1370437195}
+  - {fileID: 977589631}
   - {fileID: 1794002887}
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -2391,6 +2392,55 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
+--- !u!1 &977589630
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 977589631}
+  - component: {fileID: 977589632}
+  m_Layer: 0
+  m_Name: Level2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &977589631
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 977589630}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.28, y: -4.86, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1826052018}
+  - {fileID: 1405251898}
+  m_Father: {fileID: 623975829}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &977589632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 977589630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fea01c4197b5914fb4ea37e3ab88105, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level_name: Level0Title
+  level_description: Level0Description
+  level_number: 2
+  grid: {fileID: 1826052020}
+  path: {fileID: 1405251899}
+  player_bullets: 1
+  enemy_lifes: 1
 --- !u!1 &1016248351
 GameObject:
   m_ObjectHideFlags: 0
@@ -3442,7 +3492,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1370437195
 Transform:
   m_ObjectHideFlags: 0
@@ -3616,6 +3666,64 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1380538577}
+--- !u!1 &1405251897
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1405251898}
+  - component: {fileID: 1405251899}
+  m_Layer: 0
+  m_Name: PathInstance
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1405251898
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1405251897}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.16, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 977589631}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1405251899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1405251897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dd1142774d4ed244ab3792871746932, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points_size: 1.03
+  draw_path: 1
+  path_points:
+  - pos: {x: 6.43, y: 9.21}
+    world_pos: {x: -6.4400005, y: -4.86}
+    direction: 0
+    entity:
+      type: 2
+      go: {fileID: 0}
+    uid: e8629e92-abab-4a63-a785-23c62cbdfbd9
+  - pos: {x: 6.43, y: 0.44}
+    world_pos: {x: -6.4400005, y: -4.86}
+    direction: 0
+    entity:
+      type: 1
+      go: {fileID: 0}
+    uid: 885e89f6-15fa-4dc3-98d9-7fb939a1d663
+  path_point_conexions: []
 --- !u!1 &1413922270
 GameObject:
   m_ObjectHideFlags: 0
@@ -6089,7 +6197,7 @@ Transform:
   - {fileID: 71908423}
   - {fileID: 842103992}
   m_Father: {fileID: 623975829}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1803148675
 GameObject:
@@ -6286,6 +6394,239 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bf37e03718183e4ba7435a774cca340, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1826052017
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1826052018}
+  - component: {fileID: 1826052020}
+  - component: {fileID: 1826052019}
+  m_Layer: 0
+  m_Name: GridInstance
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1826052018
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1826052017}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.28, y: 4.92, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 977589631}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1826052019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1826052017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6c46dda626e77044960308f51bd9c7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movement_time: 0.15
+--- !u!114 &1826052020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1826052017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7985f2066b430c64ea99ae5126e9f33e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grid_size: {x: 5, y: 5}
+  tiles_size: 1.3
+  tiles_spacing: {x: 1.14, y: 1.04}
+  draw_tiles: 1
+  tiles:
+  - pos: {x: -2.9639997, y: -2.6439998}
+    grid_pos: {x: 0, y: 0}
+    go: {fileID: 0}
+    empty_tile_go: {fileID: 0}
+    type: 2
+    initial_pos: {x: 0, y: 0}
+    initial_grid_pos: {x: 0, y: 0}
+  - pos: {x: -1.4819999, y: -2.6439998}
+    grid_pos: {x: 1, y: 0}
+    go: {fileID: 0}
+    empty_tile_go: {fileID: 0}
+    type: 0
+    initial_pos: {x: 0, y: 0}
+    initial_grid_pos: {x: 0, y: 0}
+  - pos: {x: 0.00000010585785, y: -2.6439998}
+    grid_pos: {x: 2, y: 0}
+    go: {fileID: 0}
+    empty_tile_go: {fileID: 0}
+    type: 0
+    initial_pos: {x: 0, y: 0}
+    initial_grid_pos: {x: 0, y: 0}
+  - pos: {x: 1.482, y: -2.6439998}
+    grid_pos: {x: 3, y: 0}
+    go: {fileID: 0}
+    empty_tile_go: {fileID: 0}
+    type: 0
+    initial_pos: {x: 0, y: 0}
+    initial_grid_pos: {x: 0, y: 0}
+  - pos: {x: 2.964, y: -2.6439998}
+    grid_pos: {x: 4, y: 0}
+    go: {fileID: 0}
+    empty_tile_go: {fileID: 0}
+    type: 0
+    initial_pos: {x: 0, y: 0}
+    initial_grid_pos: {x: 0, y: 0}
+  - pos: {x: -2.9639997, y: -1.2919999}
+    grid_pos: {x: 0, y: 1}
+    go: {fileID: 0}
+    empty_tile_go: {fileID: 0}
+    type: 0
+    initial_pos: {x: 0, y: 0}
+    initial_grid_pos: {x: 0, y: 0}
+  - pos: {x: -1.4819999, y: -1.2919999}
+    grid_pos: {x: 1, y: 1}
+    go: {fileID: 0}
+    empty_tile_go: {fileID: 0}
+    type: 1
+    initial_pos: {x: 0, y: 0}
+    initial_grid_pos: {x: 0, y: 0}
+  - pos: {x: 0.00000010585785, y: -1.2919999}
+    grid_pos: {x: 2, y: 1}
+    go: {fileID: 0}
+    empty_tile_go: {fileID: 0}
+    type: 0
+    initial_pos: {x: 0, y: 0}
+    initial_grid_pos: {x: 0, y: 0}
+  - pos: {x: 1.482, y: -1.2919999}
+    grid_pos: {x: 3, y: 1}
+    go: {fileID: 0}
+    empty_tile_go: {fileID: 0}
+    type: 1
+    initial_pos: {x: 0, y: 0}
+    initial_grid_pos: {x: 0, y: 0}
+  - pos: {x: 2.964, y: -1.2919999}
+    grid_pos: {x: 4, y: 1}
+    go: {fileID: 0}
+    empty_tile_go: {fileID: 0}
+    type: 1
+    initial_pos: {x: 0, y: 0}
+    initial_grid_pos: {x: 0, y: 0}
+  - pos: {x: -2.9639997, y: 0.059999987}
+    grid_pos: {x: 0, y: 2}
+    go: {fileID: 0}
+    empty_tile_go: {fileID: 0}
+    type: 2
+    initial_pos: {x: 0, y: 0}
+    initial_grid_pos: {x: 0, y: 0}
+  - pos: {x: -1.4819999, y: 0.059999987}
+    grid_pos: {x: 1, y: 2}
+    go: {fileID: 0}
+    empty_tile_go: {fileID: 0}
+    type: 2
+    initial_pos: {x: 0, y: 0}
+    initial_grid_pos: {x: 0, y: 0}
+  - pos: {x: 0.00000010585785, y: 0.059999987}
+    grid_pos: {x: 2, y: 2}
+    go: {fileID: 0}
+    empty_tile_go: {fileID: 0}
+    type: 0
+    initial_pos: {x: 0, y: 0}
+    initial_grid_pos: {x: 0, y: 0}
+  - pos: {x: 1.482, y: 0.059999987}
+    grid_pos: {x: 3, y: 2}
+    go: {fileID: 0}
+    empty_tile_go: {fileID: 0}
+    type: 0
+    initial_pos: {x: 0, y: 0}
+    initial_grid_pos: {x: 0, y: 0}
+  - pos: {x: 2.964, y: 0.059999987}
+    grid_pos: {x: 4, y: 2}
+    go: {fileID: 0}
+    empty_tile_go: {fileID: 0}
+    type: 2
+    initial_pos: {x: 0, y: 0}
+    initial_grid_pos: {x: 0, y: 0}
+  - pos: {x: -2.9639997, y: 1.412}
+    grid_pos: {x: 0, y: 3}
+    go: {fileID: 0}
+    empty_tile_go: {fileID: 0}
+    type: 0
+    initial_pos: {x: 0, y: 0}
+    initial_grid_pos: {x: 0, y: 0}
+  - pos: {x: -1.4819999, y: 1.412}
+    grid_pos: {x: 1, y: 3}
+    go: {fileID: 0}
+    empty_tile_go: {fileID: 0}
+    type: 0
+    initial_pos: {x: 0, y: 0}
+    initial_grid_pos: {x: 0, y: 0}
+  - pos: {x: 0.00000010585785, y: 1.412}
+    grid_pos: {x: 2, y: 3}
+    go: {fileID: 0}
+    empty_tile_go: {fileID: 0}
+    type: 1
+    initial_pos: {x: 0, y: 0}
+    initial_grid_pos: {x: 0, y: 0}
+  - pos: {x: 1.482, y: 1.412}
+    grid_pos: {x: 3, y: 3}
+    go: {fileID: 0}
+    empty_tile_go: {fileID: 0}
+    type: 2
+    initial_pos: {x: 0, y: 0}
+    initial_grid_pos: {x: 0, y: 0}
+  - pos: {x: 2.964, y: 1.412}
+    grid_pos: {x: 4, y: 3}
+    go: {fileID: 0}
+    empty_tile_go: {fileID: 0}
+    type: 0
+    initial_pos: {x: 0, y: 0}
+    initial_grid_pos: {x: 0, y: 0}
+  - pos: {x: -2.9639997, y: 2.7639997}
+    grid_pos: {x: 0, y: 4}
+    go: {fileID: 0}
+    empty_tile_go: {fileID: 0}
+    type: 0
+    initial_pos: {x: 0, y: 0}
+    initial_grid_pos: {x: 0, y: 0}
+  - pos: {x: -1.4819999, y: 2.7639997}
+    grid_pos: {x: 1, y: 4}
+    go: {fileID: 0}
+    empty_tile_go: {fileID: 0}
+    type: 0
+    initial_pos: {x: 0, y: 0}
+    initial_grid_pos: {x: 0, y: 0}
+  - pos: {x: 0.00000010585785, y: 2.7639997}
+    grid_pos: {x: 2, y: 4}
+    go: {fileID: 0}
+    empty_tile_go: {fileID: 0}
+    type: 0
+    initial_pos: {x: 0, y: 0}
+    initial_grid_pos: {x: 0, y: 0}
+  - pos: {x: 1.482, y: 2.7639997}
+    grid_pos: {x: 3, y: 4}
+    go: {fileID: 0}
+    empty_tile_go: {fileID: 0}
+    type: 2
+    initial_pos: {x: 0, y: 0}
+    initial_grid_pos: {x: 0, y: 0}
+  - pos: {x: 2.964, y: 2.7639997}
+    grid_pos: {x: 4, y: 4}
+    go: {fileID: 0}
+    empty_tile_go: {fileID: 0}
+    type: 0
+    initial_pos: {x: 0, y: 0}
+    initial_grid_pos: {x: 0, y: 0}
 --- !u!1 &1834066198
 GameObject:
   m_ObjectHideFlags: 0
