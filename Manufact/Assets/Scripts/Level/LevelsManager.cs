@@ -98,7 +98,7 @@ public class LevelsManager : Singleton<LevelsManager>
 
                 level_end_ui.EndLevel(win, current_level.GetLevelNumber());
 
-                ExitLevel();
+                EndLevel();
             }
         }
     }
@@ -175,18 +175,41 @@ public class LevelsManager : Singleton<LevelsManager>
         return ret;
     }
 
-    public void ExitLevel()
+    public void LoadLevel()
+    {
+        if(current_level != null)
+        {
+            current_level.gameObject.SetActive(true);
+        }
+    }
+
+    public void BeginLevel()
+    {
+        if (current_level != null)
+        {
+            levels_ui.UIBegin();
+        }
+    }
+
+    public void EndLevel()
     {
         if(current_level != null)
         {
             current_level.SetStarted(false);
             current_level.OnEnd();
+
+            levels_ui.FadeOut();
+        }
+    }
+
+    public void UnloadLevel()
+    {
+        if (current_level != null)
+        {
             current_level.gameObject.SetActive(false);
 
             last_level = current_level;
             current_level = null;
-
-            levels_ui.FadeOut();
         }
     }
 
@@ -234,7 +257,7 @@ public class LevelsManager : Singleton<LevelsManager>
 
                 current_level.SetStarted(true);
 
-                current_level.gameObject.SetActive(true);
+                LoadLevel();
             }
 
             EventManager.Event new_ev = new EventManager.Event(EventManager.EventType.LEVEL_STARTED);
@@ -268,10 +291,7 @@ public class LevelsManager : Singleton<LevelsManager>
 
             case EventManager.EventType.LEVEL_UNLOAD:
 
-                if (last_level != null)
-                {
-                    last_level.gameObject.SetActive(false);
-                }
+                UnloadLevel();
                 break;
         }
     }

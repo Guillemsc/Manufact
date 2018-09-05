@@ -1,9 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public abstract class GameEntity : MonoBehaviour
 {
+    private enum GameEntityAnimation
+    {
+        NO_ANIMATION,
+        SCALE_ROTATE_DISAPPEAR,
+    }
+
     protected EntityPathInstance path = null;
 
     protected EntityPathInstance.PathEntityType type;
@@ -16,11 +23,18 @@ public abstract class GameEntity : MonoBehaviour
     private Timer timer_before_new_shoot = new Timer();
     private float time_before_new_shoot = 1.0f;
 
+    private Collider2D collider = null;
+
+    private GameEntityAnimation curr_animation = GameEntityAnimation.NO_ANIMATION;
+    private Transform start_animation_transform = null;
+
     public void Awake()
     {
         timer_before_new_shoot.Start();
 
         EventManager.Instance.Suscribe(OnEvent);
+
+        collider = gameObject.GetComponent<Collider2D>();
     }
 
     public void OnDestroy()
@@ -75,7 +89,8 @@ public abstract class GameEntity : MonoBehaviour
             EventManager.Instance.SendEvent(ev);
 
             path.RemoveGameObject(gameObject);
-            gameObject.SetActive(false);
+            collider.enabled = false;
+            StartAnimation(GameEntityAnimation.SCALE_ROTATE_DISAPPEAR);
         }
     }
 
@@ -138,6 +153,24 @@ public abstract class GameEntity : MonoBehaviour
         }
 
         return ret;
+    }
+
+    private void StartAnimation(GameEntityAnimation ani)
+    {
+        if(curr_animation == GameEntityAnimation.NO_ANIMATION)
+        {
+            curr_animation = ani;
+
+            switch(ani)
+            {
+                case GameEntityAnimation.SCALE_ROTATE_DISAPPEAR:
+                    {
+                        start_animation_transform = gameObject.transform;
+                        gameObject.transform.DOScale(new Vector3(0, 0, 0), 1.0f);
+                    }
+                    break;
+            }
+        }
     }
 
     private void OnEvent(EventManager.Event ev)

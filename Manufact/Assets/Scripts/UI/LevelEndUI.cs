@@ -7,9 +7,9 @@ using TMPro;
 
 public class LevelEndUI : MonoBehaviour
 {
-
     enum LevelEndState
     {
+        WATING_TO_FADE_IN,
         ALL_BACK_FADE_IN,
         FADING_IN,
         WAITING_TO_FADE_OUT,
@@ -30,6 +30,9 @@ public class LevelEndUI : MonoBehaviour
 
     [SerializeField] private float starting_alpha_val = 0.9f;
 
+    [SerializeField] private float wait_fade_in_time = 1.0f;
+    private Timer wait_fade_in_timer = new Timer();
+
     [SerializeField] private float all_back_fade_in_time = 1.0f;
     private Timer all_back_fade_in_timer = new Timer();
 
@@ -46,6 +49,33 @@ public class LevelEndUI : MonoBehaviour
     {
         switch (state)
         {
+            case LevelEndState.WATING_TO_FADE_IN:
+                {
+                    if (wait_fade_in_timer.ReadTime() > wait_fade_in_time)
+                    {
+                        all_back_image.gameObject.SetActive(true);
+
+                        if (win)
+                        {
+                            object[] val = { level_ended };
+                            level_status_text.text = LocManager.Instance.GetText("FinishLevelLevelCompleted", val);
+                            next_level_play_again_text.text = LocManager.Instance.GetText("FinishLevelNextLevel");
+                        }
+                        else
+                        {
+                            object[] val = { level_ended };
+                            level_status_text.text = LocManager.Instance.GetText("FinishLevelLevelFailed", val);
+                            next_level_play_again_text.text = LocManager.Instance.GetText("FinishLevelReestartLevel");
+                        }
+
+                        all_back_image.DOFade(1.0f, all_back_fade_in_time);
+                        all_back_fade_in_timer.Start();
+
+                        state = LevelEndState.ALL_BACK_FADE_IN;
+                    }
+
+                    break;
+                }
             case LevelEndState.ALL_BACK_FADE_IN:
                 {
                     if (all_back_fade_in_timer.ReadTime() > all_back_fade_in_time)
@@ -107,22 +137,6 @@ public class LevelEndUI : MonoBehaviour
         win = finished;
 
         gameObject.SetActive(true);
-        all_back_image.gameObject.SetActive(true);
-
-        level_ended = level_to_end;
-
-        if(finished)
-        {
-            object[] val = { level_ended };
-            level_status_text.text = LocManager.Instance.GetText("FinishLevelLevelCompleted", val);
-            next_level_play_again_text.text = LocManager.Instance.GetText("FinishLevelNextLevel");
-        }
-        else
-        {
-            object[] val = { level_ended };
-            level_status_text.text = LocManager.Instance.GetText("FinishLevelLevelFailed", val);
-            next_level_play_again_text.text = LocManager.Instance.GetText("FinishLevelReestartLevel");
-        }
 
         Canvas.ForceUpdateCanvases();
 
@@ -131,14 +145,13 @@ public class LevelEndUI : MonoBehaviour
 
         all_back_image.transform.position = canvas_group.gameObject.transform.position;
         background_image.gameObject.transform.position = starting_pos;
+        all_back_image.color = new Color(all_back_image.color.r, all_back_image.color.g, all_back_image.color.b, 0.0f);
 
         canvas_group.alpha = starting_alpha_val;
 
-        all_back_image.color = new Color(all_back_image.color.r, all_back_image.color.g, all_back_image.color.b, 0.0f);
-        all_back_image.DOFade(1.0f, all_back_fade_in_time);
-        all_back_fade_in_timer.Start();
+        wait_fade_in_timer.Start();
 
-        state = LevelEndState.ALL_BACK_FADE_IN;
+        state = LevelEndState.WATING_TO_FADE_IN;
     }
 
     public void FadeOut(bool _level_reestart)
