@@ -5,6 +5,8 @@ using UnityEngine;
 public class BasicLevel : Level
 {
     [Header("Level info")]
+    [SerializeField] private GameObject level_background_prefab = null;
+
     [SerializeField] private int player_bullets;
     [SerializeField] private int enemy_lifes;
 
@@ -20,6 +22,10 @@ public class BasicLevel : Level
     public override void OnAwake()
     {
         EventManager.Instance.Suscribe(OnEvent);
+
+        GameObject background = Instantiate(level_background_prefab, new Vector3(0, 0, 0), Quaternion.identity);
+
+        background.transform.parent = gameObject.transform;
     }
 
     public override void OnEnd()

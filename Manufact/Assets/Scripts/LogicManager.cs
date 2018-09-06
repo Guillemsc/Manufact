@@ -43,9 +43,12 @@ public class LogicManager : Singleton<LogicManager>
     {
         EventManager.Instance.Suscribe(OnEvent);
 
-        LevelsManager.Instance.StartLevel(1);
-
-        //StartPhase(LogicPhase.GAME_LOAD_SCREENS);
+        if(AppManager.Instance.GetIsRelease())
+        {
+            StartPhase(LogicPhase.GAME_LOAD_SCREENS);
+        }
+        else
+            LevelsManager.Instance.StartLevel(0);
     }
 
     public void StartPhase(LogicPhase p)
