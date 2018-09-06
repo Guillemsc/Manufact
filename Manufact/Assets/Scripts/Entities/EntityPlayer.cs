@@ -54,7 +54,7 @@ public class EntityPlayer : GameEntity
                 new_bull.transform.parent = this.transform;
                 new_bull.transform.localScale = new Vector3(1, 1, 1);
                 new_bull.transform.localPosition = new Vector3((start_pos + (i * to_add)),
-                    -0.67f, 0);
+                    -0.47f, 0);
 
                 visual_bullets.Add(new_bull);
             }

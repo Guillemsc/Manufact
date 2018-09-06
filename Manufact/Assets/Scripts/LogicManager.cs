@@ -100,7 +100,7 @@ public class LogicManager : Singleton<LogicManager>
     public void ReturnMainMenu()
     {
         StartGameMenu();
-        LevelsManager.Instance.ExitLevel();
+        LevelsManager.Instance.EndLevel();
     }
 
     public void ReestartLevel()

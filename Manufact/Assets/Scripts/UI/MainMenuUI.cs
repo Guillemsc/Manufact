@@ -59,8 +59,7 @@ public class MainMenuUI : UIControl
 
             logo_image.gameObject.SetActive(true);
 
-            logo_image.transform.DOMove(new Vector3(logo_move_in_pos.transform.position.x,
-                                                               logo_move_in_pos.transform.position.y,                                              transform.position.z), logo_move_in_time);
+            logo_image.transform.DOMove(new Vector3(logo_move_in_pos.transform.position.x, logo_move_in_pos.transform.position.y, transform.position.z), logo_move_in_time);
             orange_time_offset_move_in_timer.Start();
             blue_time_offset_in_timer.Start();
         }
@@ -131,6 +130,13 @@ public class MainMenuUI : UIControl
 
                             orange_triangle_move_in_timer.Start();
 
+                            if (LevelsManager.Instance.GetCurrentLevel() != null)
+                            {
+                                EventManager.Event ev = new EventManager.Event(EventManager.EventType.LEVEL_UNLOAD);
+                                ev.level_unload.level = LevelsManager.Instance.GetCurrentLevel().GetLevelNumber();
+                                EventManager.Instance.SendEvent(ev);
+                            }
+
                             state = MainMenuSelectState.TRIANGLES_FADING_IN;
                         }
                     }
@@ -141,6 +147,7 @@ public class MainMenuUI : UIControl
                 {
                     if(blue_triangle_move_in_timer.ReadTime() > blue_triangle_move_in_time)
                     {
+
                         if (orange_triangle_move_in_timer.ReadTime() > orange_triangle_move_in_time)
                         {
                             logo_group.transform.DOMove(logo_group_end_pos.transform.position, group_move_up_time);

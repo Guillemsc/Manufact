@@ -248,6 +248,10 @@ public class LevelsManager : Singleton<LevelsManager>
                 current_level.OnStart();
 
                 current_level.SetStarted(true);
+
+                EventManager.Event new_ev = new EventManager.Event(EventManager.EventType.LEVEL_STARTED);
+                new_ev.level_started.level = current_level.GetLevelNumber();
+                EventManager.Instance.SendEvent(new_ev);
             }
             else
             {
@@ -257,12 +261,14 @@ public class LevelsManager : Singleton<LevelsManager>
 
                 current_level.SetStarted(true);
 
-                LoadLevel();
-            }
+                EventManager.Event new_ev = new EventManager.Event(EventManager.EventType.LEVEL_STARTED);
+                new_ev.level_started.level = current_level.GetLevelNumber();
+                EventManager.Instance.SendEvent(new_ev);
 
-            EventManager.Event new_ev = new EventManager.Event(EventManager.EventType.LEVEL_STARTED);
-            new_ev.level_started.level = current_level.GetLevelNumber();
-            EventManager.Instance.SendEvent(new_ev);
+                EventManager.Event ev = new EventManager.Event(EventManager.EventType.LEVEL_LOAD);
+                ev.level_load.level = current_level.GetLevelNumber();
+                EventManager.Instance.SendEvent(ev);
+            }
         }
         else
         {
@@ -276,17 +282,11 @@ public class LevelsManager : Singleton<LevelsManager>
         {
             case EventManager.EventType.LEVEL_LOAD:
 
-                if (current_level != null)
-                {
-                    current_level.gameObject.SetActive(true);
-                }
+                LoadLevel();
                 break;
             case EventManager.EventType.LEVEL_BEGIN:
 
-                if (current_level != null)
-                {
-                    levels_ui.UIBegin();
-                }
+                BeginLevel();
                 break;
 
             case EventManager.EventType.LEVEL_UNLOAD:

@@ -3999,7 +3999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dd1142774d4ed244ab3792871746932, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points_size: 1.33
+  points_size: 1.15
   draw_path: 1
   path_points:
   - pos: {x: 6.43, y: 9.12}
@@ -4009,7 +4009,7 @@ MonoBehaviour:
       type: 2
       go: {fileID: 0}
     uid: e8629e92-abab-4a63-a785-23c62cbdfbd9
-  - pos: {x: 6.43, y: 0.64}
+  - pos: {x: 6.43, y: 0.35}
     world_pos: {x: -6.4400005, y: -4.86}
     direction: 0
     entity:
@@ -6136,11 +6136,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -7103,6 +7103,7 @@ MonoBehaviour:
   all_back_image: {fileID: 1429306489}
   next_level_play_again_text: {fileID: 2141432331}
   starting_alpha_val: 1
+  wait_fade_in_time: 1
   all_back_fade_in_time: 1
   fade_in_time: 1
   fade_out_time: 1
@@ -7831,7 +7832,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -52.8, y: -64.79}
+  m_AnchoredPosition: {x: -52.80005, y: -64.79001}
   m_SizeDelta: {x: 99.8, y: 77.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2105357323
