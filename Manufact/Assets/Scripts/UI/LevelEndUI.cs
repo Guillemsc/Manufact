@@ -27,6 +27,8 @@ public class LevelEndUI : MonoBehaviour
     [SerializeField] private Image background_image = null;
     [SerializeField] private Image all_back_image = null;
     [SerializeField] private TMPro.TextMeshProUGUI next_level_play_again_text = null;
+    [SerializeField] private Button button1 = null;
+    [SerializeField] private Button button2 = null;
 
     [SerializeField] private float starting_alpha_val = 0.9f;
 
@@ -92,6 +94,9 @@ public class LevelEndUI : MonoBehaviour
                 {
                     if (fade_in_timer.ReadTime() > fade_in_time)
                     {
+                        button1.interactable = true;
+                        button2.interactable = true;
+
                         EventManager.Event ev = new EventManager.Event(EventManager.EventType.LEVEL_UNLOAD);
                         ev.level_unload.level = level_ended;
                         EventManager.Instance.SendEvent(ev);
@@ -110,7 +115,7 @@ public class LevelEndUI : MonoBehaviour
                 {
                     if (fade_out_timer.ReadTime() > fade_out_time)
                     {
-                        if(level_reestart)
+                        if (level_reestart)
                         {
                             EventManager.Event ev = new EventManager.Event(EventManager.EventType.LEVEL_BEGIN);
                             ev.level_begin.level = level_ended;
@@ -149,6 +154,9 @@ public class LevelEndUI : MonoBehaviour
 
         canvas_group.alpha = starting_alpha_val;
 
+        button1.interactable = false;
+        button2.interactable = false;
+
         wait_fade_in_timer.Start();
 
         state = LevelEndState.WATING_TO_FADE_IN;
@@ -165,6 +173,9 @@ public class LevelEndUI : MonoBehaviour
 
         background_image.transform.DOMoveX(finish_pos.x, fade_out_time);
         all_back_image.transform.DOMoveX(finish_pos.x, fade_out_time);
+
+        button1.interactable = false;
+        button2.interactable = false;
 
         fade_out_timer.Start();
 
