@@ -7,10 +7,9 @@ public class BasicLevel : Level
     [Header("Level info")]
     [SerializeField] private GameObject level_background_prefab = null;
 
-    [SerializeField] private int player_bullets;
+    [SerializeField] private List<EntityBullet.EntityBulletType> bullets = new List<EntityBullet.EntityBulletType>();
     [SerializeField] private int enemy_lifes;
 
-    private int curr_player_bullets = 0;
     private int curr_enemy_lifes = 0;
 
     private EntityPlayer player = null;
@@ -35,7 +34,6 @@ public class BasicLevel : Level
 
     public override void OnStart()
     {
-        curr_player_bullets = player_bullets;
         curr_enemy_lifes = enemy_lifes;
         enemy_dead = false;
         no_bullets = false;
@@ -48,7 +46,7 @@ public class BasicLevel : Level
 
         if(player != null)
         {
-            player.SetBullets(player_bullets);
+            player.SetBullets(bullets);
         }
 
         if(enemy != null)
@@ -72,6 +70,30 @@ public class BasicLevel : Level
         return no_bullets;
     }
 
+    public List<EntityBullet.EntityBulletType> GetBulletsList()
+    {
+        return bullets;
+    }
+
+    public void SetBulletsNumber(int set)
+    {
+        if (set != bullets.Count && set >= 0)
+        {
+            bullets.Clear();
+
+            for(int i = 0; i < set; ++i)
+            {
+                bullets.Add(EntityBullet.EntityBulletType.HIT_MOVE_TILE);
+            }
+        }
+    }
+
+    public void SetBulletType(int index, EntityBullet.EntityBulletType type)
+    {
+        if (bullets.Count > index)
+            bullets[index] = type;
+    }
+
     private void OnEvent(EventManager.Event ev)
     {
         switch(ev.Type())
@@ -85,7 +107,7 @@ public class BasicLevel : Level
             case EventManager.EventType.ENTITY_SHOOT_FINISHED:
                 if(ev.entity_shoot_finished.sender == player)
                 {
-                    if(player.GetBullets() <= 0)
+                    if(player.GetBulletsCount() <= 0)
                     {
                         no_bullets = true;
                     }

@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class EntityBullet : MonoBehaviour
 {
+    public enum EntityBulletType
+    {
+        HIT_MOVE_TILE,
+        HIT_STATIC_TILE,
+    }
+
     private float movement_speed = 0.0f;
     private EntityPathInstance.PathPointDirection movement_dir;
     private GameEntity sender = null;
+    private EntityBulletType type;
 
     private BoxCollider2D collider = null;
 
@@ -27,11 +34,17 @@ public class EntityBullet : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public void Init(GameEntity entity_sender, float speed, EntityPathInstance.PathPointDirection direction)
+    public void Init(GameEntity entity_sender, float speed, EntityBulletType bullet_type, EntityPathInstance.PathPointDirection direction)
     {
         sender = entity_sender;
         movement_speed = speed;
         movement_dir = direction;
+        type = bullet_type;
+    }
+
+    public EntityBulletType Type()
+    {
+        return type;
     }
 
     private void UpdateMovement()
@@ -89,9 +102,11 @@ public class EntityBullet : MonoBehaviour
             EventManager.Event ev = new EventManager.Event(EventManager.EventType.TILE_HIT);
             ev.tile_hit.tile = tile_hit;
             ev.tile_hit.sender = sender;
+            ev.tile_hit.bullet = this;
             EventManager.Instance.SendEvent(ev);
 
             Destroy(gameObject);
+
             return;
         }
     }

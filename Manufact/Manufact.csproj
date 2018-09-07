@@ -270,6 +270,7 @@
     <Compile Include="Assets\Scripts\Grid\GridTileInstance.cs" />
     <Compile Include="Assets\Scripts\Level\Level.cs" />
     <Compile Include="Assets\Scripts\Level\Levels\BasicLevel.cs" />
+    <Compile Include="Assets\Scripts\Level\Levels\BasicLevelExt.cs" />
     <Compile Include="Assets\Scripts\Level\LevelsManager.cs" />
     <Compile Include="Assets\Scripts\Localization\LocManager.cs" />
     <Compile Include="Assets\Scripts\Localization\LocText.cs" />

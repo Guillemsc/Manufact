@@ -21,8 +21,10 @@ public class LevelCreatorEditor : Singleton<LevelCreatorEditor>
     [SerializeField] private Color base_enemy_debug;
 
     [Header("Bullets")]
-    [SerializeField] private GameObject base_bullet = null;
-    [SerializeField] private GameObject base_bullet_ammo = null;
+    [SerializeField] private GameObject bullet_type_hit_move = null;
+    [SerializeField] private GameObject bullet_ammo_hit_move = null;
+    [SerializeField] private GameObject bullet_type_hit_static = null;
+    [SerializeField] private GameObject bullet_ammo_hit_static = null;
     [SerializeField] private float bullets_speed = 0.0f;
 
     private void Awake()
@@ -105,14 +107,24 @@ public class LevelCreatorEditor : Singleton<LevelCreatorEditor>
         return new Material(Shader.Find("Sprites/Default"));
     }
 
-    public GameObject GetBaseBullet()
+    public GameObject GetBulletHitMove()
     {
-        return base_bullet;
+        return bullet_type_hit_move;
     }
 
-    public GameObject GetBaseBulletAmmo()
+    public GameObject GetBulletAmmoHitMove()
     {
-        return base_bullet_ammo;
+        return bullet_ammo_hit_move;
+    }
+
+    public GameObject GetBulletHitStatic()
+    {
+        return bullet_type_hit_static;
+    }
+
+    public GameObject GetBulletAmmoHitStatic()
+    {
+        return bullet_ammo_hit_static;
     }
 
     public float GetBulletsSpeed()

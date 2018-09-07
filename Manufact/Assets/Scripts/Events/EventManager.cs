@@ -22,7 +22,6 @@ public class EventManager : Singleton<EventManager>
         ENTITY_SHOOT_FINISHED,
         ENTITY_HIT,
         ENTITY_DIES,
-        ENTITY_BULLETS_CHANGE,
 
         CONTROLS_SWIPE_UP,
         CONTROLS_SWIPE_RIGHT,
@@ -118,19 +117,12 @@ public class EventManager : Singleton<EventManager>
         }
         public EntityDies entity_dies = new EntityDies();
 
-        public class EntityBulletsChange
-        {
-            public GameEntity entity = null;
-            public int bullets_now = 0;
-            public int bullets_before = 0;
-        }
-        public EntityBulletsChange entity_bullets_change = new EntityBulletsChange();
-
         // Tiles
         public class TileHit
         {
             public GridTileInstance tile = null;
             public GameEntity sender = null;
+            public EntityBullet bullet = null;
         }
         public TileHit tile_hit = new TileHit();
 

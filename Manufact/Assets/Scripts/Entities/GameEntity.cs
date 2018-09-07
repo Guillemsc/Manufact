@@ -16,7 +16,8 @@ public abstract class GameEntity : MonoBehaviour
     protected EntityPathInstance.PathEntityType type;
 
     protected int life_points = 1;
-    protected int bullets_count = 0;
+    protected List<EntityBullet.EntityBulletType> bullets = new List<EntityBullet.EntityBulletType>();
+    private List<GameObject> visual_bullets = new List<GameObject>();
 
     protected bool dead = false;
 
@@ -48,29 +49,37 @@ public abstract class GameEntity : MonoBehaviour
         path = ins;
     }
 
-    public void SetBullets(int set)
+    public void SetBullets(List<EntityBullet.EntityBulletType> bullets_to_add)
     {
-        if (set < 0)
-            set = 0;
-
-        if (bullets_count != set)
+        if (bullets != null)
         {
-            EventManager.Event ev = new EventManager.Event(EventManager.EventType.ENTITY_BULLETS_CHANGE);
-            ev.entity_bullets_change.entity = this;
-            ev.entity_bullets_change.bullets_before = bullets_count;
-            ev.entity_bullets_change.bullets_now = set;
-            EventManager.Instance.SendEvent(ev);
+            bullets = new List<EntityBullet.EntityBulletType>(bullets_to_add);
 
-            bullets_count = set;
+            SetVisualBullets();
         }
-
-        if (bullets_count < 0)
-            bullets_count = 0;
     }
 
-    public int GetBullets()
+    public EntityBullet.EntityBulletType GetNextBullet()
     {
-        return bullets_count;
+        EntityBullet.EntityBulletType ret = new EntityBullet.EntityBulletType();
+
+        if (bullets.Count > 0)
+            ret = bullets[0];
+
+        return ret;
+    }
+
+    public void RemoveNextBullet()
+    {
+        if (bullets.Count > 0)
+            bullets.RemoveAt(0);
+
+        SetVisualBullets();
+    }
+
+    public int GetBulletsCount()
+    {
+        return bullets.Count;
     }
 
     public void SetLifePoints(int set)
@@ -115,7 +124,7 @@ public abstract class GameEntity : MonoBehaviour
 
         if (timer_before_new_shoot.ReadTime() > time_before_new_shoot)
         {
-            if (path != null && bullets_count > 0)
+            if (path != null && GetBulletsCount() > 0)
             {
                 EntityPathInstance.PathPoint point = path.GetPathPointFromEntityGo(gameObject);
 
@@ -134,13 +143,13 @@ public abstract class GameEntity : MonoBehaviour
                     }
                 }
 
+                EntityBullet.EntityBulletType type = GetNextBullet();
 
-                GameObject bullet = Instantiate(LevelCreatorEditor.Instance.GetBaseBullet(), transform.position, Quaternion.identity);
-                bullet.transform.parent = gameObject.transform;
+                GameObject bullet = InstantiateBulletGoFromBulletType(type);
                 EntityBullet bullet_script = bullet.AddComponent<EntityBullet>();
-                bullet_script.Init(this, LevelCreatorEditor.Instance.GetBulletsSpeed(), point.direction);
+                bullet_script.Init(this, LevelCreatorEditor.Instance.GetBulletsSpeed(), type, point.direction);
 
-                SetBullets(bullets_count - 1);
+                RemoveNextBullet();
 
                 timer_before_new_shoot.Start();
 
@@ -153,6 +162,87 @@ public abstract class GameEntity : MonoBehaviour
         }
 
         return ret;
+    }
+
+    GameObject InstantiateBulletGoFromBulletType(EntityBullet.EntityBulletType type)
+    {
+        GameObject ret = null;
+
+        GameObject prefab = null;
+        switch (type)
+        {
+            case EntityBullet.EntityBulletType.HIT_MOVE_TILE:
+                prefab = LevelCreatorEditor.Instance.GetBulletHitMove();
+                break;
+            case EntityBullet.EntityBulletType.HIT_STATIC_TILE:
+                prefab = LevelCreatorEditor.Instance.GetBulletHitStatic();
+                break;
+        }
+
+        if (prefab != null)
+        {
+            ret = Instantiate(prefab, transform.position, Quaternion.identity);
+            ret.transform.parent = transform;
+        }
+
+        return ret;
+    }
+
+    GameObject InstantiateVisualBulletGoFromBulletType(EntityBullet.EntityBulletType type)
+    {
+        GameObject ret = null;
+
+        GameObject prefab = null;
+        switch (type)
+        {
+            case EntityBullet.EntityBulletType.HIT_MOVE_TILE:
+                prefab = LevelCreatorEditor.Instance.GetBulletAmmoHitMove();
+                break;
+            case EntityBullet.EntityBulletType.HIT_STATIC_TILE:
+                prefab = LevelCreatorEditor.Instance.GetBulletAmmoHitStatic();
+                break;
+        }
+
+        if (prefab != null)
+        {
+            ret = Instantiate(prefab, new Vector3(0, 0, 0), Quaternion.identity);
+            ret.transform.parent = transform;
+        }
+
+        return ret;
+    }
+
+
+    private void SetVisualBullets()
+    {
+        if (bullets != null)
+        {
+            for (int i = 0; i < visual_bullets.Count; ++i)
+            {
+                Destroy(visual_bullets[i]);
+            }
+
+            visual_bullets.Clear();
+
+            for (int i = 0; i < bullets.Count; ++i)
+            {
+                GameObject new_bull = InstantiateVisualBulletGoFromBulletType(bullets[i]);
+
+                float start_pos = 0.86f;
+
+                float to_add = 0.15f;
+
+                if (i == 0)
+                    to_add = 0.46f;
+
+                new_bull.transform.parent = this.transform;
+                new_bull.transform.localScale = new Vector3(1, 1, 1);
+                new_bull.transform.localPosition = new Vector3((start_pos + (i * to_add)),
+                    -0.47f, 0);
+
+                visual_bullets.Add(new_bull);
+            }
+        }
     }
 
     private void StartAnimation(GameEntityAnimation ani)

@@ -169,7 +169,7 @@ public class GameGridInstance : MonoBehaviour
         {
             ret = Instantiate(prefab, Vector3.zero, Quaternion.identity);
             GridTileInstance tile_script = ret.AddComponent<GridTileInstance>();
-            tile_script.Init(this);
+            tile_script.Init(this, type);
         }
 
         return ret;

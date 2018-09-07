@@ -18,9 +18,12 @@ public class GridTileInstance : MonoBehaviour
     private GridTileAnimation curr_animation = GridTileAnimation.NO_ANIMATION;
     private Transform start_animation_transform = null;
 
-    public void Init(GameGridInstance grid_in)
+    GameGridInstance.GridTileType type = new GameGridInstance.GridTileType(); 
+
+    public void Init(GameGridInstance grid_in, GameGridInstance.GridTileType grid_type)
     {
         grid = grid_in;
+        type = grid_type;
 
         collider = gameObject.GetComponent<Collider2D>();
     }
@@ -34,6 +37,24 @@ public class GridTileInstance : MonoBehaviour
     {
         if (EventManager.Valid())
             EventManager.Instance.UnSuscribe(OnEvent);
+    }
+
+    public GameGridInstance.GridTileType Type()
+    {
+        return type;
+    }
+
+    private bool BulletCanDestroyTile(EntityBullet.EntityBulletType bullet_type, GameGridInstance.GridTileType tile_type)
+    {
+        bool ret = false;
+
+        if (bullet_type == EntityBullet.EntityBulletType.HIT_MOVE_TILE && tile_type == GameGridInstance.GridTileType.GRID_TILE_TYPE_MOVE)
+            ret = true;
+
+        if (bullet_type == EntityBullet.EntityBulletType.HIT_STATIC_TILE && tile_type == GameGridInstance.GridTileType.GRID_TIILE_TYPE_STATIC)
+            ret = true;
+
+        return ret;
     }
 
     private void StartAnimation(GridTileAnimation ani)
@@ -62,10 +83,13 @@ public class GridTileInstance : MonoBehaviour
             case EventManager.EventType.TILE_HIT:
                 if (ev.tile_hit.tile == this)
                 {
-                    grid.RemoveGameObject(gameObject);
+                    if (BulletCanDestroyTile(ev.tile_hit.bullet.Type(), type))
+                    {
+                        grid.RemoveGameObject(gameObject);
 
-                    collider.enabled = false;
-                    StartAnimation(GridTileAnimation.SCALE_ROTATE_DISAPPEAR);
+                        collider.enabled = false;
+                        StartAnimation(GridTileAnimation.SCALE_ROTATE_DISAPPEAR);
+                    }
                 }
                 break;
         }
