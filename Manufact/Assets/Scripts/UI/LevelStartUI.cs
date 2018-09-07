@@ -111,18 +111,21 @@ public class LevelStartUI : UIControl
         }
 	}
 
-    public void UIBegin(int level_number, string level_title, string level_text)
+    public void UIBegin(int level_number)
     {
-        base.UIBegin();
-
         gameObject.SetActive(true);
         all_back_image.gameObject.SetActive(true);
 
-        level_to_load = level_number;
+        Level level = LevelsManager.Instance.GetLevel(level_number);
 
-        number_text.text = level_number.ToString();
-        title_text.text = level_title;
-        description_text.text = level_text;
+        if (level != null)
+        {
+            number_text.text = level_number.ToString();
+            title_text.text = level.GetLevelName();
+            description_text.text = level.GetLevelDescription();
+        }
+
+        level_to_load = level_number;
 
         Canvas.ForceUpdateCanvases();
 

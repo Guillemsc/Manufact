@@ -187,7 +187,7 @@ public class LevelsManager : Singleton<LevelsManager>
     {
         if (current_level != null)
         {
-            levels_ui.UIBegin();
+            levels_ui.UIBegin(current_level.GetLevelNumber());
         }
     }
 
@@ -241,7 +241,7 @@ public class LevelsManager : Singleton<LevelsManager>
         {
             if (level_to_start_use_intro)
             {
-                level_start_ui.UIBegin(current_level.GetLevelNumber(), current_level.GetLevelName(), current_level.GetLevelDescription());
+                level_start_ui.UIBegin(current_level.GetLevelNumber());
 
                 current_level.OnAwake();
 

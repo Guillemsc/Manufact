@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using TMPro;
 
 public class LevelsUI : UIControl
 {
@@ -15,6 +16,8 @@ public class LevelsUI : UIControl
     private LevelUIState state = new LevelUIState();
 
     [SerializeField] private CanvasGroup canvas_group = null;
+    [SerializeField] private TextMeshProUGUI level_text = null;
+    [SerializeField] private TextMeshProUGUI level_description_text = null;
 
     private Timer fade_in_timer = new Timer();
     [SerializeField] private float fade_in_time = 0.4f;
@@ -51,11 +54,17 @@ public class LevelsUI : UIControl
         }
     }
 
-    public override void UIBegin()
+    public void UIBegin(int level_number)
     {
-        base.UIBegin();
-
         gameObject.SetActive(true);
+
+        Level level = LevelsManager.Instance.GetLevel(level_number);
+
+        if(level != null)
+        {
+            level_text.text = "Level " + level_number + " - " + level.GetLevelName();
+            level_description_text.text = level.GetLevelDescription();
+        }
 
         canvas_group.alpha = 0.0f;
         canvas_group.DOFade(1, fade_in_time);
