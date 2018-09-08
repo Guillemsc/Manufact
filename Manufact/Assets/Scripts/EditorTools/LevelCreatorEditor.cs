@@ -9,6 +9,7 @@ public class LevelCreatorEditor : Singleton<LevelCreatorEditor>
     [SerializeField] private GameObject empty_tile = null;
     [SerializeField] private GameObject base_move_tile = null;
     [SerializeField] private GameObject base_static_tile = null;
+    [SerializeField] private float tiles_speed = 0.0f;
 
     [SerializeField] private Color base_move_tile_debug;
     [SerializeField] private Color base_static_tile_debug;
@@ -80,6 +81,11 @@ public class LevelCreatorEditor : Singleton<LevelCreatorEditor>
     public Color GetStaticTileDebugColor()
     {
         return base_static_tile_debug;
+    }
+
+    public float GetTilesMoveSpeed()
+    {
+        return tiles_speed;
     }
 
     public GameObject GetPlayerPrefab()

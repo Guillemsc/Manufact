@@ -223,7 +223,7 @@ public class GameGridInstance : MonoBehaviour
     {
         SUCCES,
         OUT_OF_BOUNDARIES,
-        NO_TIILE_FOUND,
+        NO_TILE_FOUND,
     }
 
     public GridTile GetTileByGridPos(Vector2Int grid_pos)
@@ -236,7 +236,7 @@ public class GameGridInstance : MonoBehaviour
     {
         GridTile ret = null;
 
-        state = GetTileByGridPosState.NO_TIILE_FOUND;
+        state = GetTileByGridPosState.NO_TILE_FOUND;
 
         if (grid_pos.x < grid_size.x && grid_pos.y < grid_size.y && grid_pos.x >= 0 && grid_pos.y >= 0)
         {
@@ -253,7 +253,7 @@ public class GameGridInstance : MonoBehaviour
             }
 
             if (ret == null)
-                state = GetTileByGridPosState.NO_TIILE_FOUND;
+                state = GetTileByGridPosState.NO_TILE_FOUND;
         }
         else
             state = GetTileByGridPosState.OUT_OF_BOUNDARIES;

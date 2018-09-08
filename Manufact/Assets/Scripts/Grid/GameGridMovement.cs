@@ -13,8 +13,6 @@ public class GameGridMovement : MonoBehaviour
         RIGHT,
     }
 
-    [SerializeField] private float movement_time = 0.5f;
-
     private GameGridInstance grid_inst = null;
 
     private bool moving = false;
@@ -75,7 +73,7 @@ public class GameGridMovement : MonoBehaviour
                         go_to_move.target_pos = target_pos;
                         go_to_move.tile_go = curr_tile.go;
 
-                        go_to_move.tile_go.transform.DOMove(go_to_move.target_pos, movement_time);
+                        go_to_move.tile_go.transform.DOMove(go_to_move.target_pos, LevelCreatorEditor.Instance.GetTilesMoveSpeed());
 
                         tile_gos_to_move.Add(go_to_move);
 
@@ -96,7 +94,9 @@ public class GameGridMovement : MonoBehaviour
 
         if (tile != null)
         {
-            if (tile.type != GameGridInstance.GridTileType.GRID_TIILE_TYPE_STATIC)
+            GridTileInstance tile_ins_go = tile.go.GetComponent<GridTileInstance>();
+
+            if (tile_ins_go != null && tile_ins_go.Type() != GameGridInstance.GridTileType.GRID_TIILE_TYPE_STATIC)
             {
                 Vector2Int grid_pos_to_offset = GetOffsetByDirection(dir);
 
@@ -115,7 +115,7 @@ public class GameGridMovement : MonoBehaviour
                                 ret = true;
                         }
                         break;
-                    case GameGridInstance.GetTileByGridPosState.NO_TIILE_FOUND:
+                    case GameGridInstance.GetTileByGridPosState.NO_TILE_FOUND:
                         {
                             ret = true;
                         }

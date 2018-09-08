@@ -1,6 +1,6 @@
-WindowsStandalone
+Android
 PlayerPath?
-C:/Users/MacBacon/Desktop/asd.exe
+C:/Users/Guillem/Desktop/Manufact/AndroidBuild/Manufact.apk
 SceneListBegin?
 Assets/Scenes/MainScene.unity
 SceneListEnd?
@@ -20,8 +20,9 @@ ff05dcdf90651c3d98a9cad3df5e471e UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 df374c01140c2d578bf70cbd60073d1d UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
 b75fdd29c3f372c6b79e9b343a53e3d1 Assembly-CSharp.dll:Lean.Touch.LeanFingerDown
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UIControl
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.BasicLevelExt
 91f1d5edeb3110867ff723bd53427867 Assembly-CSharp.dll:Lean.Touch.LeanFingerLine
-348aed45c148b2340ea37db2603be5da Assembly-CSharp.dll:.LevelsUI
+dd41169a5b56585e8b6b4eb467f8073e Assembly-CSharp.dll:.LevelsUI
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 49cd62a578efc0a599b810a2b66cd49c UnityEngine.UI.dll:UnityEngine.UI.Button
@@ -153,7 +154,7 @@ e763036081c708b34f78f5a56f72c23d TextMeshPro-2017.3-Runtime.dll:TMPro.TMP_StyleS
 22bb40270d2bfc0d0884e2aefd3d1c60 TextMeshPro-2017.3-Runtime.dll:TMPro.TMP_Text
 322cb40e1e282f28af980cbef7922a90 UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsEventTracker
 dc07d7ad69b399a46e92c483bf1c04ca UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
-7e7732030fe317bb6a79844d7d95e356 Assembly-CSharp.dll:.BasicLevel
+faf61fde05d5eb2226149bf3dc3d55be Assembly-CSharp.dll:.BasicLevel
 0ea7e3a1b65cd933d7a007e6774c4eaa Assembly-CSharp.dll:.Sequences
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
@@ -240,9 +241,9 @@ e0f7ffd5d5c2abe4b2e16569a21163da UnityEngine.GoogleAudioSpatializer.dll:UnityEng
 67a5f2c97205d2e41a8ed7c7ce898f6e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
 29df9c04438d15b5b4fdcf4eb9a48823 Assembly-CSharp.dll:Lean.Touch.LeanSelectable
 aa9d1bd0cc771545f2ae1f63a6d0ed6a Assembly-CSharp.dll:TMPro.Examples.TMP_TextEventCheck
-b0a52a01741efb87b0085d9c8cc3c351 Assembly-CSharp.dll:.GameGridMovement
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.GameGridMovement
 609f68cf59bb06a93cdd3fb8b3be2a60 Assembly-CSharp.dll:.MainMenuUI
-9b3d05ffb32b1b3671ded007fa435e3d Assembly-CSharp.dll:.LevelCreatorEditor
+fcdcad7ac39fb6c7e4c8e20e30ab90dd Assembly-CSharp.dll:.LevelCreatorEditor
 9e0ef5bf862444b5dc48b5a99554ce7c UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioListenerExtension
 e0f7ffd5d5c2abe4b2e16569a21163da UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 67a5f2c97205d2e41a8ed7c7ce898f6e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSoundfieldExtension
@@ -282,7 +283,7 @@ cc0c6e43dd8c08bbdbe4e43f1c20ddd6 Assembly-CSharp.dll:Lean.Touch.LeanFingerUp
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.EntityBaseEnemy
 f39fa2d90cea541e27581f74e8fbbf9a Assembly-CSharp.dll:Lean.Touch.LeanSpawnAt
 af7666733efcc974926d7d470e1732a6 Assembly-CSharp.dll:TMPro.Examples.SkewTextExample
-e4ac43feefbe4d503bd078594f9b220a Assembly-CSharp.dll:.LevelEndUI
+266744cb9296703e1556b9f7d2520949 Assembly-CSharp.dll:.LevelEndUI
 9f94f2bd15532b7f4fb26e9ddf013d57 Assembly-CSharp.dll:Lean.Touch.LeanFingerHeld
 c7b4e1cefa38e05c60ad69dee88481d8 Assembly-CSharp.dll:Lean.Touch.LeanSelectableRendererColor
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.EntityBullet
