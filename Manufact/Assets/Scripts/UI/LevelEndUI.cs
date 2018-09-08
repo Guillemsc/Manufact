@@ -141,6 +141,8 @@ public class LevelEndUI : MonoBehaviour
     {
         win = finished;
 
+        level_ended = level_to_end;
+
         gameObject.SetActive(true);
 
         Canvas.ForceUpdateCanvases();

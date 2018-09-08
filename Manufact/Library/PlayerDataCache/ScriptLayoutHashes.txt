@@ -265,7 +265,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TMPro.Examples.TextConsoleSimulator
 493c211ab85ec2db8c090d3ba6c0a013 Assembly-CSharp.dll:Lean.Touch.LeanSelectableSpriteRendererColor
-b9f1c537a98b40479d1c6a715daff256 Assembly-CSharp.dll:.LevelStartUI
+8cdc05f8b857cf5c4db248b07b39a863 Assembly-CSharp.dll:.LevelStartUI
 e8e8f0e750145acab4381d7e2fa841be Assembly-CSharp.dll:Lean.Touch.LeanFingerTap
 b69fb5034809d4cbe977f438123a337f Assembly-CSharp.dll:Lean.Touch.LeanCameraZoom
 75cd0c6c744b9733ef29aa6c59ece2b1 Assembly-CSharp.dll:TMPro.Examples.VertexShakeB
@@ -289,3 +289,4 @@ c7b4e1cefa38e05c60ad69dee88481d8 Assembly-CSharp.dll:Lean.Touch.LeanSelectableRe
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.EntityBullet
 34e025057ef78b1bf238460cdf6583a3 Assembly-CSharp.dll:TMPro.Examples.ObjectSpin
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TMPro.Examples.SimpleScript
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.BreathButton

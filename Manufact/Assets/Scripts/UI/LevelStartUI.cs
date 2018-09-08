@@ -24,7 +24,6 @@ public class LevelStartUI : UIControl
     [SerializeField] private Canvas canvas = null;
     [SerializeField] private TMPro.TextMeshProUGUI number_text = null;
     [SerializeField] private TMPro.TextMeshProUGUI title_text = null;
-    [SerializeField] private TMPro.TextMeshProUGUI description_text = null;
     [SerializeField] private Image background_image = null;
     [SerializeField] private Image all_back_image = null;
 
@@ -77,15 +76,7 @@ public class LevelStartUI : UIControl
                 {
                     if (wait_timer.ReadTime() > wait_time)
                     {
-                        Vector3 finish_pos = new Vector3(canvas_group.gameObject.transform.position.x - background_image.rectTransform.rect.size.x * 2,
-                        canvas_group.gameObject.gameObject.transform.position.y, canvas_group.gameObject.transform.position.z);
-
-                        background_image.transform.DOMoveX(finish_pos.x, fade_out_time);
-                        all_back_image.transform.DOMoveX(finish_pos.x, fade_out_time);
-
-                        fade_out_timer.Start();
-
-                        state = LevelStartState.FADING_OUT;
+                        FadeOut();
                     }
 
                     break;
@@ -122,7 +113,6 @@ public class LevelStartUI : UIControl
         {
             number_text.text = level_number.ToString();
             title_text.text = level.GetLevelName();
-            description_text.text = level.GetLevelDescription();
         }
 
         level_to_load = level_number;
@@ -142,5 +132,18 @@ public class LevelStartUI : UIControl
         all_back_fade_in_timer.Start();
 
         state = LevelStartState.ALL_BACK_FADE_IN;
+    }
+
+    public void FadeOut()
+    {
+        Vector3 finish_pos = new Vector3(canvas_group.gameObject.transform.position.x - background_image.rectTransform.rect.size.x * 2,
+        canvas_group.gameObject.gameObject.transform.position.y, canvas_group.gameObject.transform.position.z);
+
+        background_image.transform.DOMoveX(finish_pos.x, fade_out_time);
+        all_back_image.transform.DOMoveX(finish_pos.x, fade_out_time);
+
+        state = LevelStartState.FADING_OUT;
+
+        fade_out_timer.Start();
     }
 }
