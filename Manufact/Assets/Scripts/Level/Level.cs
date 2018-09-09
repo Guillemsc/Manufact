@@ -7,6 +7,7 @@ public class Level : MonoBehaviour
     [Header("Base level info")]
     [SerializeField] private string level_name = "no_name_key";
     [SerializeField] private string level_description = "no_description_key";
+    [SerializeField] private int level_stage = 0;
     [SerializeField] private int level_number = 0;
 
     [Header("Build info")]

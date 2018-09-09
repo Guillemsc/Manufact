@@ -63,10 +63,6 @@ public class LevelStartUI : UIControl
                     {
                         wait_timer.Start();
 
-                        EventManager.Event ev = new EventManager.Event(EventManager.EventType.LEVEL_LOAD);
-                        ev.level_load.level = level_to_load;
-                        EventManager.Instance.SendEvent(ev);
-
                         state = LevelStartState.WAITING_TO_FADE_OUT;
                     }
 
@@ -136,6 +132,10 @@ public class LevelStartUI : UIControl
 
     public void FadeOut()
     {
+        EventManager.Event ev = new EventManager.Event(EventManager.EventType.LEVEL_LOAD);
+        ev.level_load.level = level_to_load;
+        EventManager.Instance.SendEvent(ev);
+
         Vector3 finish_pos = new Vector3(canvas_group.gameObject.transform.position.x - background_image.rectTransform.rect.size.x * 2,
         canvas_group.gameObject.gameObject.transform.position.y, canvas_group.gameObject.transform.position.z);
 

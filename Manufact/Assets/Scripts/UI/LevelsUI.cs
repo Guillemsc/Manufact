@@ -16,7 +16,6 @@ public class LevelsUI : UIControl
     private LevelUIState state = new LevelUIState();
 
     [SerializeField] private CanvasGroup canvas_group = null;
-    [SerializeField] private TextMeshProUGUI level_text = null;
     [SerializeField] private TextMeshProUGUI level_description_text = null;
 
     private Timer fade_in_timer = new Timer();
@@ -62,7 +61,6 @@ public class LevelsUI : UIControl
 
         if(level != null)
         {
-            level_text.text = "Level " + level_number + " - " + level.GetLevelName();
             level_description_text.text = level.GetLevelDescription();
         }
 

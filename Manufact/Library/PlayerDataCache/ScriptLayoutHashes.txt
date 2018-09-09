@@ -22,7 +22,7 @@ b75fdd29c3f372c6b79e9b343a53e3d1 Assembly-CSharp.dll:Lean.Touch.LeanFingerDown
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UIControl
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.BasicLevelExt
 91f1d5edeb3110867ff723bd53427867 Assembly-CSharp.dll:Lean.Touch.LeanFingerLine
-dd41169a5b56585e8b6b4eb467f8073e Assembly-CSharp.dll:.LevelsUI
+46c5877d81402d8b57aa609e75189f4c Assembly-CSharp.dll:.LevelsUI
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 49cd62a578efc0a599b810a2b66cd49c UnityEngine.UI.dll:UnityEngine.UI.Button
@@ -154,7 +154,7 @@ e763036081c708b34f78f5a56f72c23d TextMeshPro-2017.3-Runtime.dll:TMPro.TMP_StyleS
 22bb40270d2bfc0d0884e2aefd3d1c60 TextMeshPro-2017.3-Runtime.dll:TMPro.TMP_Text
 322cb40e1e282f28af980cbef7922a90 UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsEventTracker
 dc07d7ad69b399a46e92c483bf1c04ca UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
-faf61fde05d5eb2226149bf3dc3d55be Assembly-CSharp.dll:.BasicLevel
+8aaca0daac8dc94798d3adc0b9b1f261 Assembly-CSharp.dll:.BasicLevel
 0ea7e3a1b65cd933d7a007e6774c4eaa Assembly-CSharp.dll:.Sequences
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
@@ -227,7 +227,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 3f32f08a64daf40b09ed864d96fe3840 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransform
 73843688b51256aed059f049c540bca8 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
-a499dd2fe3946fd502680d261a9faeb8 Assembly-CSharp.dll:.Level
+029bea48eeaa26ca4ae214648f28d31b Assembly-CSharp.dll:.Level
 a8df30edef0c9ba664999240dc0b3058 Assembly-CSharp.dll:Lean.Touch.LeanCameraMove
 62229a3e4d53ca59bec192e89627ed52 Assembly-CSharp.dll:TMPro.Examples.CameraController
 5a35d5b94055acf66f01869f65b7d8a6 Assembly-CSharp.dll:.Basics
@@ -289,4 +289,4 @@ c7b4e1cefa38e05c60ad69dee88481d8 Assembly-CSharp.dll:Lean.Touch.LeanSelectableRe
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.EntityBullet
 34e025057ef78b1bf238460cdf6583a3 Assembly-CSharp.dll:TMPro.Examples.ObjectSpin
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TMPro.Examples.SimpleScript
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.BreathButton
+ce90b77819fe425d2075d9d2c135300b Assembly-CSharp.dll:.ButtonBreathUI

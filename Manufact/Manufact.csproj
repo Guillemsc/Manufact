@@ -277,7 +277,7 @@
     <Compile Include="Assets\Scripts\LogicManager.cs" />
     <Compile Include="Assets\Scripts\Path\EntityPathInstance.cs" />
     <Compile Include="Assets\Scripts\Path\EntityPathInstanceExt.cs" />
-    <Compile Include="Assets\Scripts\UI\BreathButton.cs" />
+    <Compile Include="Assets\Scripts\UI\ButtonBreathUI.cs" />
     <Compile Include="Assets\Scripts\UI\DebugUI.cs" />
     <Compile Include="Assets\Scripts\UI\IntroLogoUI.cs" />
     <Compile Include="Assets\Scripts\UI\LanguageSelectUI.cs" />
