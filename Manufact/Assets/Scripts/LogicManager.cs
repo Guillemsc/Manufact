@@ -48,7 +48,7 @@ public class LogicManager : Singleton<LogicManager>
             StartPhase(LogicPhase.GAME_LOAD_SCREENS);
         }
         else
-            LevelsManager.Instance.StartLevel(12);
+            LevelsManager.Instance.StartLevel(13);
     }
 
     public void StartPhase(LogicPhase p)
