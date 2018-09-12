@@ -128,26 +128,11 @@ public abstract class GameEntity : MonoBehaviour
             {
                 EntityPathInstance.PathPoint point = path.GetPathPointFromEntityGo(gameObject);
 
-                if (point != null)
-                {
-                    switch (point.direction)
-                    {
-                        case EntityPathInstance.PathPointDirection.PATH_POINT_DIRECTION_UP:
-                            break;
-                        case EntityPathInstance.PathPointDirection.PATH_POINT_DIRECTION_DOWN:
-                            break;
-                        case EntityPathInstance.PathPointDirection.PATH_POINT_DIRECTION_LEFT:
-                            break;
-                        case EntityPathInstance.PathPointDirection.PATH_POINT_DIRECTION_RIGHT:
-                            break;
-                    }
-                }
-
                 EntityBullet.EntityBulletType type = GetNextBullet();
 
                 GameObject bullet = InstantiateBulletGoFromBulletType(type);
                 EntityBullet bullet_script = bullet.AddComponent<EntityBullet>();
-                bullet_script.Init(this, LevelCreatorEditor.Instance.GetBulletsSpeed(), type, point.direction);
+                bullet_script.Init(this, LevelCreatorEditor.Instance.GetBulletsSpeed(), type);
 
                 RemoveNextBullet();
 

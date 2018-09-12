@@ -15,6 +15,7 @@ public class LogicManager : Singleton<LogicManager>
     [SerializeField] private IntroLogoUI intro_logo_ui = null;
     [SerializeField] private LanguageSelectUI select_language_ui = null;
     [SerializeField] private MainMenuUI main_menu_ui = null;
+    [SerializeField] private OptionsMenuUI options_menu_ui = null;
 
     private void Awake()
     {
@@ -37,6 +38,11 @@ public class LogicManager : Singleton<LogicManager>
         {
             main_menu_ui.gameObject.SetActive(false);
         }
+
+        if(options_menu_ui != null)
+        {
+            options_menu_ui.gameObject.SetActive(false);
+        }
     }
 
     private void Start()
@@ -48,7 +54,7 @@ public class LogicManager : Singleton<LogicManager>
             StartPhase(LogicPhase.GAME_LOAD_SCREENS);
         }
         else
-            LevelsManager.Instance.StartLevel(13);
+            LevelsManager.Instance.StartLevel(15);
     }
 
     public void StartPhase(LogicPhase p)
@@ -111,6 +117,16 @@ public class LogicManager : Singleton<LogicManager>
         LevelsManager.Instance.ReestartCurrentLevel();
     }
 
+    public void OpenOptionsMenu()
+    {
+        options_menu_ui.FadeIn();
+    }
+
+    public void CloseOptionsMenu()
+    {
+        options_menu_ui.FadeOut();
+    }
+
     private void StartGameLoadScreens()
     {
         if (intro_logo_ui != null)
@@ -138,6 +154,8 @@ public class LogicManager : Singleton<LogicManager>
 
     private void OnSelectLanguageUIFinished(UIControl c)
     {
+        GooglePlayManager.Instance.LogIn();
+
         StartPhase(LogicPhase.GAME_MENU);
     }
 

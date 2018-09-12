@@ -60,6 +60,7 @@ public class EntityPathInstance : MonoBehaviour
     {
         public PathEntityType type = PathEntityType.PATH_ENTITY_TYPE_EMPTY;
         public GameObject     go = null;
+        public float          start_rotation_angle = 0.0f;
     }
 
 	void Start ()
@@ -160,6 +161,7 @@ public class EntityPathInstance : MonoBehaviour
                     curr_tile.entity.go = inst;
                     curr_tile.entity.go.transform.position = curr_tile.RealPos();
                     curr_tile.entity.go.transform.parent = this.transform;
+                    curr_tile.entity.go.transform.localRotation = Quaternion.Euler(0, 0, curr_tile.entity.start_rotation_angle);
                 }
             }
 

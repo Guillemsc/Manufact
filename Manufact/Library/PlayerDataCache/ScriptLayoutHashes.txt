@@ -271,11 +271,13 @@ b69fb5034809d4cbe977f438123a337f Assembly-CSharp.dll:Lean.Touch.LeanCameraZoom
 75cd0c6c744b9733ef29aa6c59ece2b1 Assembly-CSharp.dll:TMPro.Examples.VertexShakeB
 752ea815860a151aee955bcc6c8b2dbf Assembly-CSharp.dll:.GameGridInstanceExt
 6826e26f7cc718f870001971f13e79c7 Assembly-CSharp.dll:TMPro.TMP_TextEventHandler
+ce90b77819fe425d2075d9d2c135300b Assembly-CSharp.dll:.ButtonBreathUI
 8e194e74053b8ffdee68402e7e9dd69f Assembly-CSharp.dll:Lean.Touch.LeanFingerTrail
 493c211ab85ec2db8c090d3ba6c0a013 Assembly-CSharp.dll:Lean.Touch.LeanSelectableGraphicColor
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TMPro.Examples.VertexColorCycler
 da8b1afa3aba9ced70c35c501f25776f Assembly-CSharp.dll:Lean.Touch.LeanTranslate
 f62e81c9c44a76626d343490e1ae2ab4 Assembly-CSharp.dll:.LanguageSelectUI
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:GooglePlayGames.OurUtils.PlayGamesHelperObject
 910ddf785f92530d7ed2376620a85a8a Assembly-CSharp.dll:.LevelsManager
 cc0c6e43dd8c08bbdbe4e43f1c20ddd6 Assembly-CSharp.dll:Lean.Touch.LeanFingerUp
 020550babdb991365f61c5bffe1f4f52 Assembly-CSharp.dll:TMPro.Examples.TextMeshSpawner
@@ -289,4 +291,4 @@ c7b4e1cefa38e05c60ad69dee88481d8 Assembly-CSharp.dll:Lean.Touch.LeanSelectableRe
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.EntityBullet
 34e025057ef78b1bf238460cdf6583a3 Assembly-CSharp.dll:TMPro.Examples.ObjectSpin
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TMPro.Examples.SimpleScript
-ce90b77819fe425d2075d9d2c135300b Assembly-CSharp.dll:.ButtonBreathUI
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.GooglePlayManager

@@ -11,7 +11,8 @@ public class EntityBullet : MonoBehaviour
     }
 
     private float movement_speed = 0.0f;
-    private EntityPathInstance.PathPointDirection movement_dir;
+    private Vector2 direction_norm = Vector2.zero;
+    private float rotation_angle = 0.0f;
     private GameEntity sender = null;
     private EntityBulletType type;
 
@@ -34,11 +35,12 @@ public class EntityBullet : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public void Init(GameEntity entity_sender, float speed, EntityBulletType bullet_type, EntityPathInstance.PathPointDirection direction)
+    public void Init(GameEntity entity_sender, float speed, EntityBulletType bullet_type)
     {
         sender = entity_sender;
         movement_speed = speed;
-        movement_dir = direction;
+        direction_norm = entity_sender.gameObject.transform.up.normalized;
+        rotation_angle = entity_sender.gameObject.transform.eulerAngles.z;
         type = bullet_type;
     }
 
@@ -53,25 +55,8 @@ public class EntityBullet : MonoBehaviour
         float speed_dt = movement_speed * Time.deltaTime;
         Quaternion rotation = Quaternion.identity;
 
-        switch(movement_dir)
-        {
-            case EntityPathInstance.PathPointDirection.PATH_POINT_DIRECTION_UP:
-                move_val = new Vector3(0, speed_dt, transform.position.z);
-                rotation = Quaternion.Euler(0, 0, 0);
-                break;
-            case EntityPathInstance.PathPointDirection.PATH_POINT_DIRECTION_DOWN:
-                move_val = new Vector3(0, -speed_dt, transform.position.z);
-                rotation = Quaternion.Euler(0, 0, 180);
-                break;
-            case EntityPathInstance.PathPointDirection.PATH_POINT_DIRECTION_LEFT:
-                move_val = new Vector3(-speed_dt, 0, transform.position.z);
-                rotation = Quaternion.Euler(0, 0, 90);
-                break;
-            case EntityPathInstance.PathPointDirection.PATH_POINT_DIRECTION_RIGHT:
-                move_val = new Vector3(speed_dt, 0, transform.position.z);
-                rotation = Quaternion.Euler(0, 0, 270);
-                break;
-        }
+        move_val = direction_norm * speed_dt;
+        rotation = Quaternion.Euler(0, 0, rotation_angle);
 
         transform.position += move_val;
         transform.rotation = rotation;

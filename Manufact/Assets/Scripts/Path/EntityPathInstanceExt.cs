@@ -75,11 +75,11 @@ public class EntityPathInstanceExt : Editor
                     EditorUtility.SetDirty(target);
                 }
 
-                EntityPathInstance.PathPointDirection direction = (EntityPathInstance.PathPointDirection)EditorGUILayout.EnumPopup("Type", curr_point.direction);
+                float direction = EditorGUILayout.FloatField("Starting Angle", curr_point.entity.start_rotation_angle);
 
-                if(direction != curr_point.direction)
+                if(direction != curr_point.entity.start_rotation_angle)
                 {
-                    curr_point.direction = direction;
+                    curr_point.entity.start_rotation_angle = direction;
 
                     EditorUtility.SetDirty(target);
                 }
