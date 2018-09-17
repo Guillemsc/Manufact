@@ -26,6 +26,11 @@ public class Level : MonoBehaviour
         return LocManager.Instance.GetText(level_description);
     }
 
+    public int GetLevelStage()
+    {
+        return level_stage;
+    }
+
     public int GetLevelNumber()
     {
         return level_number;

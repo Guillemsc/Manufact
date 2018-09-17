@@ -29,6 +29,7 @@ public class EventManager : Singleton<EventManager>
         CONTROLS_SWIPE_LEFT,
 
         TILE_HIT,
+        TILE_HIT_NOT_DESTROYED,
     }
 
     public class Event
@@ -101,6 +102,7 @@ public class EventManager : Singleton<EventManager>
         public class EntityShootFinished
         {
             public GameEntity sender = null;
+            public bool       hits = false;
         }
         public EntityShootFinished entity_shoot_finished = new EntityShootFinished();
 
@@ -125,6 +127,14 @@ public class EventManager : Singleton<EventManager>
             public EntityBullet bullet = null;
         }
         public TileHit tile_hit = new TileHit();
+
+        public class TileHitNotDestroyed
+        {
+            public GridTileInstance tile = null;
+            public GameEntity sender = null;
+            public EntityBullet bullet = null;
+        }
+        public TileHitNotDestroyed tile_hit_not_destroyed = new TileHitNotDestroyed();
 
         public EventManager.EventType Type()
         {

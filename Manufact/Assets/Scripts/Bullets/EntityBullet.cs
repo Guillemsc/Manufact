@@ -16,6 +16,8 @@ public class EntityBullet : MonoBehaviour
     private GameEntity sender = null;
     private EntityBulletType type;
 
+    private bool hits = false;
+
     private BoxCollider2D collider = null;
 
     private Timer destruction_timer = new Timer();
@@ -86,9 +88,11 @@ public class EntityBullet : MonoBehaviour
         {
             EventManager.Event ev = new EventManager.Event(EventManager.EventType.TILE_HIT);
             ev.tile_hit.tile = tile_hit;
-            ev.tile_hit.sender = sender;
             ev.tile_hit.bullet = this;
+            ev.tile_hit.sender = sender;
             EventManager.Instance.SendEvent(ev);
+
+            hits = true;
 
             Destroy(gameObject);
 
@@ -100,6 +104,7 @@ public class EntityBullet : MonoBehaviour
     {
         EventManager.Event ev = new EventManager.Event(EventManager.EventType.ENTITY_SHOOT_FINISHED);
         ev.entity_shoot_finished.sender = sender;
+        ev.entity_shoot_finished.hits = hits;
         EventManager.Instance.SendEvent(ev);
     }
 }

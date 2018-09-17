@@ -33,7 +33,9 @@ public class AppManager : Singleton<AppManager>
     {
         fps_timer.Start();
 
-        SetVSync(vsync);
+        if (!is_release)
+            SetVSync(vsync);
+
         SetMaxFPS(max_fps);
     }
 

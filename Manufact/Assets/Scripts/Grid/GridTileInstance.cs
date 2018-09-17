@@ -90,6 +90,15 @@ public class GridTileInstance : MonoBehaviour
                         collider.enabled = false;
                         StartAnimation(GridTileAnimation.SCALE_ROTATE_DISAPPEAR);
                     }
+                    else
+                    {
+                        EventManager.Event new_ev = new EventManager.Event(EventManager.EventType.TILE_HIT_NOT_DESTROYED);
+                        new_ev.tile_hit_not_destroyed.bullet = ev.tile_hit.bullet;
+                        new_ev.tile_hit_not_destroyed.sender = ev.tile_hit.sender;
+                        new_ev.tile_hit_not_destroyed.tile = ev.tile_hit.tile;
+
+                        EventManager.Instance.SendEvent(new_ev);
+                    }
                 }
                 break;
         }

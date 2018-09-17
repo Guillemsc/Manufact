@@ -4,18 +4,61 @@ using UnityEngine;
 
 public class LevelsManager : Singleton<LevelsManager>
 {
-    private List<Level> levels = new List<Level>();
+    private List<LevelsStage> level_stages = new List<LevelsStage>();
 
+    private LevelsStage curr_level_stage = null;
     private Level current_level = null;
     private Level last_level = null;
 
     private int  level_to_start = 0;
+    private int  level_stage_to_start = 0;
     private bool to_start_level = false;
     private bool level_to_start_use_intro = false;
 
     [SerializeField] private LevelStartUI level_start_ui = null;
     [SerializeField] private LevelEndUI level_end_ui = null;
     [SerializeField] private LevelsUI levels_ui = null;
+
+    public class LevelsStage
+    {
+        public int stage = 0;
+
+        public Level GetLevel(int level_index)
+        {
+            Level ret = null;
+
+            for (int i = 0; i < levels.Count; ++i)
+            {
+                Level level = levels[i];
+
+                if (level.GetLevelNumber() == level_index)
+                {
+                    ret = level;
+                    break;
+                }
+            }
+
+            return ret;
+        }
+
+        public void AddLevel(Level level)
+        {
+            if (level != null)
+            {
+                if (GetLevel(level.GetLevelNumber()) == null)
+                {
+                    if (level.GetLevelStage() == stage)
+                        levels.Add(level);
+                }
+                else
+                {
+                    Debug.LogError("[Levels] There are two levels with the same number: " + level.GetLevelNumber());
+                }
+            }
+        }
+
+        public List<Level> levels = new List<Level>();
+    }
 
     private void Awake()
     {
@@ -27,13 +70,22 @@ public class LevelsManager : Singleton<LevelsManager>
         {
             Level curr_level = levels_arr[i];
 
-            if (!CheckNumberDuplicate(curr_level.GetLevelNumber()))
+            int stage_index = curr_level.GetLevelStage();
+
+            LevelsStage stage = GetLevelStage(stage_index);
+
+            if(stage != null)
             {
-                levels.Add(curr_level);
+                stage.AddLevel(curr_level);
             }
             else
             {
-                Debug.LogError("[Levels] There are two levels with the same number: " + curr_level.GetLevelNumber());
+                LevelsStage new_stage = new LevelsStage();
+                new_stage.stage = stage_index;
+
+                level_stages.Add(new_stage);
+
+                new_stage.AddLevel(curr_level);
             }
         }
 
@@ -44,12 +96,19 @@ public class LevelsManager : Singleton<LevelsManager>
 
     private void Start()
     {
-        for (int i = 0; i < levels.Count; ++i)
+        for (int i = 0; i < level_stages.Count; ++i)
         {
-            levels[i].gameObject.SetActive(false);
+            LevelsStage stage = level_stages[i];
+
+            for(int y = 0; y < stage.levels.Count; ++y)
+            {
+                stage.levels[y].gameObject.SetActive(false);
+            }
         }
 
         EventManager.Instance.Suscribe(OnEvent);
+
+        StartStage(0);
     }
 
     private void Update()
@@ -103,20 +162,9 @@ public class LevelsManager : Singleton<LevelsManager>
         }
     }
 
-    private bool CheckNumberDuplicate(int number)
+    public LevelsStage GetCurrentStage()
     {
-        bool ret = false;
-
-        for (int i = 0; i < levels.Count; ++i)
-        {
-            if (levels[i].GetLevelNumber() == number)
-            {
-                ret = true;
-                break;
-            }
-        }
-
-        return ret;
+        return curr_level_stage;
     }
 
     public Level GetCurrentLevel()
@@ -124,20 +172,108 @@ public class LevelsManager : Singleton<LevelsManager>
         return current_level;
     }
 
+    public LevelsStage GetLevelStage(int stage)
+    {
+        LevelsStage ret = null;
+
+        for(int i = 0; i < level_stages.Count; ++i)
+        {
+            LevelsStage curr_stage = level_stages[i];
+
+            if (curr_stage.stage == stage)
+            {
+                ret = curr_stage;
+                break;
+            }
+        }
+
+        return ret;
+    }
+
+    public Level GetCurrentStageLevel(int level)
+    {
+        Level ret = null;
+
+        if (curr_level_stage != null)
+        {
+            ret = curr_level_stage.GetLevel(level);
+        }
+
+        return ret;
+    }
+
+    public int GetStageLevelsCount(int stage)
+    {
+        int ret = 0;
+
+        LevelsStage curr_stage = GetLevelStage(stage);
+
+        if(curr_stage != null)
+        {
+            ret = curr_stage.levels.Count;
+        }
+
+        return ret;
+    }
+
+    public bool StartStage(int stage)
+    {
+        bool ret = false;
+
+        LevelsStage curr_stage = GetLevelStage(stage);
+
+        if(curr_stage != null)
+        {
+            curr_level_stage = curr_stage;
+
+            ret = true;
+        }
+
+        return ret;
+    }
+
+    public bool StartNextStage()
+    {
+        bool ret = false;
+
+        if(curr_level_stage != null)
+        {
+            ret = StartStage(curr_level_stage.stage + 1);
+        }
+
+        return ret;
+    }
+
     public bool StartLevel(int level_number, bool use_intro = true)
     {
         bool ret = false;
 
-        Level level = GetLevel(level_number);
-
-        if (level != null)
+        if (curr_level_stage != null)
         {
-            level.gameObject.SetActive(false);
-            level_to_start = level_number;
-            to_start_level = true;
-            level_to_start_use_intro = use_intro;
+            Level level = GetLevel(curr_level_stage.stage, level_number);
 
-            ret = true;
+            if (level != null)
+            {
+                level.gameObject.SetActive(false);
+                level_to_start = level_number;
+                level_stage_to_start = curr_level_stage.stage;
+                to_start_level = true;
+                level_to_start_use_intro = use_intro;
+
+                ret = true;
+            }
+        }
+
+        return ret;
+    }
+
+    public bool StartNextLevel()
+    {
+        bool ret = false;
+
+        if (last_level != null)
+        {
+            ret = StartLevel(last_level.GetLevelNumber() + 1);
         }
 
         return ret;
@@ -159,18 +295,6 @@ public class LevelsManager : Singleton<LevelsManager>
 
         if(current_level != null)
             ret = StartLevel(current_level.GetLevelNumber(), false);
-
-        return ret;
-    }
-
-    public bool StartNextLevel()
-    {
-        bool ret = false;
-
-        if (last_level != null)
-        {
-            ret = StartLevel(last_level.GetLevelNumber() + 1);
-        }
 
         return ret;
     }
@@ -213,18 +337,23 @@ public class LevelsManager : Singleton<LevelsManager>
         }
     }
 
-    public Level GetLevel(int level_num)
+    public Level GetLevel(int level_stage, int level_num)
     {
         Level ret = null;
 
-        for (int i = 0; i < levels.Count; ++i)
-        {
-            Level level = levels[i];
+        LevelsStage curr_stage = GetLevelStage(level_stage);
 
-            if (level.GetLevelNumber() == level_num)
+        if (curr_stage != null)
+        {
+            for (int i = 0; i < curr_stage.levels.Count; ++i)
             {
-                ret = level;
-                break;
+                Level level = curr_stage.levels[i];
+
+                if (level.GetLevelNumber() == level_num)
+                {
+                    ret = level;
+                    break;
+                }
             }
         }
 
@@ -235,7 +364,7 @@ public class LevelsManager : Singleton<LevelsManager>
     {
         current_level = null;
 
-        current_level = GetLevel(level_to_start);
+        current_level = GetLevel(level_stage_to_start, level_to_start);
 
         if (current_level != null)
         {

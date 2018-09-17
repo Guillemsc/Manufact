@@ -11,18 +11,18 @@ public class GooglePlayManager : Singleton<GooglePlayManager>
     {
         InitInstance(this, gameObject);
 
-        PlayGamesPlatform.Activate();
+        //PlayGamesPlatform.Activate();
     }
 
     public bool LogIn()
     {
         bool ret = false;
 
-        Social.localUser.Authenticate((bool succes) =>
-        {
-            if (succes)
-                ret = true;
-        });
+        //Social.localUser.Authenticate((bool succes) =>
+        //{
+        //    if (succes)
+        //        ret = true;
+        //});
 
         return ret;
     }

@@ -16,7 +16,7 @@ public class BasicLevel : Level
     private EntityBaseEnemy enemy = null;
 
     private bool enemy_dead = false;
-    private bool no_bullets = false;
+    private bool lose = false;
 
     public override void OnAwake()
     {
@@ -36,7 +36,7 @@ public class BasicLevel : Level
     {
         curr_enemy_lifes = enemy_lifes;
         enemy_dead = false;
-        no_bullets = false;
+        lose = false;
 
         path.ReloadPath();
         grid.ReloadGrid();
@@ -67,7 +67,7 @@ public class BasicLevel : Level
 
     public override bool OnCheckLose()
     {
-        return no_bullets;
+        return lose;
     }
 
     public List<EntityBullet.EntityBulletType> GetBulletsList()
@@ -109,8 +109,13 @@ public class BasicLevel : Level
                 {
                     if(player.GetBulletsCount() <= 0)
                     {
-                        no_bullets = true;
+                        lose = true;
                     }
+                }
+                break;
+            case EventManager.EventType.TILE_HIT_NOT_DESTROYED:
+                {
+                    lose = true;
                 }
                 break;
         }

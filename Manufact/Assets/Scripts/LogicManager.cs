@@ -16,6 +16,7 @@ public class LogicManager : Singleton<LogicManager>
     [SerializeField] private LanguageSelectUI select_language_ui = null;
     [SerializeField] private MainMenuUI main_menu_ui = null;
     [SerializeField] private OptionsMenuUI options_menu_ui = null;
+    [SerializeField] private StageSelectionUI stage_selection_ui = null;
 
     private void Awake()
     {
@@ -43,6 +44,11 @@ public class LogicManager : Singleton<LogicManager>
         {
             options_menu_ui.gameObject.SetActive(false);
         }
+
+        if(stage_selection_ui != null)
+        {
+            stage_selection_ui.gameObject.SetActive(false);
+        }
     }
 
     private void Start()
@@ -54,7 +60,8 @@ public class LogicManager : Singleton<LogicManager>
             StartPhase(LogicPhase.GAME_LOAD_SCREENS);
         }
         else
-            LevelsManager.Instance.StartLevel(15);
+            StartPhase(LogicPhase.GAME_MENU);
+        //LevelsManager.Instance.StartLevel(0);
     }
 
     public void StartPhase(LogicPhase p)
@@ -125,6 +132,13 @@ public class LogicManager : Singleton<LogicManager>
     public void CloseOptionsMenu()
     {
         options_menu_ui.FadeOut();
+    }
+
+    public void OpenStageSelection()
+    {
+        main_menu_ui.gameObject.SetActive(false);
+
+        stage_selection_ui.FadeIn();
     }
 
     private void StartGameLoadScreens()

@@ -57,7 +57,7 @@ public class LevelsUI : UIControl
     {
         gameObject.SetActive(true);
 
-        Level level = LevelsManager.Instance.GetLevel(level_number);
+        Level level = LevelsManager.Instance.GetCurrentStageLevel(level_number);
 
         if(level != null)
         {

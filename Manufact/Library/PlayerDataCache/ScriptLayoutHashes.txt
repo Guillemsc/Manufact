@@ -1,6 +1,6 @@
-Android
+WindowsStandalone
 PlayerPath?
-C:/Users/Guillem/Desktop/Manufact/AndroidBuild/Manufact.apk
+C:/Users/Guillem/Desktop/Manufact/Builds/Manufact.exe
 SceneListBegin?
 Assets/Scenes/MainScene.unity
 SceneListEnd?
@@ -133,7 +133,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 2f514da27b71d477e62b77ba8324ad55 Assembly-CSharp.dll:Lean.Touch.LeanPlane
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.GridTileInstance
 0e5d517277ec9ce8ca9d50dd679a865c Assembly-CSharp.dll:Lean.Touch.LeanFingerSwipe
-76a7caf08ae5ca1bae01c0b8c9065bec Assembly-CSharp.dll:.LogicManager
+4fdac5b23d4597b605d037c7bf7df11e Assembly-CSharp.dll:.LogicManager
 1957a9369e72d2661ae9d0de26e7d064 Assembly-CSharp.dll:TMPro.Examples.WarpTextExample
 f4bd1aee67eeef7953cce6c44588b3d7 TextMeshPro-2017.3-Runtime.dll:TMPro.TextContainer
 bf22e89fa4b77e86d45d7ae313079474 TextMeshPro-2017.3-Runtime.dll:TMPro.TextMeshPro
@@ -188,7 +188,7 @@ e763036081c708b34f78f5a56f72c23d TextMeshPro-2017.3-Runtime.dll:TMPro.TMP_StyleS
 b900ead596b2fb1093b31cb63a678767 Assembly-CSharp.dll:TMPro.Examples.TextMeshProFloatingText
 548c6364d9081c2ff45481e12d6106e8 Assembly-CSharp.dll:Lean.Touch.LeanRotate
 dad1c1272dfe1898bb613dcb2631bcce Assembly-CSharp.dll:TMPro.Examples.Benchmark02
-9eac18f82d345a4e729ae905aa20aa70 Assembly-CSharp.dll:.EntityPathInstance
+c827c5cc9ede5688a0ca169c8c3d36b2 Assembly-CSharp.dll:.EntityPathInstance
 1f9dfc14bbf548d256d3ee29ecf4a461 Assembly-CSharp.dll:.LocText
 05524b8f659e7bfe5756d1335fec24ba TextMeshPro-2017.3-Editor.dll:TMPro.EditorUtilities.DropdownEditor
 05524b8f659e7bfe5756d1335fec24ba TextMeshPro-2017.3-Editor.dll:TMPro.EditorUtilities.TMP_ColorGradientEditor
@@ -207,6 +207,7 @@ a8ed45ab553b07236625df6cc6ac449c TextMeshPro-2017.3-Editor.dll:TMPro.EditorUtili
 05524b8f659e7bfe5756d1335fec24ba TextMeshPro-2017.3-Editor.dll:.TMPro_SDFMaterialEditor
 05524b8f659e7bfe5756d1335fec24ba TextMeshPro-2017.3-Editor.dll:TMPro.EditorUtilities.TMPro_TextContainerEditor
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TMPro.TMP_DigitValidator
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.GooglePlayManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TMPro.Examples.TeleType
 23a312385c401592d4fb5e71380e6af6 Assembly-CSharp.dll:.DebugUI
 8a50d3d11bf0cc541f5c35347dd25633 Assembly-CSharp.dll:TMPro.Examples.ShaderPropAnimator
@@ -265,7 +266,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TMPro.Examples.TextConsoleSimulator
 493c211ab85ec2db8c090d3ba6c0a013 Assembly-CSharp.dll:Lean.Touch.LeanSelectableSpriteRendererColor
-8cdc05f8b857cf5c4db248b07b39a863 Assembly-CSharp.dll:.LevelStartUI
+75f5719d218ad4c892b494ce98381b1b Assembly-CSharp.dll:.LevelStartUI
 e8e8f0e750145acab4381d7e2fa841be Assembly-CSharp.dll:Lean.Touch.LeanFingerTap
 b69fb5034809d4cbe977f438123a337f Assembly-CSharp.dll:Lean.Touch.LeanCameraZoom
 75cd0c6c744b9733ef29aa6c59ece2b1 Assembly-CSharp.dll:TMPro.Examples.VertexShakeB
@@ -287,8 +288,8 @@ f39fa2d90cea541e27581f74e8fbbf9a Assembly-CSharp.dll:Lean.Touch.LeanSpawnAt
 af7666733efcc974926d7d470e1732a6 Assembly-CSharp.dll:TMPro.Examples.SkewTextExample
 266744cb9296703e1556b9f7d2520949 Assembly-CSharp.dll:.LevelEndUI
 9f94f2bd15532b7f4fb26e9ddf013d57 Assembly-CSharp.dll:Lean.Touch.LeanFingerHeld
+735c235f26556bc68ef01771f82c2f75 Assembly-CSharp.dll:.OptionsMenuUI
 c7b4e1cefa38e05c60ad69dee88481d8 Assembly-CSharp.dll:Lean.Touch.LeanSelectableRendererColor
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.EntityBullet
 34e025057ef78b1bf238460cdf6583a3 Assembly-CSharp.dll:TMPro.Examples.ObjectSpin
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:TMPro.Examples.SimpleScript
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.GooglePlayManager

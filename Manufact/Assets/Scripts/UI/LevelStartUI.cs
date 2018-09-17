@@ -24,6 +24,7 @@ public class LevelStartUI : UIControl
     [SerializeField] private Canvas canvas = null;
     [SerializeField] private TMPro.TextMeshProUGUI number_text = null;
     [SerializeField] private TMPro.TextMeshProUGUI title_text = null;
+    [SerializeField] private TMPro.TextMeshProUGUI stage_text = null;
     [SerializeField] private Image background_image = null;
     [SerializeField] private Image all_back_image = null;
 
@@ -103,12 +104,13 @@ public class LevelStartUI : UIControl
         gameObject.SetActive(true);
         all_back_image.gameObject.SetActive(true);
 
-        Level level = LevelsManager.Instance.GetLevel(level_number);
+        Level level = LevelsManager.Instance.GetCurrentStageLevel(level_number);
 
         if (level != null)
         {
             number_text.text = level_number.ToString();
             title_text.text = level.GetLevelName();
+            stage_text.text = LocManager.Instance.GetText("Stage") + ": " + level.GetLevelStage();
         }
 
         level_to_load = level_number;
