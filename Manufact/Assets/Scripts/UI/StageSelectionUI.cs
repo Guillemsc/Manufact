@@ -195,6 +195,7 @@ public class StageSelectionUI : MonoBehaviour
             case StageSelectionState.FADING_OUT:
                 if(fade_out_timer.ReadTime() > fade_out_time)
                 {
+                    gameObject.SetActive(false);
                     state = StageSelectionState.FINISHED;
                 }
                 break;
@@ -215,7 +216,6 @@ public class StageSelectionUI : MonoBehaviour
                     state = StageSelectionState.WAITING_TO_FADE_OUT;
                 }
                 break;
-                break;
             case StageSelectionState.FINISHED:
                 break;
         }
@@ -225,13 +225,15 @@ public class StageSelectionUI : MonoBehaviour
     {
         gameObject.SetActive(true);
 
+        Canvas.ForceUpdateCanvases();
+
         SetStageGameObjects(starting_stage);
 
         state = StageSelectionState.FADING_IN;
 
         Canvas.ForceUpdateCanvases();
 
-        Vector3 starting_pos = new Vector3(canvas_group.gameObject.transform.position.x + background_image.rectTransform.rect.size.x * 2,
+        Vector3 starting_pos = new Vector3(canvas_group.gameObject.transform.position.x + background_image.rectTransform.rect.width,
             canvas_group.gameObject.gameObject.transform.position.y, canvas_group.gameObject.transform.position.z);
 
         background_image.gameObject.transform.position = starting_pos;
@@ -249,10 +251,12 @@ public class StageSelectionUI : MonoBehaviour
     {
         if(state == StageSelectionState.WAITING_TO_FADE_OUT)
         {
-            Vector3 finish_pos = new Vector3(canvas_group.gameObject.transform.position.x - background_image.rectTransform.rect.size.x * 2,
+            Vector3 finish_pos = new Vector3(canvas_group.gameObject.transform.position.x - background_image.rectTransform.rect.width,
             canvas_group.gameObject.gameObject.transform.position.y, canvas_group.gameObject.transform.position.z);
 
             background_image.transform.DOMoveX(finish_pos.x, fade_out_time);
+
+            fade_out_timer.Start();
 
             state = StageSelectionState.FADING_OUT;
         }

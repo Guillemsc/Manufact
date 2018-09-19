@@ -182,6 +182,7 @@ public class LogicManager : Singleton<LogicManager>
         {
             case EventManager.EventType.LEVEL_LOAD:
                 main_menu_ui.gameObject.SetActive(false);
+                stage_selection_ui.gameObject.SetActive(false);
                 break;
         }
     }
