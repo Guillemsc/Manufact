@@ -3,12 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class StageSelectionUI : MonoBehaviour
 {
     private int curr_stage = 0;
+    private int stage_to_change = 0;
 
-    [SerializeField] TMPro.TextMeshProUGUI stage_text = null;
+    enum StageSelectionState
+    {
+        FADING_IN,
+        WAITING_TO_FADE_OUT,
+        FADING_OUT,
+        CHANGE_STAGE_FADE_IN,
+        CHANGE_STAGE_FADE_OUT,
+        FINISHED,
+    }
+
+    private StageSelectionState state = StageSelectionState.FINISHED;
+
+    [SerializeField] private float fade_in_time = 1.0f;
+    private Timer fade_in_timer = new Timer();
+
+    [SerializeField] private float fade_out_time = 1.0f;
+    private Timer fade_out_timer = new Timer();
+
+    [SerializeField] private float change_stage_time = 1.0f;
+    private Timer change_stage_timer = new Timer();
+
+    [SerializeField] private TMPro.TextMeshProUGUI stage_text = null;
+
+    [SerializeField] private CanvasGroup canvas_group = null;
+    [SerializeField] private Image background_image = null;
+    [SerializeField] private Image change_state_image = null;
+    [SerializeField] private Button next_stage_button = null;
+    [SerializeField] private Button prev_stage_button = null;
 
     [SerializeField] private RectTransform scroll_view_rect = null;
     [SerializeField] private GameObject scroll_view_content = null;
@@ -31,6 +60,8 @@ public class StageSelectionUI : MonoBehaviour
         CheckChangeScrollView();
 
         ActuallyUpdatePositions();
+
+        UpdateState();
     }
 
     private void CheckChangeScrollView()
@@ -78,7 +109,7 @@ public class StageSelectionUI : MonoBehaviour
             int curr_row = 0;
             int curr_column = 0;
 
-            for (int i = 0; i < 100; ++i)
+            for (int i = 0; i < levels_list.Count; ++i)
             {
                 LevelButtonUI curr_button = levels_list[i];
 
@@ -113,18 +144,20 @@ public class StageSelectionUI : MonoBehaviour
     {
         curr_stage = stage;
 
+        UpdateNextPreviousButtons();
+
         stage_text.text = LocManager.Instance.GetText("Stage") + ": " + stage;
 
         for (int i = 0; i < levels_list.Count; ++i)
         {
-            Destroy(levels_list[i]);   
+            Destroy(levels_list[i].gameObject);   
         }
 
         levels_list.Clear();
 
         int to_spawn = LevelsManager.Instance.GetStageLevelsCount(stage);
 
-        for(int i = 0; i < 100; ++i)
+        for(int i = 0; i < to_spawn; ++i)
         {
             GameObject new_go = Instantiate(levels_prefab, new Vector3(0, 0, 0), Quaternion.identity);
             LevelButtonUI button_ui = new_go.GetComponent<LevelButtonUI>();
@@ -147,10 +180,130 @@ public class StageSelectionUI : MonoBehaviour
         ++to_update_positions;
     }
 
+    private void UpdateState()
+    {
+        switch(state)
+        {
+            case StageSelectionState.FADING_IN:
+                if(fade_in_timer.ReadTime() > fade_in_time)
+                {
+                    state = StageSelectionState.WAITING_TO_FADE_OUT;
+                }
+                break;
+            case StageSelectionState.WAITING_TO_FADE_OUT:
+                break;
+            case StageSelectionState.FADING_OUT:
+                if(fade_out_timer.ReadTime() > fade_out_time)
+                {
+                    state = StageSelectionState.FINISHED;
+                }
+                break;
+            case StageSelectionState.CHANGE_STAGE_FADE_IN:
+                if(change_stage_timer.ReadTime() > change_stage_time * 0.5f)
+                {
+                    SetStageGameObjects(stage_to_change);
+
+                    change_state_image.DOFade(0, change_stage_time * 0.5f);
+
+                    state = StageSelectionState.CHANGE_STAGE_FADE_OUT;
+                }
+                break;
+            case StageSelectionState.CHANGE_STAGE_FADE_OUT:
+                if (change_stage_timer.ReadTime() > change_stage_time)
+                {
+                    change_state_image.gameObject.SetActive(false);
+                    state = StageSelectionState.WAITING_TO_FADE_OUT;
+                }
+                break;
+                break;
+            case StageSelectionState.FINISHED:
+                break;
+        }
+    }
+
     public void FadeIn(int starting_stage = 0)
     {
         gameObject.SetActive(true);
 
         SetStageGameObjects(starting_stage);
+
+        state = StageSelectionState.FADING_IN;
+
+        Canvas.ForceUpdateCanvases();
+
+        Vector3 starting_pos = new Vector3(canvas_group.gameObject.transform.position.x + background_image.rectTransform.rect.size.x * 2,
+            canvas_group.gameObject.gameObject.transform.position.y, canvas_group.gameObject.transform.position.z);
+
+        background_image.gameObject.transform.position = starting_pos;
+
+        background_image.transform.DOMoveX(canvas_group.gameObject.transform.position.x, fade_in_time);
+
+        change_state_image.color = new Color(change_state_image.color.r, change_state_image.color.g, change_state_image.color.b, 0);
+
+        change_state_image.gameObject.SetActive(false);
+
+        fade_in_timer.Start();
+    }
+
+    public void FadeOut()
+    {
+        if(state == StageSelectionState.WAITING_TO_FADE_OUT)
+        {
+            Vector3 finish_pos = new Vector3(canvas_group.gameObject.transform.position.x - background_image.rectTransform.rect.size.x * 2,
+            canvas_group.gameObject.gameObject.transform.position.y, canvas_group.gameObject.transform.position.z);
+
+            background_image.transform.DOMoveX(finish_pos.x, fade_out_time);
+
+            state = StageSelectionState.FADING_OUT;
+        }
+    }
+
+    public void NextStage()
+    {
+        LevelsManager.LevelsStage stage = LevelsManager.Instance.GetLevelStage(curr_stage + 1);
+
+        if(stage != null)
+        {
+            state = StageSelectionState.CHANGE_STAGE_FADE_IN;
+            change_stage_timer.Start();
+
+            stage_to_change = curr_stage + 1;
+
+            change_state_image.gameObject.SetActive(true);
+            change_state_image.DOFade(1, change_stage_time * 0.5f);
+        }
+    }
+
+    public void PreviousStage()
+    {
+        LevelsManager.LevelsStage stage = LevelsManager.Instance.GetLevelStage(curr_stage - 1);
+
+        if (stage != null)
+        {
+            state = StageSelectionState.CHANGE_STAGE_FADE_IN;
+            change_stage_timer.Start();
+
+            stage_to_change = curr_stage - 1;
+
+            change_state_image.gameObject.SetActive(true);
+            change_state_image.DOFade(1, change_stage_time * 0.5f);
+        }
+    }
+
+    private void UpdateNextPreviousButtons()
+    {
+        LevelsManager.LevelsStage next_stage = LevelsManager.Instance.GetLevelStage(curr_stage + 1);
+
+        if (next_stage == null)
+            next_stage_button.gameObject.SetActive(false);
+        else
+            next_stage_button.gameObject.SetActive(true);
+
+        LevelsManager.LevelsStage prev_stage = LevelsManager.Instance.GetLevelStage(curr_stage - 1);
+
+        if (prev_stage == null)
+            prev_stage_button.gameObject.SetActive(false);
+        else
+            prev_stage_button.gameObject.SetActive(true);
     }
 }

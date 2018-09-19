@@ -35,7 +35,8 @@ public class LevelButtonUI : MonoBehaviour
 
     private void OnMouseDownIntern()
     {
-        int i = 0;
+        LevelsManager.Instance.StartStage(stage);
+        LevelsManager.Instance.StartLevel(level);
     }
 
     public void SetLevel(int _stage, int _level)

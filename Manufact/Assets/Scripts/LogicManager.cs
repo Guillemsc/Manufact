@@ -136,9 +136,12 @@ public class LogicManager : Singleton<LogicManager>
 
     public void OpenStageSelection()
     {
-        main_menu_ui.gameObject.SetActive(false);
-
         stage_selection_ui.FadeIn();
+    }
+
+    public void CloseStageSelection()
+    {
+        stage_selection_ui.FadeOut();
     }
 
     private void StartGameLoadScreens()
