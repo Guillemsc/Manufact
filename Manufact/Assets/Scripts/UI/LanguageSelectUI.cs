@@ -153,12 +153,16 @@ public class LanguageSelectUI : UIControl
     {        
         LocManager.Instance.SetLanguage(LocManager.Language.EN);
 
+        SerializationManager.Instance.SetLanguage(LocManager.Language.EN);
+
         FinishWaitingToFadeOut();
     }
 
     private void OnSpanishPress()
     {        
         LocManager.Instance.SetLanguage(LocManager.Language.SPA);
+
+        SerializationManager.Instance.SetLanguage(LocManager.Language.SPA);
 
         FinishWaitingToFadeOut();
     }

@@ -17,6 +17,7 @@ public class LogicManager : Singleton<LogicManager>
     [SerializeField] private MainMenuUI main_menu_ui = null;
     [SerializeField] private OptionsMenuUI options_menu_ui = null;
     [SerializeField] private StageSelectionUI stage_selection_ui = null;
+    [SerializeField] private CreditsUI credits_ui = null;
 
     private void Awake()
     {
@@ -48,6 +49,11 @@ public class LogicManager : Singleton<LogicManager>
         if(stage_selection_ui != null)
         {
             stage_selection_ui.gameObject.SetActive(false);
+        }
+
+        if(credits_ui != null)
+        {
+            credits_ui.gameObject.SetActive(false);
         }
     }
 
@@ -116,7 +122,7 @@ public class LogicManager : Singleton<LogicManager>
     public void ReturnMainMenu()
     {
         StartGameMenu();
-        LevelsManager.Instance.EndLevel();
+        LevelsManager.Instance.EndCurrentLevel();
     }
 
     public void ReestartLevel()
@@ -144,6 +150,24 @@ public class LogicManager : Singleton<LogicManager>
         stage_selection_ui.FadeOut();
     }
 
+    public void OpenCredits()
+    {
+        credits_ui.FadeIn();
+    }
+
+    public void CloseCredits()
+    {
+        credits_ui.FadeOut();
+    }
+
+    public void ChangeLanguageOptions()
+    {
+        options_menu_ui.gameObject.SetActive(false);
+        select_language_ui.UIBegin();
+        select_language_ui.SetBackgroundFade(true);
+    }
+
+
     private void StartGameLoadScreens()
     {
         if (intro_logo_ui != null)
@@ -156,16 +180,33 @@ public class LogicManager : Singleton<LogicManager>
     {
         if (main_menu_ui != null)
         {
-            main_menu_ui.UIBegin();
+            bool first = SerializationManager.Instance.GetFistTime();
+
+            if (first)
+                SerializationManager.Instance.SetFirstTime();
+
+            main_menu_ui.FadeIn(!first);
         }
     }
 
     private void OnIntroLogoUIFinished(UIControl c)
     {
-        if (select_language_ui != null)
+        bool has_language = SerializationManager.Instance.GetHasLanguage();
+
+        if (!has_language)
         {
-            select_language_ui.UIBegin();
-            select_language_ui.SetBackgroundFade(true);
+            if (select_language_ui != null)
+            {
+                select_language_ui.UIBegin();
+                select_language_ui.SetBackgroundFade(true);
+            }
+        }
+        else
+        {
+            LocManager.Language lan = SerializationManager.Instance.GetLanguage();
+            LocManager.Instance.SetLanguage(lan);
+
+            StartPhase(LogicPhase.GAME_MENU);
         }
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class MainMenuUI : UIControl
+public class MainMenuUI : MonoBehaviour
 {
     enum MainMenuSelectState
     {
@@ -45,29 +45,21 @@ public class MainMenuUI : UIControl
     [SerializeField] CanvasGroup play_button_group = null;
     [SerializeField] Button play_button = null;
 
-    public override void UIBegin()
+    [SerializeField] CanvasGroup other_ui_group = null;
+
+    private bool show_other_ui = false;
+
+    public void FadeIn(bool _show_other_ui)
     {
         gameObject.SetActive(true);
 
+        show_other_ui = _show_other_ui;
+
         Canvas.ForceUpdateCanvases();
 
-        UIRestart();
-
-        if (logo_image != null)
-        {
-            Canvas.ForceUpdateCanvases();
-
-            logo_image.gameObject.SetActive(true);
-
-            logo_image.transform.DOMove(new Vector3(logo_move_in_pos.transform.position.x, logo_move_in_pos.transform.position.y, transform.position.z), logo_move_in_time);
-            orange_time_offset_move_in_timer.Start();
-            blue_time_offset_in_timer.Start();
-        }
-    }
-
-    public override void UIRestart()
-    {
         state = MainMenuSelectState.FADING_IN;
+
+        other_ui_group.alpha = 0.0f;
 
         if (logo_image != null && logo_starting_pos != null)
         {
@@ -94,6 +86,17 @@ public class MainMenuUI : UIControl
 
         if (play_button != null)
             play_button.gameObject.SetActive(false);
+
+        if (logo_image != null)
+        {
+            Canvas.ForceUpdateCanvases();
+
+            logo_image.gameObject.SetActive(true);
+
+            logo_image.transform.DOMove(new Vector3(logo_move_in_pos.transform.position.x, logo_move_in_pos.transform.position.y, transform.position.z), logo_move_in_time);
+            orange_time_offset_move_in_timer.Start();
+            blue_time_offset_in_timer.Start();
+        }
     }
 
     void Start ()
@@ -157,6 +160,11 @@ public class MainMenuUI : UIControl
                                 play_button.gameObject.SetActive(true);
 
                                 play_button_group.DOFade(1, group_move_up_time);
+
+                                if(show_other_ui)
+                                {
+                                    other_ui_group.DOFade(1, group_move_up_time);
+                                }
                             }
                         }
                     }

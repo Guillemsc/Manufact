@@ -7,8 +7,11 @@ public class Level : MonoBehaviour
     [Header("Base level info")]
     [SerializeField] private string level_name = "no_name_key";
     [SerializeField] private string level_description = "no_description_key";
+
     [SerializeField] private int level_stage = 0;
     [SerializeField] private int level_number = 0;
+
+    private bool completed = false;
 
     [Header("Build info")]
     [SerializeField] protected GameGridInstance grid = null;
@@ -34,6 +37,16 @@ public class Level : MonoBehaviour
     public int GetLevelNumber()
     {
         return level_number;
+    }
+
+    public void SetCompleted(bool set)
+    {
+        completed = set;
+    }
+
+    public bool GetCompleted()
+    {
+        return completed;
     }
 
     public void SetStarted(bool set)

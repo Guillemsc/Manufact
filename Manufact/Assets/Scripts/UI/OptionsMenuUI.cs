@@ -24,15 +24,6 @@ public class OptionsMenuUI : MonoBehaviour
 
     [SerializeField] private CanvasGroup canvas_group = null;
     [SerializeField] private Image background_image = null;
-
-    private void Start ()
-    {
-        Vector3 starting_pos = new Vector3(canvas_group.gameObject.transform.position.x,
-        canvas_group.gameObject.gameObject.transform.position.y + background_image.rectTransform.rect.size.y * 2,
-        canvas_group.gameObject.transform.position.z);
-
-        background_image.gameObject.transform.position = starting_pos;
-    }
 	
 	private void Update ()
     {
@@ -70,14 +61,12 @@ public class OptionsMenuUI : MonoBehaviour
             fade_in_timer.Start();
             state = OptionsMenuSelectState.FADING_IN;
 
-            Vector3 starting_pos = new Vector3(canvas_group.gameObject.transform.position.x,
-            canvas_group.gameObject.gameObject.transform.position.y + background_image.rectTransform.rect.size.y,
-            canvas_group.gameObject.transform.position.z);
+            Vector3 starting_pos = new Vector3(canvas_group.gameObject.transform.position.x + (background_image.rectTransform.rect.width * 0.6f),
+                      canvas_group.gameObject.gameObject.transform.position.y, canvas_group.gameObject.transform.position.z);
 
             background_image.gameObject.transform.position = starting_pos;
 
-            background_image.transform.DOMoveY(canvas_group.gameObject.transform.position.y, fade_in_time);
-            fade_in_timer.Start();
+            background_image.transform.DOMoveX(canvas_group.gameObject.transform.position.x, fade_in_time);
         }
     }
 
@@ -88,11 +77,10 @@ public class OptionsMenuUI : MonoBehaviour
             fade_out_timer.Start();
             state = OptionsMenuSelectState.FADING_OUT;
 
-            Vector3 finish_pos = new Vector3(canvas_group.gameObject.transform.position.x,
-            canvas_group.gameObject.gameObject.transform.position.y + background_image.rectTransform.rect.size.y,
-            canvas_group.gameObject.transform.position.z);
+            Vector3 finish_pos = new Vector3(canvas_group.gameObject.transform.position.x - (background_image.rectTransform.rect.width * 0.6f),
+            canvas_group.gameObject.gameObject.transform.position.y, canvas_group.gameObject.transform.position.z);
 
-            background_image.transform.DOMoveY(finish_pos.y, fade_out_time);
+            background_image.transform.DOMoveX(finish_pos.x, fade_out_time);
         }
     }
 }

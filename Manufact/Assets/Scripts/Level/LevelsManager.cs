@@ -23,6 +23,24 @@ public class LevelsManager : Singleton<LevelsManager>
     {
         public int stage = 0;
 
+        public bool GetCompleted()
+        {
+            bool ret = true;
+
+            for (int i = 0; i < levels.Count; ++i)
+            {
+                Level level = levels[i];
+
+                if (!level.GetCompleted())
+                {
+                    ret = false;
+                    break;
+                }
+            }
+
+            return ret;
+        }
+
         public Level GetLevel(int level_index)
         {
             Level ret = null;
@@ -141,6 +159,8 @@ public class LevelsManager : Singleton<LevelsManager>
                 // Win
                 finished = true;
                 win = true;
+
+                current_level.SetCompleted(true);
             }
             else if (current_level.OnCheckLose())
             {
@@ -157,7 +177,7 @@ public class LevelsManager : Singleton<LevelsManager>
 
                 level_end_ui.EndLevel(win, current_level.GetLevelNumber());
 
-                EndLevel();
+                EndCurrentLevel();
             }
         }
     }
@@ -212,6 +232,15 @@ public class LevelsManager : Singleton<LevelsManager>
         {
             ret = curr_stage.levels.Count;
         }
+
+        return ret;
+    }
+
+    public bool GetStageCompleted(int stage)
+    {
+        bool ret = false;
+
+        LevelsStage curr_stage = GetLevelStage(stage);
 
         return ret;
     }
@@ -299,7 +328,7 @@ public class LevelsManager : Singleton<LevelsManager>
         return ret;
     }
 
-    public void LoadLevel()
+    public void LoadCurrentLevel()
     {
         if(current_level != null)
         {
@@ -307,7 +336,7 @@ public class LevelsManager : Singleton<LevelsManager>
         }
     }
 
-    public void BeginLevel()
+    public void BeginCurrentLevel()
     {
         if (current_level != null)
         {
@@ -315,7 +344,7 @@ public class LevelsManager : Singleton<LevelsManager>
         }
     }
 
-    public void EndLevel()
+    public void EndCurrentLevel()
     {
         if(current_level != null)
         {
@@ -326,7 +355,7 @@ public class LevelsManager : Singleton<LevelsManager>
         }
     }
 
-    public void UnloadLevel()
+    public void UnloadCurrentLevel()
     {
         if (current_level != null)
         {
@@ -355,6 +384,18 @@ public class LevelsManager : Singleton<LevelsManager>
                     break;
                 }
             }
+        }
+
+        return ret;
+    }
+
+    public List<Level> GetAllLevels()
+    {
+        List<Level> ret = new List<Level>();
+
+        for(int i = 0; i < level_stages.Count; ++i)
+        {
+            ret.AddRange(level_stages[i].levels);
         }
 
         return ret;
@@ -411,16 +452,16 @@ public class LevelsManager : Singleton<LevelsManager>
         {
             case EventManager.EventType.LEVEL_LOAD:
 
-                LoadLevel();
+                LoadCurrentLevel();
                 break;
             case EventManager.EventType.LEVEL_BEGIN:
 
-                BeginLevel();
+                BeginCurrentLevel();
                 break;
 
             case EventManager.EventType.LEVEL_UNLOAD:
 
-                UnloadLevel();
+                UnloadCurrentLevel();
                 break;
         }
     }

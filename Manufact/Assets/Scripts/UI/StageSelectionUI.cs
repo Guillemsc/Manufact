@@ -223,35 +223,38 @@ public class StageSelectionUI : MonoBehaviour
 
     public void FadeIn(int starting_stage = 0)
     {
-        gameObject.SetActive(true);
+        if (state != StageSelectionState.FADING_OUT)
+        {
+            gameObject.SetActive(true);
 
-        Canvas.ForceUpdateCanvases();
+            Canvas.ForceUpdateCanvases();
 
-        SetStageGameObjects(starting_stage);
+            SetStageGameObjects(starting_stage);
 
-        state = StageSelectionState.FADING_IN;
+            state = StageSelectionState.FADING_IN;
 
-        Canvas.ForceUpdateCanvases();
+            Canvas.ForceUpdateCanvases();
 
-        Vector3 starting_pos = new Vector3(canvas_group.gameObject.transform.position.x + background_image.rectTransform.rect.width,
-            canvas_group.gameObject.gameObject.transform.position.y, canvas_group.gameObject.transform.position.z);
+            Vector3 starting_pos = new Vector3(canvas_group.gameObject.transform.position.x + (background_image.rectTransform.rect.width * 0.6f),
+                canvas_group.gameObject.gameObject.transform.position.y, canvas_group.gameObject.transform.position.z);
 
-        background_image.gameObject.transform.position = starting_pos;
+            background_image.gameObject.transform.position = starting_pos;
 
-        background_image.transform.DOMoveX(canvas_group.gameObject.transform.position.x, fade_in_time);
+            background_image.transform.DOMoveX(canvas_group.gameObject.transform.position.x, fade_in_time);
 
-        change_state_image.color = new Color(change_state_image.color.r, change_state_image.color.g, change_state_image.color.b, 0);
+            change_state_image.color = new Color(change_state_image.color.r, change_state_image.color.g, change_state_image.color.b, 0);
 
-        change_state_image.gameObject.SetActive(false);
+            change_state_image.gameObject.SetActive(false);
 
-        fade_in_timer.Start();
+            fade_in_timer.Start();
+        }
     }
 
     public void FadeOut()
     {
         if(state == StageSelectionState.WAITING_TO_FADE_OUT)
         {
-            Vector3 finish_pos = new Vector3(canvas_group.gameObject.transform.position.x - background_image.rectTransform.rect.width,
+            Vector3 finish_pos = new Vector3(canvas_group.gameObject.transform.position.x - (background_image.rectTransform.rect.width * 0.6f),
             canvas_group.gameObject.gameObject.transform.position.y, canvas_group.gameObject.transform.position.z);
 
             background_image.transform.DOMoveX(finish_pos.x, fade_out_time);
